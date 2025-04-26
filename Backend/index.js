@@ -3,6 +3,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import { connectDB } from "./utils/connectDB.js";
+import router from "./routes/user.routes.js";
+
 dotenv.config({});
 
 const app = express();
@@ -17,11 +19,20 @@ const corsOptions = {
     credentials: true,
 }
 
+
+
+
 app.get("/" , (req , res) => {
     res.send("Home Page of Job Portal")
 })
 
 app.use(cors(corsOptions))
+
+
+// Here we have all our API's 
+
+app.use("/api/request/user" , router)
+
 
 app.listen(PORT , () => {
     connectDB();
