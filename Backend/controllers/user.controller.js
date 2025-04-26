@@ -41,6 +41,8 @@ export const Register = async (req, res) => {
     }
 };
 
+// Login API 
+
 export const Login = async (req , res) => {
     try {
         const { Email , password , role } = req.body
@@ -103,3 +105,11 @@ export const Login = async (req , res) => {
     }
 } 
 
+// LogOut API 
+
+export const logOut = async (req , res) => {
+    return res.status(200).cookie("token" , "" , {maxAge: 0}).json({
+      message: "Logged Out Successfully...",
+      success: true
+    })
+} 
