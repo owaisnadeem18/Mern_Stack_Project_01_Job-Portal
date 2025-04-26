@@ -30,6 +30,12 @@ export const Register = async (req, res) => {
       phoneNumber,
       role,
     });
+
+    res.status(201).json({
+      message: "User Successfully Registered" , 
+      success: true
+    })
+
   } catch (error) {
     console.log("The error is => " , error)
     }
@@ -45,7 +51,7 @@ export const Login = async (req , res) => {
             })
         } 
 
-        const LoginUser = await User.findOne({Email})
+        let LoginUser = await User.findOne({Email})
 
         if (!LoginUser) {
             return res.status(400).json({
@@ -74,10 +80,24 @@ export const Login = async (req , res) => {
             userId: LoginUser._id 
         }
 
-        const token = await jwt.sign(tokenData)
-        
+        LoginUser = {
+          _id : LoginUser._id , 
+          FullName : LoginUser.FullName ,
+          Email : LoginUser.Email ,
+          password : LoginUser.password ,
+          phoneNumber : LoginUser.phoneNumber ,
+          profile : LoginUser.profile
+        }
+
+        const token = await jwt.sign(tokenData , process.env.SECRET_KEY , {expiresIn : "1d"})
+
+        return res.status(200).cookie("token" , token , {maxAge : 1* 24 * 60 * 60 * 1000 , httpsOnly: true , sameSite: "strict"}).json({
+          message: `Welcome Back ${User.FullName}` , 
+          success: true
+        })
 
     }
+
     catch(err) {
         console.log("the login error is => " , err)
     }
