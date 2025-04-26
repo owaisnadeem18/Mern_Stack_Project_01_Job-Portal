@@ -44,16 +44,16 @@ export const Login = async (req , res) => {
             })
         } 
 
-        const LoginUser = User.findOne({Email})
+        const LoginUser = await User.findOne({Email})
 
-        if (LoginUser.Email !== Email) {
+        if (!LoginUser) {
             return res.status(400).json({
                 message: "User Email is incorrect" , 
                 success: false
             })
         }
 
-        const passwordMatch = bcrypt.compare(password , LoginUser.password)
+        const passwordMatch = await bcrypt.compare(password , LoginUser.password)
 
         if (!passwordMatch) {
             return res.status(400).json({
@@ -62,14 +62,14 @@ export const Login = async (req , res) => {
             }) 
         }
 
-
-
         if ( LoginUser.role !== role ) {
             return res.status(400).json({
                 message: "You are logging in with incorrect role...",
                 success: false
             }) 
         }
+
+        
 
     }
     catch(err) {
