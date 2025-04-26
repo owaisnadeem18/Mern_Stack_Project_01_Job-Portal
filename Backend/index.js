@@ -31,7 +31,7 @@ app.use(cors(corsOptions))
 
 // Here we have all our API's 
 
-app.use("/api/request/user" , router)
+app.use("/api/user" , router)
 
 
 app.listen(PORT , () => {

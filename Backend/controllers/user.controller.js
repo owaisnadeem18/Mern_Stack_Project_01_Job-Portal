@@ -1,4 +1,4 @@
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 
@@ -94,7 +94,7 @@ export const Login = async (req , res) => {
         const token = jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: "1d" })
 
         return res.status(200).cookie("token" , token , {maxAge : 1* 24 * 60 * 60 * 1000 , httpsOnly: true , sameSite: "strict"}).json({
-          message: `Welcome Back ${User.FullName}` , 
+          message: `Welcome Back ${LoginUser.FullName}` , 
           success: true
         })
 
