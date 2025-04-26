@@ -134,7 +134,7 @@ export const UpdatingProfile = async (req , res) => {
 
     // -------------------------------
 
-    
+
 
     // -------------------------------
 
@@ -156,7 +156,29 @@ export const UpdatingProfile = async (req , res) => {
     FindUser.password = password ,
     FindUser.skills = skillsArray ,
     FindUser.bio =  bio
+    
+    await FindUser.save();
+
+    // Now Updating the data in the data base: 
+
+    FindUser = {
+      _id : FindUser._id , 
+      FullName : FindUser.FullName ,
+      Email : FindUser.Email ,
+      password : FindUser.password ,
+      skills : FindUser.skills ,
+      bio : FindUser.bio
+    }
+  
+    return res.status(200).json({
+      message: "User Updated Successfully" ,
+      FindUser , 
+      success: true
+    })
+
   } 
+
+
   catch (err) {
     console.log(`Error updating the profile is => ${err}`)
   }
