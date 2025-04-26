@@ -19,9 +19,6 @@ const corsOptions = {
     credentials: true,
 }
 
-
-
-
 app.get("/" , (req , res) => {
     res.send("Home Page of Job Portal")
 })
@@ -32,7 +29,6 @@ app.use(cors(corsOptions))
 // Here we have all our API's 
 
 app.use("/api/user" , router)
-
 
 app.listen(PORT , () => {
     connectDB();

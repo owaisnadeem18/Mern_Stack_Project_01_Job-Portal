@@ -18,7 +18,8 @@ const isAuthenticated = async (req , res , next) => {
         })
     }
 
-    req.id = decode.UserId;
+    req.id = decode.userId;
+    
     next();
 
 }
