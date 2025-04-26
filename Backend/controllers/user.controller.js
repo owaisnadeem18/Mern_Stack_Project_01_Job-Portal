@@ -113,3 +113,53 @@ export const logOut = async (req , res) => {
       success: true
     })
 } 
+
+// Updating Profile 
+
+export const UpdatingProfile = async (req , res) => {
+
+  try {
+    
+    const {FullName , Email , password , skills , bio} = req.body 
+    
+    if (!FullName || !Email || !password || !skills || !bio ) {
+      return res.status(400).json({
+        message: "Something is missing" , 
+        success: false
+      })    
+    }
+
+
+    // Here, we have to add the data of cloudinary: 
+
+    // -------------------------------
+
+    
+
+    // -------------------------------
+
+    const skillsArray = skills.split(",")
+    const userId = req.id // middleware authentication (point to be remember -> It's quite difficult)
+    const FindUser = await User.findById(userId) // Then, I used this specific I'd in order to find the user.
+
+    if (!FindUser) {
+      return res.status(400).json({
+        message: "404 User is not found" , 
+        success: false
+      })
+    }
+
+    // Updating the data:
+    
+    FindUser.FullName = FullName ,
+    FindUser.Email = Email   ,
+    FindUser.password = password ,
+    FindUser.skills = skillsArray ,
+    FindUser.bio =  bio
+  } 
+  catch (err) {
+    console.log(`Error updating the profile is => ${err}`)
+  }
+
+}
+
