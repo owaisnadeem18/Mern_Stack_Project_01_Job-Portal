@@ -1,5 +1,6 @@
 import { User } from "../models/user.model";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken"
 
 export const Register = async (req, res) => {
   try {
@@ -69,6 +70,11 @@ export const Login = async (req , res) => {
             }) 
         }
 
+        const tokenData = {
+            userId: LoginUser._id 
+        }
+
+        const token = await jwt.sign(tokenData)
         
 
     }
