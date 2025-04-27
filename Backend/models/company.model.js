@@ -1,9 +1,10 @@
 import mongoose from "mongoose"
 
 const CompanySchema = new mongoose.Schema({
-    CompanyName : {
+    name : {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     description : {
         type: String
@@ -17,7 +18,7 @@ const CompanySchema = new mongoose.Schema({
     companyLogo : {
         type: String
     },
-    userID : {
+    userId : {
         type: mongoose.Schema.Types.ObjectId , ref: "User" , required: true
     }
 },{timestamps:true})

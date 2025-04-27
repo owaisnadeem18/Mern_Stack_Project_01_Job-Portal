@@ -1,19 +1,19 @@
-import { CompanyModel } from "../models/company.model";
+import { CompanyModel } from "../models/company.model.js";
 
 // Register Company:
 
 export const RegisterCompany = async (req, res) => {
   try {
-    const { companyName } = req.body;
+    const { CompanyName } = req.body;
 
-    if (!companyName) {
+    if (!CompanyName) {
       return res.status(400).json({
         message: "Company Name is required.",
         success: false,
       });
     }
 
-    let company = await CompanyModel.findOne({ name: companyName });
+    let company = await CompanyModel.findOne({ name: CompanyName });
 
     if (company) {
       return res.status(400).json({
@@ -23,16 +23,17 @@ export const RegisterCompany = async (req, res) => {
     }
 
     company = await CompanyModel.create({
-      name: companyName,
+      name: CompanyName,
       userId: req.id,
     });
 
     return res.status(200).json({
       message: "Company created successfully",
+      company,
       success: true,
     });
   } catch (error) {
-    console.log(error);
+      console.log("The error is -> " , error);
   }
 };
 
@@ -49,6 +50,12 @@ export const getCompanies = async (req, res) => {
         success: false,
       });
     }
+
+    return res.status(200).json({
+        companies,
+        success: true
+    })
+
   } catch (err) {
     console.log(`Get company error is -> ${err}`);
   }
@@ -59,7 +66,7 @@ export const getCompanies = async (req, res) => {
 export const GetCompanyById = async (req, res) => {
   try {
     const companyId = req.params.id;
-    const company = await CompanyModel.findById({ companyId });
+    const company = await CompanyModel.findById(companyId);
     if (!company) {
       return res.status(404).json({
         message: "Company not found",
