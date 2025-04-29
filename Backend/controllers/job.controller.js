@@ -1,5 +1,6 @@
 import { JobModel } from "../models/job.model";
 
+// For Admin to create job posts :
 export const JobPost = async (req, res) => {
   try {
     const {
@@ -54,9 +55,11 @@ export const JobPost = async (req, res) => {
   }
 };
 
-const GetAllJobs = async (req, res) => {
+// Get All Jobs API (for user/student)
+export const GetAllJobs = async (req, res) => {
   try {
     const keyword = req.query.keyword || "";
+
     const query = {
       $or: [
         { title: { $regex: keyword, $options: "i" } },
@@ -68,7 +71,8 @@ const GetAllJobs = async (req, res) => {
 
     if (!jobs) {
       return res.status(400).json({
-        message: "Jobs not found ...",
+        message: "Job is not found",
+        success: false,
       });
     }
 
@@ -80,3 +84,57 @@ const GetAllJobs = async (req, res) => {
     console.log(err);
   }
 };
+
+
+// Get Job By Id (for user/student)
+export const getJobById = async (req , res) => {
+  try {
+    
+    const jobId = req.params.id;
+
+    const jobbyId = await JobModel.find(jobId)
+
+    if (!jobbyId) {
+      return res.status(400).json({
+        message: "Job is not found",
+        success: false,
+      })
+    }
+
+    return res.status(200).json({
+      jobbyId , 
+      success:true
+    })
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Admin to view the job posts created by him/her (How many jobs admin has created)
+
+const adminJobs = async ( req , res ) => {
+  try {
+    
+    const adminId = req.id 
+
+    const adminJobId = JobModel.find({created_by: adminId})
+
+    if (!adminJobId) {
+      return res.status(400).json({
+        message: "job not found" , 
+        success: false
+      })
+    }
+
+    return res.status(200).json({
+      adminJobId,
+      success:true
+    })
+
+  } catch (error) {
+    
+    console.log(error)
+  
+  }
+}
