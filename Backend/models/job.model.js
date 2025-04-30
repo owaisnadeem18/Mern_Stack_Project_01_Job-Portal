@@ -6,6 +6,9 @@ const jobModel = new mongoose.Schema({
     company : { type: mongoose.Schema.Types.ObjectId , ref : "Company" , required: true},
     location : { type: String, required: true},
     salary : { type: Number, required: true},
+    requirements : [{
+        type: String
+    }] ,
     experience : {type: String , required: true},
     jobType : {type: String , required: true},
     created_by : { type: mongoose.Schema.Types.ObjectId , ref: "User" , required: true},
