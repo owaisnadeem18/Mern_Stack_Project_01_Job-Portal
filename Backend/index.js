@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./utils/connectDB.js";
 import router from "./routes/user.routes.js";
 import CompanyRouter from "./routes/company.routes.js";
+import jobRouter from "./routes/job.routes.js"
 
 dotenv.config({});
 
@@ -31,6 +32,7 @@ app.use(cors(corsOptions))
 
 app.use("/api/user" , router)
 app.use("/api/company" , CompanyRouter )
+app.use("/api/job" , jobRouter )
 
 app.listen(PORT , () => {
     connectDB();

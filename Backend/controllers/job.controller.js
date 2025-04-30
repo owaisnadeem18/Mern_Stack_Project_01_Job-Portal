@@ -1,4 +1,4 @@
-import { JobModel } from "../models/job.model";
+import { JobModel } from "../models/job.model.js";
 
 // For Admin to create job posts :
 export const JobPost = async (req, res) => {
@@ -113,7 +113,7 @@ export const getJobById = async (req , res) => {
 
 // Admin to view the job posts created by him/her (How many jobs admin has created)
 
-const adminJobs = async ( req , res ) => {
+export const adminJobs = async ( req , res ) => {
   try {
     
     const adminId = req.id 
