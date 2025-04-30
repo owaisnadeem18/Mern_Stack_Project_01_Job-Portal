@@ -9,3 +9,4 @@ jobRouter.route("/getJobs").get(isAuthenticated ,GetAllJobs)
 jobRouter.route("/getJobs/:id").get(isAuthenticated , getJobById)
 jobRouter.route("/adminJobs").post(isAuthenticated , adminJobs)
 
+export default jobRouter
