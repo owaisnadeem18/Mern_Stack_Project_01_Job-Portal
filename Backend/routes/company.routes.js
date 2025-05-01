@@ -7,6 +7,6 @@ const CompanyRouter = express()
 CompanyRouter.route("/registerCompany").post( isAuthenticated , RegisterCompany)
 CompanyRouter.route("/getCompanies").get( isAuthenticated , getCompanies)
 CompanyRouter.route("/getCompanies/:id").get( isAuthenticated , GetCompanyById)
-CompanyRouter.route("/updateCompany/:id").put( isAuthenticated , updateCompany)
+CompanyRouter.route("/updateCompany/:id").put( isAuthenticated  , updateCompany)
 
 export default CompanyRouter
