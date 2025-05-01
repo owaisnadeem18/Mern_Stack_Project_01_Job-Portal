@@ -9,4 +9,4 @@ CompanyRouter.route("/getCompanies").get( isAuthenticated , getCompanies)
 CompanyRouter.route("/getCompanies/:id").get( isAuthenticated , GetCompanyById)
 CompanyRouter.route("/updateCompany/:id").put( isAuthenticated  , updateCompany)
 
-export default CompanyRouter
+export default CompanyRouter;
