@@ -40,6 +40,7 @@ export const JobPost = async (req, res) => {
       location,
       salary: Number(salary),
       jobType,
+      position,
       created_by: userId,
       company: companyId,
       experience: experience,
