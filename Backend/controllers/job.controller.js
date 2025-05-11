@@ -68,7 +68,9 @@ export const GetAllJobs = async (req, res) => {
       ],
     };
 
-    const jobs = await JobModel.find(query);
+    const jobs = await JobModel.find(query).populate({
+        path:"company"
+    });
 
     if (!jobs) {
       return res.status(400).json({
