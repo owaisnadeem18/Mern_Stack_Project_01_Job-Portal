@@ -1,0 +1,68 @@
+import { applicationModel } from "../models/Application.model.js"
+import { JobModel } from "../models/job.model"
+
+
+export const applyJob = async (req , res) => {
+    try{
+
+        const userId = req.id 
+        const JobId = req.params.id 
+
+        if (!JobId) {
+            res.status(400).json({
+                message: "Job Id is required.",
+                success: false
+            })
+        }
+
+        // If the user already applied on the job:
+
+        const isApplied = await applicationModel.findOne({job:JobId , applicant: userId})
+        
+        if (isApplied) {
+            return res.status(400).json({
+                message: "Already Applied on this job.",
+                success: false
+            })
+        }
+
+        // If the job exists , now we have to check this condition:
+
+        const isJobExisted = await JobModel.findById(JobId)
+
+        if (!isJobExisted) {
+            return res.status(400).json({
+                message: "Job does not exist",
+                success: false 
+            })
+        }
+
+    }
+
+
+    catch(err){
+    
+        console.log(err)
+    
+    }
+}
+
+export const getAppliedJobs = async (req , res) => {
+
+    try {
+
+        const userId = req.id
+
+        const PreviousApplications = await applicationModel.find({
+            
+        }) 
+
+
+    }
+
+    catch(err) {
+        console.log(err)
+    }
+
+}
+
