@@ -7,6 +7,6 @@ const jobRouter = express()
 jobRouter.route("/jobPost").post( isAuthenticated , JobPost)
 jobRouter.route("/getJobs").get(isAuthenticated ,GetAllJobs)
 jobRouter.route("/getJobs/:id").get(isAuthenticated , getJobById)
-jobRouter.route("/adminJobs").post(isAuthenticated , adminJobs)
+jobRouter.route("/adminJobs").get(isAuthenticated , adminJobs)
 
 export default jobRouter
