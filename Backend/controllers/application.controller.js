@@ -53,10 +53,22 @@ export const getAppliedJobs = async (req , res) => {
 
         const userId = req.id
 
-        const PreviousApplications = await applicationModel.find({
-            
-        }) 
+        const PreviousApplications = await applicationModel.find({ applicant: userId }).sort({createdAt:-1}).populate({
+            path: "job",
+            options: {sort:{createdAt:-1}}
+        })
 
+        if (!PreviousApplications) {
+            return res.status(404).json({
+                message: "No Applications found",
+                success: false
+            })
+        }
+
+        return res.status(200).json({
+            PreviousApplications,
+            success: true
+         })
 
     }
 
