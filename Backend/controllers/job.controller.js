@@ -93,7 +93,7 @@ export const getJobById = async (req , res) => {
     
     const jobId = req.params.id;
 
-    const jobbyId = await JobModel.find(jobId)
+    const jobbyId = await JobModel.findById(jobId)
 
     if (!jobbyId) {
       return res.status(400).json({
