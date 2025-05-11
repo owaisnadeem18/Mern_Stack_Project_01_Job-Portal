@@ -19,7 +19,6 @@ const jobModel = new mongoose.Schema({
             ref: "Application",
         }
     ]
-
 })
 
 export const JobModel = mongoose.model("Job" , jobModel)
