@@ -37,6 +37,16 @@ export const applyJob = async (req , res) => {
             })
         }
 
+        // Here , after all the validations , now user can apply on any of the specific job: 
+        
+        const newApplication = await applicationModel.create({
+            job: JobId,
+            applicant: userId
+        })
+
+        isJobExisted.applications.push(newApplication._id)
+        await isJobExisted.save()
+
     }
 
 
