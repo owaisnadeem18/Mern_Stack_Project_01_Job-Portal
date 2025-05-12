@@ -47,6 +47,11 @@ export const applyJob = async (req , res) => {
         isJobExisted.applications.push(newApplication._id)
         await isJobExisted.save()
 
+        return res.status(201).json({
+            message: "Job Applied Successfully !",
+            success: true
+        })
+
     }
 
 
