@@ -1,7 +1,10 @@
 import { applicationModel } from "../models/Application.model"
 import { JobModel } from "../models/job.model"
 
-const applyJob = async (req , res) => {
+
+// Apply on Job (For User):
+
+export const applyJob = async (req , res) => {
     try{
         let userId = req.userId
         let jobId = req.params.id 
@@ -58,3 +61,38 @@ catch(err) {
 
 
 } 
+
+// Get All jobs, that user applied: 
+
+export const GetAppliedJobs = async (req , res) => {
+    
+    try {    
+        const userId = req.id
+        
+        // Get the all Jobs on which user has previously applied:
+        const get_applied_jobs = await applicationModel.findById(userId).sort({createdAt : -1}).populate({
+            path: "job",
+            options: {sort:{createdAt:-1}},
+            populate: {
+                path: "company" ,
+                options: {sort: {createdAt:-1}}
+            }
+        })
+
+        // If there are no applications present: 
+        return res.status(404).json({
+            message: "No Jobs Previously Applied! "
+        })
+
+        // Get all the applications , user applied previously 
+        return res.status(200).json({
+            get_applied_jobs,
+            success: true
+        })
+
+    }
+
+    catch(err) {
+        console.log(err)        
+    }
+}
