@@ -1,6 +1,5 @@
-import { applicationModel } from "../models/Application.model"
-import { JobModel } from "../models/job.model"
-
+import { applicationModel } from "../models/Application.model.js"
+import { JobModel } from "../models/job.model.js"
 
 // Apply on Job (For User):
 
