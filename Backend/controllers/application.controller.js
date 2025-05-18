@@ -96,3 +96,38 @@ export const GetAppliedJobs = async (req , res) => {
         console.log(err)        
     }
 }
+
+// Now we want to let admin see that how many of the applicants applied on any specific job application: 
+
+export const getApplications = async (req , res) => {
+    
+    try {
+        const JobId = req.params.id 
+
+        const JobApplications = await JobModel.findById(JobId).populate({
+            path: "applications",
+            options: {sort: {createdAt: -1}},
+            populate: {
+                options: {sort: {createdAt: -1}}
+            }
+        })
+
+        if (!JobApplications) {
+            return res.status(404).json({
+                message: "No Job Application is Present",
+                success: false
+            })
+        }
+
+        return res.status(200).json({
+            JobApplications,
+            success: true
+        })
+
+    }
+
+    catch(err) {
+        
+    }
+
+}
