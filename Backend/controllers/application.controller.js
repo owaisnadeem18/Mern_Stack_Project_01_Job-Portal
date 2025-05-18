@@ -127,7 +127,41 @@ export const getApplications = async (req , res) => {
     }
 
     catch(err) {
-        
+        console.log(err)
+    }
+
+}
+
+// To Update the status of the user: 
+export const updateStatus = async (req , res) => {
+
+    try {
+    
+    const status = req.id
+    const applicantId = req.params.id 
+
+    if (!status) {
+        return res.status(404).json({
+            message: "Job Status is not found",
+            success: false
+        })
+    }
+
+    const UpdateStatus = await applicationModel.find({_id: applicantId})
+
+    // Now , here we have to update the status 
+    updateStatus.status = status.toLowerCase()
+    await updateStatus.save()
+
+    return res.status(200).json({
+        message: "Updated Status Successfully",
+        success: true
+    })
+
+    }
+
+    catch(err) {
+        console.log(err)    
     }
 
 }
