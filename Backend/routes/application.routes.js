@@ -4,7 +4,7 @@ import { applyJob , GetAppliedJobs , getApplications , updateStatus } from "../c
 
 const ApplicationRouter = express.Router()
 
-ApplicationRouter.route("/application").get(isAuthenticated, applyJob)
+ApplicationRouter.route("/applyJob/:id").get(isAuthenticated, applyJob)
 ApplicationRouter.route("/getApplicants").get(isAuthenticated, GetAppliedJobs)
 ApplicationRouter.route("/:id/applicants").get(isAuthenticated, getApplications)
 ApplicationRouter.route("/status/:id/update").get(isAuthenticated, updateStatus)
