@@ -5,7 +5,6 @@ import { JobModel } from "../models/job.model.js"
 
 export const applyJob = async (req,res) => {
     try {
-        
         let userId = req.userId
         let jobId = req.params.id 
         
