@@ -3,8 +3,9 @@ import { JobModel } from "../models/job.model.js"
 
 // Apply on Job (For User):
 
-export const applyJob = async (req , res) => {
-    try{
+export const applyJob = async (req,res) => {
+    try {
+        
         let userId = req.userId
         let jobId = req.params.id 
         
