@@ -13,7 +13,6 @@ export const applyJob = async (req,res) => {
         return res.status(404).json({
             message: "Job Id is not found...",
             success: false
-        
         })
 
     }
