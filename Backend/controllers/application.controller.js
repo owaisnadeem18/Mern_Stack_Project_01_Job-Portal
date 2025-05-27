@@ -10,9 +10,11 @@ export const applyJob = async (req,res) => {
         
     // If there is no job Id:
     if (!jobId) {
+
         return res.status(404).json({
             message: "Job Id is not found...",
             success: false
+        
         })
     }
 
