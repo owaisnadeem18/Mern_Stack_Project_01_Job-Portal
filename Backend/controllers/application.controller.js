@@ -17,7 +17,7 @@ export const applyJob = async (req, res) => {
     }
 
     // If the use already applied:
-    let ApplicationApplied = await applicationModel.find({
+    let ApplicationApplied = await applicationModel.findOne({
       job: jobId,
       applicant: userId,
     });
