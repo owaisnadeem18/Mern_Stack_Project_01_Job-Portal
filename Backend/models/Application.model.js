@@ -12,9 +12,9 @@ const applicationSchema = new mongoose.Schema({
         required: true
     },
     status : {
-        type: mongoose.Schema.Types.ObjectId , 
-        ref: "Job",
-        required: true
+        type: String , 
+        enum: ["pending" , "accepted" , "rejected"],
+        default: "pending"
     }
 })
 
