@@ -1,14 +1,12 @@
-import './App.css'
+import { Button } from './components/ui/button'
 
 function App() {
 
   return (
     <>
-      <div className='min-h-screen' >
-        <h1 className='bg-amber-500' >
-          Owais Nadeem
-        </h1>
-      </div>
+      <div className="">
+<Button>Job Portal</Button>
+    </div>
     </>
   )
 }
