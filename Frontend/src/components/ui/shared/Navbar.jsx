@@ -42,13 +42,19 @@ const Navbar = () => {
 
         {
 
-          !user ? <div className="flex gap-2 items-center" >
-              <Button className={"cursor-pointer bg-cyan-800 hover:bg-cyan-900"}>
-                Login 
-              </Button>
+          !user ? <div className="flex gap-2 items-center">
+
+            <Link to={"/login"}>
+                <Button className={"cursor-pointer bg-cyan-800 hover:bg-cyan-900"}  >
+                  Login 
+                </Button>
+            </Link>
+
+            <Link to={"/signup"}>
               <Button  className={"cursor-pointer bg-purple-600 hover:bg-purple-800 "}>
                 Signup
               </Button>
+            </Link>
           </div>
           :
           
