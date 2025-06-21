@@ -6,7 +6,9 @@ const InputGroup = ({ label, name, type, placeholder }) => {
   return (
     <>
       <div className="flex flex-col">
-        <Label htmlFor={name}>{label}</Label>
+        <Label className={"mb-2 px-1.5"} htmlFor={name}>
+          {label}
+        </Label>
         <Input id={name} name={name} type={type} placeholder={placeholder} />
       </div>
     </>
