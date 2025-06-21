@@ -1,12 +1,11 @@
 import { Button } from './components/ui/button'
+import Navbar from './components/ui/shared/Navbar'
 
 function App() {
 
   return (
     <>
-      <div className="">
-<Button>Job Portal</Button>
-    </div>
+      <Navbar/>
     </>
   )
 }
