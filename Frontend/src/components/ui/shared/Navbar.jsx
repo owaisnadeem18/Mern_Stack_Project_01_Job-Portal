@@ -9,9 +9,7 @@ import { LogOut, User2 } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
-
   const [user , SetUser] = useState(false)
-
   return (
     <div className="Navbar items-center justify-between flex max-w-[100%] bg-cyan-950 min-h-[8vh] py-1 px-6">
       {/* 1st side of the navbar (logo)  */}
