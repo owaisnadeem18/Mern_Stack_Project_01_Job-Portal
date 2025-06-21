@@ -10,7 +10,7 @@ const SignUp = () => {
     <>
       <Navbar />
 
-      <div className="sign-up-box w-full max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
+      <div className="sign-up-box w-full max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
         <h2 className="text-4xl font-bold text-center mb-8 underline text-cyan-950">
           SignUp
         </h2>
