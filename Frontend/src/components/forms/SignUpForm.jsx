@@ -1,12 +1,24 @@
 import { Button } from "@/components/ui/button";
 import InputGroup from "./InputGroup";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { RadioGroup } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { HandleValueChange } from "./handlers/SignUpHandler";
 
 const SignUpForm = () => {
+  // Now , let's create the state to handle "form Inputs"
+
+  const [Inputs, SetInputs] = useState({
+    FullName: "",
+    Email: "",
+    PhoneNumber: "",
+    Password: "",
+  });
+
   return (
-    <div className="rounded-xl w-full max-w-4xl mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
+    <div className="rounded-xl w-full max-w-lg mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
       <h2 className="text-4xl font-bold text-center mb-8 underline text-cyan-950">
         SignUp
       </h2>
@@ -15,34 +27,41 @@ const SignUpForm = () => {
         <InputGroup
           label="Full Name"
           type="text"
-          name="fullname"
+          name="FullName"
           placeholder="Enter your full name"
+          value={Inputs.FullName}
+          onChangeFunction={(e) => HandleValueChange(e, Inputs, SetInputs)}
         />
         <InputGroup
           label="Email"
           type="email"
-          name="email"
+          name="Email"
           placeholder="Enter your email"
+          value={Inputs.Email}
+          onChangeFunction={(e) => HandleValueChange(e, Inputs, SetInputs)}
         />
 
         <InputGroup
           label="Phone Number"
           type="tel"
-          name="phone"
+          name="PhoneNumber"
           placeholder="Enter your phone number"
+          value={Inputs.PhoneNumber}
+          onChangeFunction={(e) => HandleValueChange(e, Inputs, SetInputs)}
         />
         <InputGroup
           label="Password"
           type="password"
-          name="password"
+          name="Password"
           placeholder="Enter your password"
+          value={Inputs.Password}
+          onChangeFunction={(e) => HandleValueChange(e, Inputs, SetInputs)}
         />
-        <InputGroup
-          label="Confirm Password"
-          type="password"
-          name="confirmPassword"
-          placeholder="Re-enter your password"
-        />
+
+        <div className="flex gap-1 flex-col">
+          <Label className={"px-1.5 mb-1"}>Profile</Label>
+          <Input type={"file"} accept="image/*" className={"cursor-pointer"} />
+        </div>
 
         <RadioGroup defaultValue="option-one ">
           <div className="flex gap-5 items-center">
@@ -79,6 +98,13 @@ const SignUpForm = () => {
           </Button>
         </div>
       </form>
+
+      <div className="text-sm mt-4 md:mt-2">
+        Already have an Account ? {}
+        <Link to={"/login"} className="text-blue-600 hover:underline">
+          login
+        </Link>
+      </div>
     </div>
   );
 };
