@@ -8,7 +8,7 @@ const InputGroup = ({
   type,
   placeholder,
   valueInput,
-  onChangeFunction,
+  onChange,
 }) => {
   return (
     <div className="flex flex-col">
@@ -21,7 +21,7 @@ const InputGroup = ({
         name={name}
         type={type}
         placeholder={placeholder}
-        onChange={onChangeFunction}
+        onChange={onChange}
       />
     </div>
   );

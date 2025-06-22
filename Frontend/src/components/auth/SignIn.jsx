@@ -5,8 +5,18 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Link } from "react-router-dom";
 import Navbar from "../ui/shared/Navbar";
+import { useState } from "react";
+import { HandleSubmit, HandleValueChange } from "../forms/handlers/FormHandlers";
 
 const SignIn = () => {
+  // Now, let's handle the values from useState and make form values as controlled
+
+  const [LoginValues, SetLoginValues] = useState({
+    Email: "",
+    Password: "",
+    Role: "",
+  });
+
   return (
     <>
       <Navbar />
@@ -15,19 +25,23 @@ const SignIn = () => {
           Login
         </h2>
 
-        <form className="flex flex-col gap-6">
+        <form onSubmit={(e) => HandleSubmit(e , LoginValues) } className="flex flex-col gap-6">
           <InputGroup
             label="Email"
             type="email"
-            name="email"
+            name="Email"
+            value={LoginValues.Email}
             placeholder="Enter your email"
+            onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
           />
 
           <InputGroup
             label="Password"
             type="password"
-            name="password"
+            name="Password"
             placeholder="Enter your password"
+            value={LoginValues.Password}
+            onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
           />
 
           <RadioGroup defaultValue="option-one ">
@@ -35,10 +49,12 @@ const SignIn = () => {
               <div className="flex items-center cursor-pointer space-x-1">
                 <Input
                   className="w-4 h-4 accent-cyan-800 hover:accent-cyan-800 cursor-pointer"
-                  value="student"
-                  name="role"
+                  name="Role"
+                  value= "Student"
                   type={"radio"}
+                  checked = {LoginValues.Role == "Student"}
                   id="student"
+                  onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
                 />
                 <Label htmlFor="student" className={"cursor-pointer"}>
                   Student
@@ -46,11 +62,13 @@ const SignIn = () => {
               </div>
               <div className="flex items-center cursor-pointer space-x-1">
                 <Input
-                  value="recruiter"
-                  name="role"
+                  name="Role"
+                  value= "Recruiter"
                   type={"radio"}
                   id="recruiter"
-                  className="w-4 h-4 accent-cyan-800 hover:accent-cyan-800 cursor-pointer space-x-4"
+                  className="w-4 h-4 accent-cyan-800 hover:accent-cyan-800  cursor-pointer space-x-4"
+                  checked={LoginValues.Role == "Recruiter"}
+                  onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
                 />
                 <Label htmlFor="recruiter" className={"cursor-pointer"}>
                   Recruiter
