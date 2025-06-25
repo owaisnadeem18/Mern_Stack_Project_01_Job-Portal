@@ -12,12 +12,14 @@ const SignUpForm = () => {
   // Now , let's create the state to handle "form Inputs"
 
   const [Inputs, SetInputs] = useState({
+
     FullName: "",
     Email: "",
     PhoneNumber: "",
     Password: "",
     Role: "",
     File: ""
+  
   });
 
   return (
