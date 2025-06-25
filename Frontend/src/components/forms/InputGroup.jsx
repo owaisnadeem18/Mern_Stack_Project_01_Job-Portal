@@ -9,7 +9,9 @@ const InputGroup = ({
   placeholder,
   valueInput,
   onChange,
+
 }) => {
+  
   return (
     <div className="flex flex-col">
       <Label className={"mb-2 px-1.5"} htmlFor={name}>
