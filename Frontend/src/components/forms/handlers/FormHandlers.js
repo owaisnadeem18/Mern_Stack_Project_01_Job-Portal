@@ -25,8 +25,9 @@ export const HandleSubmit = async (e, InputValues) => {
     const res = await axios.post(`${USER_API_END_POINT}/register` , formData , {
         headers: {
             "Content-Type": "multipart/form-data"
-        },
-        withCredentials: true
+        }, 
+
+        withCredentials: true 
     });
 
 
