@@ -5,21 +5,20 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { FileHandler, HandleSubmit, HandleValueChange } from "./handlers/FormHandlers";
+import { FileHandler, HandleValueChange } from "./handlers/FormHandlers";
+import { HandleSubmitSignUp } from "./handlers/SignUpHandlers";
 
 const SignUpForm = () => {
 
   // Now , let's create the state to handle "form Inputs"
 
   const [Inputs, SetInputs] = useState({
-
-    FullName: "",
-    Email: "",
-    PhoneNumber: "",
-    Password: "",
-    Role: "",
-    File: ""
-  
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    role: "",
+    file: ""
   });
 
   return (
@@ -28,44 +27,44 @@ const SignUpForm = () => {
         SignUp
       </h2>
 
-      <form onSubmit={(e) => HandleSubmit(e , Inputs)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={(e) => HandleSubmitSignUp(e , Inputs, SetInputs)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <InputGroup
           label="Full Name"
           type="text"
-          name="FullName"
+          name="fullName"
           placeholder="Enter your full name"
-          value={Inputs.FullName}
+          value={Inputs.fullName}
           onChange={(e) => HandleValueChange(e, Inputs, SetInputs)}
         />
         <InputGroup
           label="Email"
           type="email"
-          name="Email"
+          name="email"
           placeholder="Enter your email"
-          value={Inputs.Email}
+          value={Inputs.email}
           onChange={(e) => HandleValueChange(e, Inputs, SetInputs)}
         />
 
         <InputGroup
           label="Phone Number"
           type="tel"
-          name="PhoneNumber"
+          name="phoneNumber"
           placeholder="Enter your phone number"
-          value={Inputs.PhoneNumber}
+          value={Inputs.phoneNumber}
           onChange={(e) => HandleValueChange(e, Inputs, SetInputs)}
         />
         <InputGroup
           label="Password"
           type="password"
-          name="Password"
+          name="password"
           placeholder="Enter your password"
-          value={Inputs.Password}
+          value={Inputs.password}
           onChange={(e) => HandleValueChange(e, Inputs, SetInputs)}
         />
 
         <div className="flex gap-1 flex-col">
           <Label className={"px-1.5 mb-1"}>Profile</Label>
-          <Input type={"file"} accept="image/*" className={"cursor-pointer"} onChange={(e) => FileHandler(e, Inputs , SetInputs ,  Inputs.File ) } />
+          <Input type={"file"} accept="image/*" className={"cursor-pointer"} onChange={(e) => FileHandler(e, Inputs , SetInputs ,  Inputs.file) } />
         </div>
 
         <RadioGroup defaultValue="option-one ">
@@ -73,10 +72,10 @@ const SignUpForm = () => {
             <div className="flex items-center cursor-pointer space-x-1">
               <Input
                 className="w-3 h-3 accent-cyan-800 hover:accent-cyan-800 cursor-pointer"
-                name="Role"
+                name="role"
                 value={"Student"}
                 type={"radio"}
-                checked={Inputs.Role === "Student"}
+                checked={Inputs.role === "Student"}
                 id="student"
                 onChange={(e) => HandleValueChange(e, Inputs, SetInputs)}
               />
@@ -86,9 +85,9 @@ const SignUpForm = () => {
             </div>
             <div className="flex items-center cursor-pointer space-x-1">
               <Input
-                name="Role"
+                name="role"
                 type={"radio"}
-                checked = {Inputs.Role === "Recruiter"}
+                checked = {Inputs.role === "Recruiter"}
                 value="Recruiter"
                 id="recruiter"
                 className="w-3 h-3 accent-cyan-800 hover:accent-cyan-800 cursor-pointer space-x-4"
@@ -102,7 +101,7 @@ const SignUpForm = () => {
         </RadioGroup>
 
         <div className="md:col-span-2 flex justify-center mt-4">
-          <Button type="submit"  className="w-full max-w-[8rem] cursor-pointer">
+          <Button type="submit" className="w-full max-w-[8rem] cursor-pointer">
             Create Account
           </Button>
         </div>

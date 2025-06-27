@@ -4,7 +4,15 @@ import jwt from "jsonwebtoken"
 
 export const Register = async (req, res) => {
   try {
+
+        console.log("BODY: ", req.body);
+    console.log("FILE: ", req.file);
+
+
     const { FullName, Email, password, phoneNumber, role } = req.body;
+
+    console.log(FullName, Email, password, phoneNumber, role)
+
     if (!FullName || !Email || !password || !phoneNumber || !role) {
       return res.status(400).json({
         message: "Something is missing...",
@@ -45,6 +53,9 @@ export const Register = async (req, res) => {
 
 export const Login = async (req , res) => {
     try {
+
+
+
         const { Email , password , role } = req.body
         if(!Email || !password || !role) {
             return res.status(400).json({
