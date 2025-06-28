@@ -6,8 +6,8 @@ const authSlice = createSlice({
 
     // 1. Create the key (name) which acts as the key in redux
 
-    name : "auth" , 
-
+    name : "auth" ,
+    
     // 2. It creates the initial state of redux , which will get updated when you required
     
     initialState: {
@@ -25,4 +25,4 @@ const authSlice = createSlice({
 })
 
 export const {setLoading} = authSlice.actions
-export default authSlice.reducer
+export default authSlice.reducer 
