@@ -9,18 +9,18 @@ export const Register = async (req, res) => {
     console.log("FILE: ", req.file);
 
 
-    const { FullName, Email, password, phoneNumber, role } = req.body;
+    const { fullName, email, password, phoneNumber, role } = req.body;
 
-    console.log(FullName, Email, password, phoneNumber, role)
+    console.log(fullName, email, password, phoneNumber, role)
 
-    if (!FullName || !Email || !password || !phoneNumber || !role) {
+    if (!fullName || !email || !password || !phoneNumber || !role) {
       return res.status(400).json({
         message: "Something is missing...",
         success: false,
       });
     }
 
-    const emailVerify = await User.findOne({ Email });
+    const emailVerify = await User.findOne({ email });
 
     if (emailVerify) {
       return res.status(400).json({
@@ -32,15 +32,15 @@ export const Register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await User.create({
-      FullName,
-      Email,
+      fullName,
+      email,
       password: hashedPassword,
       phoneNumber,
       role,
     });
 
     res.status(201).json({
-      message: "User Successfully Registered" , 
+      message: "Account Created Successfully" , 
       success: true
     })
 
@@ -54,17 +54,20 @@ export const Register = async (req, res) => {
 export const Login = async (req , res) => {
     try {
 
+      const { email , password , role } = req.body
 
+      console.log(email)
+      console.log(password)
+      console.log(role)
 
-        const { Email , password , role } = req.body
-        if(!Email || !password || !role) {
+        if(!email || !password || !role) {
             return res.status(400).json({
                 message: "User information is missing",
                 success: false
             })
         } 
 
-        let LoginUser = await User.findOne({Email})
+        let LoginUser = await User.findOne({email})
 
         if (!LoginUser) {
             return res.status(400).json({
@@ -95,8 +98,8 @@ export const Login = async (req , res) => {
 
         LoginUser = {
           _id : LoginUser._id , 
-          FullName : LoginUser.FullName ,
-          Email : LoginUser.Email ,
+          fullName : LoginUser.fullName ,
+          email : LoginUser.email ,
           password : LoginUser.password ,
           phoneNumber : LoginUser.phoneNumber ,
           profile : LoginUser.profile
@@ -105,7 +108,7 @@ export const Login = async (req , res) => {
         const token = jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: "1d" })
 
         return res.status(200).cookie("token" , token , {maxAge : 1* 24 * 60 * 60 * 1000 , httpsOnly: true , sameSite: "strict"}).json({
-          message: `Welcome Back ${LoginUser.FullName}` , 
+          message: `Welcome Back ${LoginUser.fullName}` , 
           success: true
         })
 

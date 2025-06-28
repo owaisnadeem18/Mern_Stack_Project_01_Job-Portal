@@ -3,7 +3,7 @@ import InputGroup from "./InputGroup";
 import { RadioGroup } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FileHandler, HandleValueChange } from "./handlers/FormHandlers";
 import { HandleSubmitSignUp } from "./handlers/SignUpHandlers";
@@ -21,13 +21,15 @@ const SignUpForm = () => {
     file: ""
   });
 
+  const navigate = useNavigate()
+
   return (
     <div className="rounded-xl w-full max-w-lg mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
       <h2 className="text-4xl font-bold text-center mb-8 underline text-cyan-950">
         SignUp
       </h2>
 
-      <form onSubmit={(e) => HandleSubmitSignUp(e , Inputs, SetInputs)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={(e) => HandleSubmitSignUp(e , Inputs , navigate)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <InputGroup
           label="Full Name"
           type="text"
@@ -73,9 +75,9 @@ const SignUpForm = () => {
               <Input
                 className="w-3 h-3 accent-cyan-800 hover:accent-cyan-800 cursor-pointer"
                 name="role"
-                value={"Student"}
+                value={"student"}
                 type={"radio"}
-                checked={Inputs.role === "Student"}
+                checked={Inputs.role === "student"}
                 id="student"
                 onChange={(e) => HandleValueChange(e, Inputs, SetInputs)}
               />
@@ -87,8 +89,8 @@ const SignUpForm = () => {
               <Input
                 name="role"
                 type={"radio"}
-                checked = {Inputs.role === "Recruiter"}
-                value="Recruiter"
+                checked = {Inputs.role === "recruiter"}
+                value="recruiter"
                 id="recruiter"
                 className="w-3 h-3 accent-cyan-800 hover:accent-cyan-800 cursor-pointer space-x-4"
                 onChange={(e) => HandleValueChange(e, Inputs, SetInputs)}

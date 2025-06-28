@@ -5,7 +5,7 @@ import { RadioGroup } from '../ui/radio-group'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Button } from '../ui/button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { HandleSubmitLogin } from './handlers/LoginHandlers'
 
 const SignInForm = () => {
@@ -16,17 +16,19 @@ const SignInForm = () => {
         role: "",
     });
 
+    const navigate = useNavigate()
+
   return (
           <div className="rounded-xl w-full max-w-sm mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
         <h2 className="text-4xl font-bold text-center mb-8 underline text-cyan-950">
           Login
         </h2>
 
-        <form onSubmit={(e) => HandleSubmitLogin(e , LoginValues , SetLoginValues) } className="flex flex-col gap-6">
+        <form onSubmit={(e) => HandleSubmitLogin(e , LoginValues , navigate) } className="flex flex-col gap-6">
           <InputGroup
             label="Email"
             type="email"
-            name="Email"
+            name="email"
             value={LoginValues.Email}
             placeholder="Enter your email"
             onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
@@ -35,9 +37,9 @@ const SignInForm = () => {
           <InputGroup
             label="Password"
             type="password"
-            name="Password"
+            name="password"
             placeholder="Enter your password"
-            value={LoginValues.Password}
+            value={LoginValues.password}
             onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
           />
 
@@ -46,10 +48,10 @@ const SignInForm = () => {
               <div className="flex items-center cursor-pointer space-x-1">
                 <Input
                   className="w-4 h-4 accent-cyan-800 hover:accent-cyan-800 cursor-pointer"
-                  name="Role"
-                  value= "Student"
+                  name="role"
+                  value= "student"
                   type={"radio"}
-                  checked = {LoginValues.Role == "Student"}
+                  checked = {LoginValues.role == "student"}
                   id="student"
                   onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
                 />
@@ -59,12 +61,12 @@ const SignInForm = () => {
               </div>
               <div className="flex items-center cursor-pointer space-x-1">
                 <Input
-                  name="Role"
-                  value= "Recruiter"
+                  name="role"
+                  value= "recruiter"
                   type={"radio"}
                   id="recruiter"
                   className="w-4 h-4 accent-cyan-800 hover:accent-cyan-800  cursor-pointer space-x-4"
-                  checked={LoginValues.Role == "Recruiter"}
+                  checked={LoginValues.role == "recruiter"}
                   onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
                 />
                 <Label htmlFor="recruiter" className={"cursor-pointer"}>
