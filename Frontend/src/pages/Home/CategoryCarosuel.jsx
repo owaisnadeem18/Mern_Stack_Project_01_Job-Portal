@@ -1,14 +1,32 @@
+import { Button } from '@/components/ui/button'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { carosuelArrayItems } from '@/components/ui/shared/utils/carosuelItems'
 import React from 'react'
 
 const CategoryCarosuel = () => {
   return (
-    <div className='flex ' >
-        {
-            carosuelArrayItems.map((item) => <h1>
-                {item}
-            </h1>)
-        }
+    <div>
+
+        <Carousel className="w-full max-w-4xl mx-auto my-20 flex items-center justify-center" >
+
+            <CarouselContent className="" >
+
+                
+                {
+                carosuelArrayItems.map((item , indx) =>
+                    <CarouselItem key={indx} className="flex justify-center items-center basis-full md:basis-1/2 lg:basis-1/3">
+                        <Button variant="outline" className= "rounded-full" >
+                            {item}
+                        </Button>
+                    </CarouselItem>
+                     
+                )
+                }
+            </CarouselContent>
+            <CarouselPrevious/>
+            <CarouselNext/>
+
+        </Carousel>
     </div>
   )
 }
