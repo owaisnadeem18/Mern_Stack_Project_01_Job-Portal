@@ -79,14 +79,14 @@ const SignInForm = () => {
           <div className="md:col-span-2 flex justify-center ">
             <Button
               type="submit"
-              className="w-full max-w-[8rem] cursor-pointer"
+              className="w-full cursor-pointer"
             >
               login
             </Button>
           </div>
         </form>
 
-        <div className="text-sm mt-4 md:mt-2">
+        <div className="text-sm mt-4 md:mt-3">
           Don't have an Account ? {}
           <Link to={"/signup"} className="text-blue-600 hover:underline">
             signup

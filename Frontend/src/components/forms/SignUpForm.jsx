@@ -103,13 +103,13 @@ const SignUpForm = () => {
         </RadioGroup>
 
         <div className="md:col-span-2 flex justify-center mt-4">
-          <Button type="submit" className="w-full max-w-[8rem] cursor-pointer">
+          <Button type="submit" className="w-full cursor-pointer">
             Create Account
           </Button>
         </div>
       </form>
 
-      <div className="text-sm mt-4 md:mt-2">
+      <div className="text-sm mt-4 md:mt-3">
         Already have an Account ? {}
         <Link to={"/login"} className="text-blue-600 hover:underline">
           login
