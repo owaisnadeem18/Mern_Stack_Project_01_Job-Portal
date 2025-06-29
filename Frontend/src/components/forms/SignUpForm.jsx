@@ -8,7 +8,6 @@ import { useState } from "react";
 import { FileHandler, HandleValueChange } from "./handlers/FormHandlers";
 import { HandleSubmitSignUp } from "./handlers/SignUpHandlers";
 import { useDispatch, useSelector } from "react-redux";
-import store from "@/redux/store";
 import { LoaderCircleIcon } from "lucide-react";
 
 const SignUpForm = () => {

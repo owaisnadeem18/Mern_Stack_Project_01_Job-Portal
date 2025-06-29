@@ -8,7 +8,6 @@ import { Button } from '../ui/button'
 import { Link, useNavigate } from 'react-router-dom'
 import { HandleSubmitLogin } from './handlers/LoginHandlers'
 import { useDispatch, useSelector } from 'react-redux'
-import store from '@/redux/store'
 import { LoaderCircle } from 'lucide-react'
 
 const SignInForm = () => {
@@ -32,7 +31,7 @@ const SignInForm = () => {
     const dispatch = useDispatch()
 
   return (
-          <div className="rounded-xl w-full max-w-sm mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
+          <div className="rounded-xl w-full max-w-lg mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
         <h2 className="text-4xl font-bold text-center mb-8 underline text-cyan-950">
           Login
         </h2>
@@ -42,7 +41,7 @@ const SignInForm = () => {
             label="Email"
             type="email"
             name="email"
-            value={LoginValues.Email}
+            value={LoginValues.email}
             placeholder="Enter your email"
             onChange={(e) => HandleValueChange(e , LoginValues , SetLoginValues)}
           />
