@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
 
-    // Create Slice function has three functionalities: 
+    // createSlice function has three functionalities: 
 
     // 1. Create the key (name) which acts as the key in redux
 
