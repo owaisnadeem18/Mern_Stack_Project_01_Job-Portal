@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import heroImg from "../../assets/Images/bg-hero-image.png"
 import { Search } from "lucide-react";
 import React from "react";
 
 const HeroSection = () => {
   return (
     <section
-      className="bg-gradient-to-br from-gray-500 to-gray-800 py-20 px-6 md:px-8"
+      className="bg-gradient-to-br from-gray-500 to-gray-800 py-5 md:px-8 md:py-0 flex items-center"
       style={{ minHeight: "calc(100vh - 56px)" }}
     >
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+      <div className="max-w-[90%] w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Content */}
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
@@ -37,7 +37,7 @@ const HeroSection = () => {
         {/* Right Image */}
         <div className="flex-1 flex items-center justify-center ">
           <img
-            src="https://cdn-icons-png.freepik.com/512/9174/9174858.png"
+            src= {heroImg}
             alt="Job search"
             className="w-[320px] h-[320px] object-contain drop-shadow-lg"
           />
