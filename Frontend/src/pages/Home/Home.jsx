@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <Navbar />
       <HeroSection />
-      {/* <CategoryCarosuel /> */}
+      <CategoryCarosuel />
       <LatestJobs />
     </>
   )

@@ -7,7 +7,7 @@ const CategoryCarosuel = () => {
   return (
     <div>
 
-        <Carousel className="w-full max-w-4xl mx-auto my-20 flex items-center justify-center" >
+        <Carousel className="w-full max-w-4xl mx-auto my-20 flex items-center justify-center " >
 
             <CarouselContent>
                 {

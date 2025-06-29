@@ -8,13 +8,13 @@ const LatestJobsCards = () => {
       {jobsData.map((job, index) => (
         <div
           key={index}
-          className="border border-b-gray-500 bg-neutral-900 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.06)] rounded-xl px-5 py-6 m-4 transition hover:scale-[1.04] duration-300"
+          className=" bg-blue-950 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.06)] rounded-xl px-5 py-6 m-4 transition hover:scale-[1.04] duration-300"
         >
           <h3 className="text-xl font-bold text-white">{job.position}</h3>
-          <p className="text-gray-400 font-semibold mt-1">{job.company}</p>
-          <p className="text-sm text-gray-200 mt-1">{job.location}</p>
+          <p className="text-gray-300 font-semibold mt-1">{job.company}</p>
+          <p className="text-sm text-gray-400 mt-1">{job.location}</p>
           
-          <p className="text-sm text-gray-500 mt-1">{job.jobDescription}</p>
+          <p className="text-sm text-gray-300 mt-1">{job.jobDescription.substring(0,120)}...</p>
 
           <div className="mt-3 flex flex-col gap-3">
             <Badge variant={"ghost"} className= "text-white" >
