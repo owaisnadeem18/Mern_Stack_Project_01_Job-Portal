@@ -7,21 +7,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FileHandler, HandleValueChange } from "./handlers/FormHandlers";
 import { HandleSubmitSignUp } from "./handlers/SignUpHandlers";
+import { useDispatch, useSelector } from "react-redux";
+import store from "@/redux/store";
+import { LoaderCircleIcon } from "lucide-react";
 
 const SignUpForm = () => {
 
-  // Now , let's create the state to handle "form Inputs"
+  // Now let's get the state of loading from the redux store
+  const loading = useSelector((store) => store.auth.loading);
 
+  // Now, let's dispatch the values from redux store and send to SignUp function 
+  const dispatch = useDispatch()
+
+  // Now , let's create the state to handle "form Inputs"
   const [Inputs, SetInputs] = useState({
     fullName: "",
     email: "",
     phoneNumber: "",
     password: "",
     role: "",
-    file: ""
+    file: "",
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="rounded-xl w-full max-w-lg mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
@@ -29,7 +37,10 @@ const SignUpForm = () => {
         SignUp
       </h2>
 
-      <form onSubmit={(e) => HandleSubmitSignUp(e , Inputs , navigate)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form
+        onSubmit={(e) => HandleSubmitSignUp(e, Inputs, navigate, dispatch )}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
         <InputGroup
           label="Full Name"
           type="text"
@@ -66,7 +77,12 @@ const SignUpForm = () => {
 
         <div className="flex gap-1 flex-col">
           <Label className={"px-1.5 mb-1"}>Profile</Label>
-          <Input type={"file"} accept="image/*" className={"cursor-pointer"} onChange={(e) => FileHandler(e, Inputs , SetInputs ,  Inputs.file) } />
+          <Input
+            type={"file"}
+            accept="image/*"
+            className={"cursor-pointer"}
+            onChange={(e) => FileHandler(e, Inputs, SetInputs, Inputs.file)}
+          />
         </div>
 
         <RadioGroup defaultValue="option-one ">
@@ -89,7 +105,7 @@ const SignUpForm = () => {
               <Input
                 name="role"
                 type={"radio"}
-                checked = {Inputs.role === "recruiter"}
+                checked={Inputs.role === "recruiter"}
                 value="recruiter"
                 id="recruiter"
                 className="w-3 h-3 accent-cyan-800 hover:accent-cyan-800 cursor-pointer space-x-4"
@@ -103,9 +119,16 @@ const SignUpForm = () => {
         </RadioGroup>
 
         <div className="md:col-span-2 flex justify-center mt-4">
-          <Button type="submit" className="w-full cursor-pointer">
-            Create Account
-          </Button>
+          {loading ? (
+            <Button className="w-full" >
+              {" "}
+              <LoaderCircleIcon className="w-2 h-2 animate-spin" /> loading ...{" "}
+            </Button>
+          ) : (
+            <Button type="submit" className="w-full cursor-pointer">
+              Create Account
+            </Button>
+          )}
         </div>
       </form>
 

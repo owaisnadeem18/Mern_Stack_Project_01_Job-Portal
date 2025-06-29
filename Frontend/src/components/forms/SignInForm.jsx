@@ -7,16 +7,27 @@ import { Label } from '../ui/label'
 import { Button } from '../ui/button'
 import { Link, useNavigate } from 'react-router-dom'
 import { HandleSubmitLogin } from './handlers/LoginHandlers'
+import { useDispatch, useSelector } from 'react-redux'
+import store from '@/redux/store'
+import { LoaderCircle } from 'lucide-react'
 
 const SignInForm = () => {
 
+    // Let's use the laoding state of redux 
+    const loading = useSelector(store => store.auth.loading)
+
+    // Form Login Values
     const [LoginValues, SetLoginValues] = useState({
         email: "",
         password: "",
         role: "",
     });
 
+    // To navigate it to another route
     const navigate = useNavigate()
+
+    // Let's send the dispatch as an argument to submit Login function
+    const dispatch = useDispatch()
 
   return (
           <div className="rounded-xl w-full max-w-sm mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
@@ -24,7 +35,7 @@ const SignInForm = () => {
           Login
         </h2>
 
-        <form onSubmit={(e) => HandleSubmitLogin(e , LoginValues , navigate) } className="flex flex-col gap-6">
+        <form onSubmit={(e) => HandleSubmitLogin(e , LoginValues , navigate , dispatch) } className="flex flex-col gap-6">
           <InputGroup
             label="Email"
             type="email"
@@ -77,12 +88,19 @@ const SignInForm = () => {
           </RadioGroup>
 
           <div className="md:col-span-2 flex justify-center ">
+            
+            {
+              loading ? <Button className= "w-full" > 
+                  <LoaderCircle className="w-2 h-2 animate-spin" /> loading ...
+                 </Button>
+             : 
             <Button
               type="submit"
               className="w-full cursor-pointer"
             >
               login
             </Button>
+          }
           </div>
         </form>
 

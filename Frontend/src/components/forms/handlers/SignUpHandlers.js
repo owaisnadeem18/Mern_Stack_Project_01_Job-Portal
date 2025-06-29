@@ -1,8 +1,11 @@
+import { setLoading } from "@/features/auth/authSlice"
+import store from "@/redux/store"
 import { USER_API_END_POINT } from "@/utils/constant"
 import axios from "axios"
+import { useDispatch, useSelector } from "react-redux"
 import { toast } from "sonner"
 
-export const HandleSubmitSignUp = async (e , SignUpValues , navigate ) => {
+export const HandleSubmitSignUp = async (e , SignUpValues , navigate , dispatch) => {
     e.preventDefault()  
 
     // Let's create a form data for all these values 
@@ -17,6 +20,7 @@ export const HandleSubmitSignUp = async (e , SignUpValues , navigate ) => {
     }
 
     try {
+        dispatch(setLoading(true))
         const res = await axios.post(`${USER_API_END_POINT}/register` , formData , {
             headers: {
                 "Content-Type" : "multipart/form-data" 
@@ -33,6 +37,9 @@ export const HandleSubmitSignUp = async (e , SignUpValues , navigate ) => {
     catch (err) {
         console.log(err)
         toast.error(err.response.data.message)
+    }
+    finally{
+        dispatch(setLoading(false))
     }
 
 }
