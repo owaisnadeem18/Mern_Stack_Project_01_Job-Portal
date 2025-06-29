@@ -4,7 +4,7 @@ import LatestJobsCards from './LatestJobsCards'
 const LatestJobs = () => {
 
   return (
-<div className=" max-w-9xl mx-auto py-10 bg-gradient-to-br from-gray-50 to-gray-100 ">
+<div className=" max-w-9xl mx-auto py-2 bg-gradient-to-br ">
       <h2 className="text-3xl md:text-5xl font-semibold px-2 leading-snug text-center">
         <span className="text-purple-700 font-bold">Job Opportunities</span>
         <span className="text-gray-800 font-semibold"> – Your </span>
