@@ -2,7 +2,7 @@ import React from 'react'
 
 const FilterCard = () => {
   return (
-    <div>
+    <div className='text-white' >
       Filter Jobs
     </div>
   )
