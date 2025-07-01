@@ -38,7 +38,7 @@ const Job = () => {
       </div>
 
       <div>
-        <h4 className='font-semibold text-white' >
+        <h4 className='text-white font-medium' >
             Title
         </h4>
         <p className='text-white' >
