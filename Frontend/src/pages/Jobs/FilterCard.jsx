@@ -29,10 +29,10 @@ const FilterCard = () => {
   ];
 
   return (
-    <div className="">
-      <h2 className="text-white font-semibold ">Filter Jobs</h2>
-      <hr className="my-3" />
+    <div className="mt-1">
 
+        <h2 className="text-white font-bold text-lg">Filter Jobs</h2>
+        <hr className="my-2" />
       <RadioGroup>
         {
           filteredData.map((data,idx) => (
@@ -45,7 +45,7 @@ const FilterCard = () => {
                 
                 
                 data.filterArray.map((item , idx) => (
-                  <div className="flex gap-3 items-center text-white my-4 md:my-0"> 
+                  <div className="flex gap-2 md:gap-3 items-center text-white my-1 md:my-0"> 
                     <RadioGroupItem className={"text-white"} id={item} key={idx} value = {item} />
                     <Label className={"leading-5"} htmlFor = {item}> {item} </Label>
                   </div>

@@ -5,6 +5,7 @@ import Job from './Job'
 
 const Jobs = () => {
   let randomJobs = [1, 2, 3, 4, 5, 6, 7, 8]
+  randomJobs.length = 0
 
   return (
     <>
@@ -23,9 +24,11 @@ const Jobs = () => {
 
                 {/* Jobs Grid */}
                 <section className="w-full md:w-[78%]">
-                    <h2 className="text-2xl font-semibold mb-4 text-white">Available Jobs</h2>
+                    <h2 className="text-2xl font-bold mb-3 text-white">Available Jobs</h2>
                     <div className="grid  gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 ">
-                    {randomJobs.map((item, indx) => (
+                    {
+                      randomJobs.length == 0 ? <div className='font-semibold text-white' >No Relevant Jobs Found</div> :
+                    randomJobs.map((item, indx) => (
                         <Job key={indx} />
                     ))}
                     </div>
