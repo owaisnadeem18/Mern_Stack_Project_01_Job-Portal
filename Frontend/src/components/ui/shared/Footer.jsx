@@ -1,10 +1,11 @@
 import React from 'react';
 import { Github, Linkedin, Heart, Briefcase } from 'lucide-react'; // Import Briefcase icon for the portal name
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
 
-    <footer className="bg-gray-900 text-gray-200 py-10 mt-16 shadow-inner border-t border-gray-700">
+    <footer className="bg-gray-900 text-gray-200 py-10 shadow-inner border-t border-gray-700">
       <div className="container mx-auto px-6 text-center">
         {/* Portal Name and Copyright */}
         <p className="text-xl font-bold mb-4 flex items-center justify-center">
@@ -24,24 +25,24 @@ const Footer = () => {
 
         {/* Social Links */}
         <div className="flex justify-center space-x-8 mt-6">
-          <a
-            href="https://github.com/owaisnadeem18" // Your actual GitHub profile link
+          <Link
+            to="https://github.com/owaisnadeem18" // Your actual GitHub profile link
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition duration-300 flex items-center transform hover:scale-105"
             aria-label="GitHub Profile"
           >
             <Github className="h-7 w-7 mr-2" /> <span className="text-lg">GitHub</span>
-          </a>
-          <a
-            href="https://linkedin.com/in/owais-nadeem"
+          </Link>
+          <Link
+            to="https://linkedin.com/in/owais-nadeem"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition duration-300 flex items-center transform hover:scale-105"
             aria-label="LinkedIn Profile"
           >
             <Linkedin className="h-7 w-7 mr-2" /> <span className="text-lg">LinkedIn</span>
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
