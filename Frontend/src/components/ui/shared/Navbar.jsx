@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { navbarItems } from "./utils/navbarItems";
 import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { PopoverContent } from "@/components/ui/popover";
@@ -26,17 +26,35 @@ const Navbar = () => {
 
       {/* 2nd side of the navbar (menu items) and (avatar) */}
       <div className="menu-items flex md:gap-6 gap-4 my-4 md:m-0">
+        
         <ul className="items-center justify-between flex text-white gap-4 md:gap-5">
-          {navbarItems("Home", "Jobs", "Browse").map((item, indx) => (
-            <li key={indx} className="relative group font-semibold font-sans">
-              <Link to={item == "Home" ? "/" : `${item.toLowerCase()}`}>
-                {item}
-              </Link>
+  {navbarItems("Home", "Jobs", "Browse").map((item, indx) => (
+    <li key={indx} className="relative group font-semibold font-sans">
+      
+      <NavLink
+        to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+        className={({ isActive }) => 
+          `transition duration-300 ${isActive ? "text-white" : "text-white"}`
+        }
+      >
+        {item}
+      </NavLink>
 
-              <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-3/4"></span>
-            </li>
-          ))}
-        </ul>
+      {/* underline span with hover + active support */}
+      <NavLink
+        to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+        className={({ isActive }) =>
+          `absolute left-0 bottom-[-2px] h-[2px] bg-white transition-all duration-300 
+          ${isActive ? "w-3/4" : "w-0"} group-hover:w-3/4`
+        }
+      >
+        <span className="sr-only">{item}</span> {/* for semantics, not visible */}
+      </NavLink>
+
+    </li>
+  ))}
+</ul>
+
 
         {/* Logic For Avatar */}
 

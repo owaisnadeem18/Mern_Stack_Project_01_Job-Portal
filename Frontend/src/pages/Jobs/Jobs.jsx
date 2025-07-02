@@ -27,7 +27,7 @@ const Jobs = () => {
               <h2 className="text-2xl font-bold mb-3 text-white">
                 Available Jobs
               </h2>
-              <div className="grid  gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 ">
+              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                 {randomJobs.length == 0 ? (
                   <div className="font-semibold text-white">
                     No Relevant Jobs Found

@@ -3,16 +3,18 @@ import SignUp from './components/auth/SignUp'
 import Home from './pages/Home/Home'
 import { Route , Routes } from 'react-router-dom'
 import Jobs from './pages/Jobs/Jobs'
+import Browse from './pages/Browse/Browse'
 
 function App() {
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home/>} ></Route>
-        <Route path='/login' element={<SignIn/>} ></Route>
-        <Route path='/signup' element={<SignUp/>} ></Route>
-        <Route path='/jobs' element={<Jobs />} ></Route>
+           <Route path='/' element={<Home />} />
+      <Route path='/login' element={<SignIn />} />
+      <Route path='/signup' element={<SignUp />} />
+      <Route path='/jobs' element={<Jobs />} />
+      <Route path='/browse' element={<Browse />} />
       </Routes>
     </>
   )
