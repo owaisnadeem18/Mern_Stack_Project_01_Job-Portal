@@ -16,7 +16,7 @@ const LatestJobsCards = () => {
           
           <p className="text-sm text-gray-300 mt-1">{job.jobDescription.substring(0,120)}...</p>
 
-          <div className="mt-3 flex flex-col gap-3">
+          <div className="mt-3 flex flex-wrap gap-3">
             <Badge variant={"ghost"} className= "text-white" >
                 {job.openings}
             </Badge>

@@ -53,7 +53,7 @@ const Job = () => {
             <Badge variant={"ghost"} className= " text-yellow-300" >
                 2,00,000/ PKR
             </Badge>
-            <Badge variant={"ghost"} className= " text-red-600" >
+            <Badge variant={"ghost"} className= "bg-white text-red-600" >
                 Job Type Full Time
             </Badge>
       </div>
