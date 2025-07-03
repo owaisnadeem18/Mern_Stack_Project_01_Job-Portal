@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, Pen, PhoneCall } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import AppliedJobsTable from "../Jobs/AppliedJobsTable";
 
 const ProfileDetails = () => {
 
@@ -16,10 +17,10 @@ const ProfileDetails = () => {
       style={{ minHeight: "calc(100vh - 56px)" }}
       className="max-w-9xl bg-gradient-to-br from-gray-500 to-gray-800 py-4 px-7"
     >
-      <h2 className="text-white text-2xl font-bold underline">Profile</h2>
 
-      <div className="my-8 rounded-xl border bg-gray-400 px-3 py-2 sm:px-7 sm:py-5">
-        <div className="flex items-center justify-between" >
+      <h2 className="text-white max-w-5xl mx-auto text-xl sm:text-2xl font-bold underline">Profile</h2>
+      <div className="my-4 rounded-xl max-w-5xl mx-auto border bg-gradient-to-br from-gray-500 to-gray-600 px-3 py-2 sm:px-7 sm:py-5">
+        <div className=" flex items-center gap-5 justify-between" >
           <div className="flex items-center text-white gap-3 sm:gap-5">
             <Avatar className={"my-4 h-12 w-12 md:h-24 md:w-24"}>
               <AvatarImage src={"https://github.com/shadcn.png"} />
@@ -59,7 +60,7 @@ const ProfileDetails = () => {
                 <Badge variant={"outline"} className={"text-gray-700 bg-white font-bold"} > Skills </Badge>
             </h3>
 
-            { skillsArray.length !== 0 ? skillsArray.map((item , idx) => <Badge variant={"outline"} className={"text-gray-200 rounded-xl bg-black mr-1"} key={idx}> {item} </Badge> ) : <p className="font-bold text-gray-200 text-sm" > N/A </p> }
+            { skillsArray.length !== 0 ? skillsArray.map((item , idx) => <Badge variant={"outline"} className={"text-gray-200 rounded-xl border border-gray-400 mr-1"} key={idx}> {item} </Badge> ) : <p className="font-bold text-gray-200 text-sm" > N/A </p> }
 
         </div>
 
@@ -72,16 +73,21 @@ const ProfileDetails = () => {
 
         </div>
 
-        {/* Div For Applied Jobs */}
-
-        <div>
-
-            <h3 className="text-lg font-medium text-white" >
-                Applied Jobs are 
-            </h3>
-        </div>
 
       </div>
+        {/* Div For Applied Jobs */}
+
+        <div className=" max-w-5xl mx-auto"  >
+
+            <h3 className="text-lg font-semibold text-white underline" >
+                Applied Jobs are 
+            </h3>
+
+            {/* Apploied Jobs Table will be there  */}
+
+            <AppliedJobsTable/>            
+
+        </div>
     </div>
   );
 };
