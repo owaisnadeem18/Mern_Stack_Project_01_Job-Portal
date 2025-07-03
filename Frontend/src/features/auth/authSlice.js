@@ -11,7 +11,8 @@ const authSlice = createSlice({
     // 2. It creates the initial state of redux , which will get updated when you required
     
     initialState: {
-        loading: false
+        loading: false,
+        user: null
     },
 
     // 3. It will create the reducer , which will be updated: 
@@ -19,10 +20,13 @@ const authSlice = createSlice({
     reducers: {
       setLoading: (state , action) => {
         state.loading = action.payload  
-      }  
+      }, 
+      setUser: (state , action) => {
+        state.user = action.payload
+      }
     }
 
 })
 
-export const {setLoading} = authSlice.actions
+export const {setLoading , setUser} = authSlice.actions
 export default authSlice.reducer 

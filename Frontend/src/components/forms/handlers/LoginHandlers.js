@@ -1,4 +1,4 @@
-import { setLoading } from "@/features/auth/authSlice"
+import { setLoading, setUser } from "@/features/auth/authSlice"
 import { USER_API_END_POINT } from "@/utils/constant"
 import axios from "axios"
 import { toast } from "sonner"
@@ -21,7 +21,10 @@ export const HandleSubmitLogin = async (e , LoginValues , navigate , dispatch) =
             }
         })
 
+        console.log(res.data.LoginUser)
+
         if (res.data.success) {
+            dispatch(setUser(res.data.LoginUser))
             navigate("/")
             toast.success(res.data.message)
         }

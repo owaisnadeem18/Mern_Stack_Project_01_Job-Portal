@@ -1,8 +1,6 @@
 import { setLoading } from "@/features/auth/authSlice"
-import store from "@/redux/store"
 import { USER_API_END_POINT } from "@/utils/constant"
 import axios from "axios"
-import { useDispatch, useSelector } from "react-redux"
 import { toast } from "sonner"
 
 export const HandleSubmitSignUp = async (e , SignUpValues , navigate , dispatch) => {

@@ -6,10 +6,12 @@ import { PopoverContent } from "@/components/ui/popover";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { LogOut, User2 } from "lucide-react";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const [user, SetUser] = useState(false);
+
+  const {user} = useSelector(store=> store.auth)
+
   return (
     <div className="items-center justify-between flex py-1 space-y-4 flex-col md:flex md:flex-row md:max-w-[100%] bg-cyan-950 min-h-[8vh] md:py-2 px-6">
       {/* 1st side of the navbar (logo)  */}
@@ -108,14 +110,21 @@ const Navbar = () => {
               </div>
 
               <div className="flex flex-col items-start justify-center">
-                <div className="flex items-center">
+                <div className="flex items-center ">
                   <User2 />
-                  <Button
+                  <Link
+                    to={"/profile"}
                     variant={"link"}
                     className={"mx-2 p-0 cursor-pointer"}
                   >
-                    View Profile
-                  </Button>
+                   <p className="relative inline-block text-sm font-medium group cursor-pointer">
+  View Profile
+
+  <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-gray-700 transition-all duration-300 group-hover:w-full"></span>
+</p>
+
+                    
+                  </Link>
                 </div>
 
                 <div className="flex items-center">
