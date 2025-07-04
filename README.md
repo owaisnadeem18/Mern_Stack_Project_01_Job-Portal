@@ -1,4 +1,4 @@
-🚀 MERN Stack Project 01 – Job Portal
+# 🚀 MERN Stack Project 01 – Job Portal 
 
 This is my first complete full-stack MERN (MongoDB, Express.js, React.js, Node.js) project, built with a focus on mastering both frontend and backend technologies—especially the backend architecture and admin panel functionalities. This Job Portal application serves as a comprehensive platform for job seekers and recruiters to connect.
 
