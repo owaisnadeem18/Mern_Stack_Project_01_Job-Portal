@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Mail, Pen, PhoneCall } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import AppliedJobsTable from "../Jobs/AppliedJobsTable";
+import EditProfileDialog from "./EditProfileDialog";
+
+const skillsArray = ['html  ' , "Css" , "JavaScript" , "Vue.js" , "MongoDB" , "Node.js" ]
+const resume = true
 
 const ProfileDetails = () => {
-
-    const skillsArray = ['html' , "Css" , "JavaScript" , "Vue.js" , "MongoDB" , "Node.js" ]
-
-    const resume = true
+  
+  
+  const [open , setOpen] = useState(false)
 
   return (
     <div
@@ -31,7 +34,7 @@ const ProfileDetails = () => {
             </div>
           </div>
           <div>
-            <Button variant={"outline"} className={"w-7 h-7 sm:w-[unset] sm:h-[unset]"} >
+            <Button onClick={() => setOpen(true)} variant={"outline"} className={"w-7 h-7 sm:w-[unset] sm:h-[unset]"} >
               {" "}
               <Pen className="p-[1px] sm:p-[unset]" />{" "}
             </Button>
@@ -84,10 +87,14 @@ const ProfileDetails = () => {
             </h3>
 
             {/* Apploied Jobs Table will be there  */}
-
             <AppliedJobsTable/>            
 
+
         </div>
+        
+        {/* Component to Open dialog to edit the profile */}
+        <EditProfileDialog open = {open}  setOpen = {setOpen} />
+
     </div>
   );
 };

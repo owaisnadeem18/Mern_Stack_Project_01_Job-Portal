@@ -5,6 +5,7 @@ import { Route , Routes } from 'react-router-dom'
 import Jobs from './pages/Jobs/Jobs'
 import Browse from './pages/Browse/Browse'
 import Profile from './pages/Profile/Profile'
+import JobsDetails from './pages/Jobs/JobsDetails'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/browse' element={<Browse />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/description/:id' element={<JobsDetails />} />
       </Routes>
     </>
   )

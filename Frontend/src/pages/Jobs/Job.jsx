@@ -3,8 +3,12 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Bookmark } from 'lucide-react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Job = () => {
+
+    const jobId = "jfmkdgeofelsfmsdmgsdmgklfd"
+
   return (
     <div className='border p-3 rounded-lg' >
     
@@ -61,7 +65,9 @@ const Job = () => {
         <div className='flex gap-2 flex-wrap' >
 
         <Button variant={"outline"} className="mt-4 text-[12px] cursor-pointer py-1 px-4 rounded-lg">
-            Save for Later
+            <Link to={`/description/${jobId}`} >
+                Details 
+            </Link>
         </Button>
 
         <Button className="mt-4 text-[12px] bg-purple-700 hover:bg-purple-800 cursor-pointer text-white py-1 px-4 rounded-lg">
