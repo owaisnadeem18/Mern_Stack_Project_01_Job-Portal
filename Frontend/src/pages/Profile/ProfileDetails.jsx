@@ -6,13 +6,15 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import AppliedJobsTable from "../Jobs/AppliedJobsTable";
 import EditProfileDialog from "./EditProfileDialog";
+import { useSelector } from "react-redux";
 
 const skillsArray = ['html  ' , "Css" , "JavaScript" , "Vue.js" , "MongoDB" , "Node.js" ]
 const resume = true
 
 const ProfileDetails = () => {
   
-  
+  const {user} = useSelector(store=> store.auth)
+
   const [open , setOpen] = useState(false)
 
   return (
@@ -29,7 +31,7 @@ const ProfileDetails = () => {
               <AvatarImage src={"https://github.com/shadcn.png"} />
             </Avatar>
             <div>
-              <h2 className="text-lg sm:text-xl font-semibold">Full Name</h2>
+              <h2 className="text-lg sm:text-xl font-semibold">{user.fullName}</h2>
               <p className="text-[14px] md:text-sm text-gray-200" > Lorem ipsum, dolor sit amet consectetur adipisicing elit. </p>
             </div>
           </div>
@@ -46,14 +48,14 @@ const ProfileDetails = () => {
 
             <Mail className="text-white" />
             <p className=" font-medium text-sm text-gray-200" >
-                owaisnadeem15@gmail.com
+                {user.email}
             </p>
             </div>
             <div className="flex items-center gap-2" >
 
             <PhoneCall className="text-white" />
             <p className="text-gray-200 font-medium text-sm" >
-                03348889907
+                {user.phoneNumber}
             </p>
             </div>
         </div>
