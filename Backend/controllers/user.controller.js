@@ -100,7 +100,7 @@ export const Login = async (req , res) => {
         return res.status(200).cookie("token" , token , {maxAge : 1* 24 * 60 * 60 * 1000 , httpsOnly: true , sameSite: "strict"}).json({
           message: `Welcome Back ${LoginUser.fullName}` , 
           LoginUser,
-          success: true
+          success: true,
         })
 
     }
@@ -125,7 +125,7 @@ export const UpdatingProfile = async (req , res) => {
 
   try {
     
-    const {FullName , Email , password , skills , bio} = req.body 
+    const {fullName , email , password , skills , bio} = req.body 
 
     // Here, we have to add the data of cloudinary: 
 
@@ -151,8 +151,8 @@ export const UpdatingProfile = async (req , res) => {
 
     // Updating the data:
     
-    if (FullName) FindUser.fullName = FullName
-    if (Email) FindUser.email = Email    
+    if (fullName) FindUser.fullName = fullName
+    if (email) FindUser.email = email    
     if (password) FindUser.password = password 
     if (skills) FindUser.skills = skillsArray  
     if (bio) FindUser.bio = bio
