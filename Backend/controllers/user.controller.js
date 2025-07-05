@@ -131,8 +131,6 @@ export const UpdatingProfile = async (req , res) => {
 
     // -------------------------------
 
-
-
     // -------------------------------
 
     let skillsArray; 
@@ -153,8 +151,8 @@ export const UpdatingProfile = async (req , res) => {
 
     // Updating the data:
     
-    if (FullName) FindUser.FullName = FullName
-    if (Email) FindUser.Email = Email    
+    if (FullName) FindUser.fullName = FullName
+    if (Email) FindUser.email = Email    
     if (password) FindUser.password = password 
     if (skills) FindUser.skills = skillsArray  
     if (bio) FindUser.bio = bio
@@ -165,8 +163,8 @@ export const UpdatingProfile = async (req , res) => {
 
     FindUser = {
       _id : FindUser._id , 
-      FullName : FindUser.FullName ,
-      Email : FindUser.Email ,
+      FullName : FindUser.fullName ,
+      Email : FindUser.email ,
       password : FindUser.password ,
       skills : FindUser.skills ,
       bio : FindUser.bio

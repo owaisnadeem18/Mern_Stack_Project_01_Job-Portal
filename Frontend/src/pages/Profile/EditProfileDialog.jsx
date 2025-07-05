@@ -10,13 +10,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoaderCircle } from "lucide-react";
+import { USER_API_END_POINT } from "@/utils/constant";
+import { setUser } from "@/features/auth/authSlice";
+import { toast } from "sonner";
+import axios from "axios";
 
 const EditProfileDialog = ({ open, setOpen }) => {
 
-  // first we have to use the loaders there: 
+  const dispatch = useDispatch()
 
+  // first we have to use the loaders there: 
   const loading = useSelector(store => store.loading)
 
   const {user} = useSelector(store=> store.auth)
@@ -35,27 +40,50 @@ const EditProfileDialog = ({ open, setOpen }) => {
   } 
 
   const handleFileChange  = (e) => {
-    const files = e.target?.files[0]
-    setInput({ ...input , [e.target.name]:e.target.value })
+    const file = e.target?.files[0]
+    setInput({ ...input , [e.target.name]:file })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // handle form logic here
-    setOpen(false)
-
+    
     const form = new FormData()
 
     form.append("fullName" , input.fullName)
     form.append("email" , input.email)
     form.append("phoneNumber" , input.phoneNumber)
     form.append("bio" , input.bio)
-    form.append("skills" , input.skills)
 
     if (input.file) {
       form.append("file" , input.file)
     }
+
+    try {
+
+      const api = await axios.post(`${USER_API_END_POINT}/profile/update` , form , {
+        headers: {
+          "Content-Type" : "multipart/form-data"
+        } ,
+        withCredentials: true
+      })
+
+      if (api.data.success) {
+        dispatch(setUser(api.data.success))
+        toast.success(api.data.success)
+      }
+
+      console.log(input)
+
+    }
+    
+    catch (err) {
+      console.log(`Error Fetching API is => ${err}`)
+      toast.error(err.response.data.message)
+    }
+
+    setOpen(false)
 
   };
 
