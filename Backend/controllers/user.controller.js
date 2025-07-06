@@ -97,7 +97,7 @@ export const Login = async (req , res) => {
 
         const token = jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: "1d" })
 
-        return res.status(200).cookie("token" , token , {maxAge : 1* 24 * 60 * 60 * 1000 , httpsOnly: true , sameSite: "strict"}).json({
+        return res.status(200).cookie("token" , token , {maxAge : 1 * 48 * 60 * 60 * 1000 , httpsOnly: true , sameSite: "strict"}).json({
           message: `Welcome Back ${LoginUser.fullName}` , 
           LoginUser,
           success: true,
@@ -126,6 +126,8 @@ export const UpdatingProfile = async (req , res) => {
   try {
     
     const {fullName , email , password , skills , bio} = req.body 
+
+    console.log(fullName, email , password , skills , bio)
 
     // Here, we have to add the data of cloudinary: 
 
@@ -163,8 +165,8 @@ export const UpdatingProfile = async (req , res) => {
 
     FindUser = {
       _id : FindUser._id , 
-      FullName : FindUser.fullName ,
-      Email : FindUser.email ,
+      fullName : FindUser.fullName ,
+      email : FindUser.email ,
       password : FindUser.password ,
       skills : FindUser.skills ,
       bio : FindUser.bio
