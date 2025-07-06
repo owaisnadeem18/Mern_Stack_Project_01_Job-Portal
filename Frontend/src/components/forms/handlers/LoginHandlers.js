@@ -18,7 +18,8 @@ export const HandleSubmitLogin = async (e , LoginValues , navigate , dispatch) =
         const res = await axios.post(`${USER_API_END_POINT}/login` , loginFormData , {
             headers: {
                 "Content-Type" : "application/json"
-            }
+            },
+            withCredentials: true
         })
 
         console.log(res.data.LoginUser)

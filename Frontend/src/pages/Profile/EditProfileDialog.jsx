@@ -30,8 +30,8 @@ const EditProfileDialog = ({ open, setOpen }) => {
     fullName: user?.fullName ,
     phoneNumber: user?.phoneNumber,
     email: user?.email,
-    bio: user?.bio,
-    skills: user?.profile.skills?.map(skill => skill),
+    bio: user?.profile?.bio,
+    skills: user?.profile?.skills.map(skill => skill),
     file: user?.profile?.resume
   })
 
@@ -44,7 +44,7 @@ const EditProfileDialog = ({ open, setOpen }) => {
     setInput({ ...input , [e.target.name]:file })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {  
     e.preventDefault();
 
     // handle form logic here
@@ -55,6 +55,7 @@ const EditProfileDialog = ({ open, setOpen }) => {
     form.append("email" , input.email)
     form.append("phoneNumber" , input.phoneNumber)
     form.append("bio" , input.bio)
+    form.append("skills" , input.skills)
 
     if (input.file) {
       form.append("file" , input.file)
@@ -100,7 +101,7 @@ const EditProfileDialog = ({ open, setOpen }) => {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        <form className="space-y-4 mt-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="fullName" className="col-span-1">
               Name

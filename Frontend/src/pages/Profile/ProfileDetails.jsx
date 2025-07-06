@@ -31,7 +31,7 @@ const ProfileDetails = () => {
               <AvatarImage src={"https://github.com/shadcn.png"} />
             </Avatar>
             <div>
-              <h2 className="text-lg sm:text-xl font-semibold">{user.fullName}</h2>
+              <h2 className="text-lg sm:text-xl font-semibold">Owais Nadeem</h2>
               <p className="text-[14px] md:text-sm text-gray-200" > Lorem ipsum, dolor sit amet consectetur adipisicing elit. </p>
             </div>
           </div>
@@ -48,14 +48,14 @@ const ProfileDetails = () => {
 
             <Mail className="text-white" />
             <p className=" font-medium text-sm text-gray-200" >
-                {user.email}
+                owaisnadeem@gmail.com
             </p>
             </div>
             <div className="flex items-center gap-2" >
 
             <PhoneCall className="text-white" />
             <p className="text-gray-200 font-medium text-sm" >
-                {user.phoneNumber}
+                03348889907
             </p>
             </div>
         </div>
