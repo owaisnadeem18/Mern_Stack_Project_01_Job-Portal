@@ -102,7 +102,7 @@ const EditProfileDialog = ({ open, setOpen }) => {
         <form className="space-y-4 mt-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="fullName" className="col-span-1">
-              Name
+              Full Name 
             </Label>
             <Input
               onChange={handleChange}
