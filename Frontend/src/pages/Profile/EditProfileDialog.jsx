@@ -133,7 +133,7 @@ const EditProfileDialog = ({ open, setOpen }) => {
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="phoneNumber" className="col-span-1">
-              Phone
+              Phone Number
             </Label>
             <Input
               value={input.phoneNumber}
