@@ -75,8 +75,6 @@ const EditProfileDialog = ({ open, setOpen }) => {
         toast.success(api.data.success)
       }
 
-      console.log(input)
-
     }
     
     catch (err) {
