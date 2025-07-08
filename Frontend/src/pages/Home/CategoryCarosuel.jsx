@@ -16,7 +16,6 @@ const CategoryCarosuel = () => {
                             {item}
                         </Button>
                     </CarouselItem>
-                     
                 )
                 }
             </CarouselContent>
