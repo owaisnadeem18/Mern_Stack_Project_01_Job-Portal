@@ -15,6 +15,7 @@ import { LoaderCircle } from "lucide-react";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/features/auth/authSlice";
 import { toast } from "sonner";
+import axios from "axios";
 
 const EditProfileDialog = ({ open, setOpen }) => {
 
@@ -24,8 +25,6 @@ const EditProfileDialog = ({ open, setOpen }) => {
   const loading = useSelector(store => store.loading)
 
   const {user} = useSelector(store => store.auth)
-
-  console.log(user)
 
 const [input , setInput] = useState({
   fullName: user?.fullName ,
@@ -49,37 +48,35 @@ const [input , setInput] = useState({
   const handleSubmit = async (e) => {  
     e.preventDefault();
 
-    console.log(input)
-
     // handle form logic here
-    
-    // const form = new FormData()
+    const formData = new FormData()
 
-    // form.append("email" , input.email)
-    // form.append("fullName" , input.fullName)
-    // form.append("phoneNumber" , input.phoneNumber)
-    // form.append("bio" , input.bio)
-    // form.append("skills" , input.skills)
+    formData.append("fullName" , input.fullName)
+    formData.append("email" , input.email)
+    formData.append("phoneNumber" , input.phoneNumber)
+    formData.append("bio" , input.bio)
+    formData.append("skills" , input.skills)
 
-    // if (input.file) {
-    //   form.append("file" , input.file)
-    // }
+    if (input.file) {
+      formData.append("file" , input.file)
+    }
 
     try {
 
-      // const api = await axios.post(`${USER_API_END_POINT}/profile/update` , form , {
-      //   headers: {
-      //     "Content-Type" : "multipart/form-data"
-      //   } ,
-      //   withCredentials: true
-      // })
+      const res = await axios.post(`${USER_API_END_POINT}/profile/update` , formData , {
+        headers: {
+          "Content-Type" : "application/json"
+        }, 
+        withCredentials: true
+      })
 
-      // if (api.data.success) {
-      //   dispatch(setUser(api.data.FindUser))
-      //   toast.success(api.data.FindUser)
-      // }
+      if (res.data.success) {
+        dispatch(setUser(res.data.FindUser))
+        toast.success(res.data.message)
+      }      
 
-      alert("Editing fields")
+      
+      console.log(input)
 
     }
     
