@@ -24,16 +24,17 @@ const EditProfileDialog = ({ open, setOpen }) => {
   // first we have to use the loaders there: 
   const loading = useSelector(store => store.loading)
 
-  const {user} = useSelector(store=> store.auth)
+  const {user} = useSelector(store => store.auth)
 
-  const [input , setInput] = useState({
-    fullName: user?.fullName ,
-    phoneNumber: user?.phoneNumber,
-    email: user?.email,
-    bio: user?.profile?.bio,
-    skills: user?.profile?.skills.map(skill => skill),
-    file: user?.profile?.resume
-  })
+const [input , setInput] = useState({
+  fullName: user?.fullName || "",
+  phoneNumber: user?.phoneNumber || "",
+  email: user?.email || "",
+  bio: user?.profile?.bio || "",
+  skills: user?.profile?.skills?.join(", ") || "",
+  file: user?.profile?.resume || null
+})
+
 
   const handleChange = (e) => {
     setInput({...input , [e.target.name] : e.target.value})
@@ -49,31 +50,33 @@ const EditProfileDialog = ({ open, setOpen }) => {
 
     // handle form logic here
     
-    const form = new FormData()
+    // const form = new FormData()
 
-    form.append("fullName" , input.fullName)
-    form.append("email" , input.email)
-    form.append("phoneNumber" , input.phoneNumber)
-    form.append("bio" , input.bio)
-    form.append("skills" , input.skills)
+    // form.append("email" , input.email)
+    // form.append("fullName" , input.fullName)
+    // form.append("phoneNumber" , input.phoneNumber)
+    // form.append("bio" , input.bio)
+    // form.append("skills" , input.skills)
 
-    if (input.file) {
-      form.append("file" , input.file)
-    }
+    // if (input.file) {
+    //   form.append("file" , input.file)
+    // }
 
     try {
 
-      const api = await axios.post(`${USER_API_END_POINT}/profile/update` , form , {
-        headers: {
-          "Content-Type" : "multipart/form-data"
-        } ,
-        withCredentials: true
-      })
+      // const api = await axios.post(`${USER_API_END_POINT}/profile/update` , form , {
+      //   headers: {
+      //     "Content-Type" : "multipart/form-data"
+      //   } ,
+      //   withCredentials: true
+      // })
 
-      if (api.data.success) {
-        dispatch(setUser(api.data.success))
-        toast.success(api.data.success)
-      }
+      // if (api.data.success) {
+      //   dispatch(setUser(api.data.FindUser))
+      //   toast.success(api.data.FindUser)
+      // }
+
+      alert("Editing fields")
 
     }
     
@@ -99,7 +102,7 @@ const EditProfileDialog = ({ open, setOpen }) => {
           </DialogDescription>
         </DialogHeader>
 
-        <form className="space-y-4 mt-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="fullName" className="col-span-1">
               Full Name 
@@ -153,6 +156,7 @@ const EditProfileDialog = ({ open, setOpen }) => {
               name="bio"
               value={input.bio}
               id="bio"
+              onChange={handleChange}
               className="col-span-3"
               placeholder="Enter your bio"
             />
@@ -162,7 +166,7 @@ const EditProfileDialog = ({ open, setOpen }) => {
             <Label htmlFor="skills" className="col-span-1">
               Skills
             </Label>
-            <Input id="skills" value={input.skills} name="skills" className="col-span-3" placeholder="skills" />
+            <Input id="skills" value={input.skills} onChange={handleChange} name="skills" className="col-span-3" placeholder="skills" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
