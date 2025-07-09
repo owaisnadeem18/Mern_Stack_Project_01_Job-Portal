@@ -26,13 +26,15 @@ const EditProfileDialog = ({ open, setOpen }) => {
 
   const {user} = useSelector(store => store.auth)
 
+  console.log(user)
+
 const [input , setInput] = useState({
-  fullName: user?.fullName || "",
-  phoneNumber: user?.phoneNumber || "",
-  email: user?.email || "",
-  bio: user?.profile?.bio || "",
-  skills: user?.profile?.skills?.join(", ") || "",
-  file: user?.profile?.resume || null
+  fullName: user?.fullName ,
+  phoneNumber: user?.phoneNumber,
+  email: user?.email,
+  bio: user?.profile?.bio,
+  skills: user?.profile?.skills?.join(", ") ,
+  file: user?.profile?.resume 
 })
 
 
