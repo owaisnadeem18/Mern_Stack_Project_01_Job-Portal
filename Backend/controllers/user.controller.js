@@ -59,6 +59,8 @@ export const Login = async (req , res) => {
 
         let LoginUser = await User.findOne({email})
 
+        console.log(LoginUser)
+
         if (!LoginUser) {
             return res.status(400).json({
                 message: "User Email is incorrect" , 

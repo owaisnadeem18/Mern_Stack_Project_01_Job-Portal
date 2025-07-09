@@ -15,7 +15,6 @@ import { LoaderCircle } from "lucide-react";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/features/auth/authSlice";
 import { toast } from "sonner";
-import axios from "axios";
 
 const EditProfileDialog = ({ open, setOpen }) => {
 
@@ -30,10 +29,10 @@ const EditProfileDialog = ({ open, setOpen }) => {
 
 const [input , setInput] = useState({
   fullName: user?.fullName ,
-  phoneNumber: user?.phoneNumber,
   email: user?.email,
+  phoneNumber: user?.phoneNumber,
   bio: user?.profile?.bio,
-  skills: user?.profile?.skills?.join(", ") ,
+  skills: user?.profile?.skills?.map(item => item) ,
   file: user?.profile?.resume 
 })
 
@@ -49,6 +48,8 @@ const [input , setInput] = useState({
 
   const handleSubmit = async (e) => {  
     e.preventDefault();
+
+    console.log(input)
 
     // handle form logic here
     
@@ -112,6 +113,7 @@ const [input , setInput] = useState({
             <Input
               onChange={handleChange}
               value = {input.fullName}
+              type={"text"}
               id="fullName"
               name="fullName"
               className="col-span-3"
@@ -144,6 +146,7 @@ const [input , setInput] = useState({
               value={input.phoneNumber}
               onChange={handleChange}
               name="phoneNumber"
+              type={"number"}
               id="phoneNumber"
               className="col-span-3"
               placeholder="Enter your phone number"
@@ -157,6 +160,7 @@ const [input , setInput] = useState({
             <Input
               name="bio"
               value={input.bio}
+              type={"text"}
               id="bio"
               onChange={handleChange}
               className="col-span-3"
@@ -168,7 +172,7 @@ const [input , setInput] = useState({
             <Label htmlFor="skills" className="col-span-1">
               Skills
             </Label>
-            <Input id="skills" value={input.skills} onChange={handleChange} name="skills" className="col-span-3" placeholder="skills" />
+            <Input type={"text"} id="skills" value={input.skills} onChange={handleChange} name="skills" className="col-span-3" placeholder="skills" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
@@ -181,7 +185,7 @@ const [input , setInput] = useState({
           <DialogFooter className="pt-4">
 
             {
-              loading ? <Button disable className= "w-full" > 
+              loading ? <Button disable className= "w-full" >
                   <LoaderCircle className="w-2 h-2 animate-spin" /> loading ...
                  </Button>
                  : 
