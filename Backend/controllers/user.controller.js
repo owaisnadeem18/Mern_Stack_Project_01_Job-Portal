@@ -127,9 +127,9 @@ export const UpdatingProfile = async (req , res) => {
 
   try {
     
-    const {fullName , email , phoneNumber , password , skills , bio} = req.body 
+    const {fullName , email , password ,  phoneNumber , skills , bio} = req.body 
 
-    console.log(fullName, email , password , phoneNumber, skills , bio)
+    console.log(fullName, email , phoneNumber, skills , bio)
 
     // Here, we have to add the data of cloudinary: 
 
