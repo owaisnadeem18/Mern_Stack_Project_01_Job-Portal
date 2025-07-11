@@ -10,12 +10,17 @@ const CategoryCarosuel = () => {
 
             <CarouselContent>
                 {
+
+
                 carosuelArrayItems.map((item , index) =>
+
                     <CarouselItem key={index} className="flex justify-center items-center basis-full md:basis-1/2 lg:basis-1/3">
                         <Button variant="outline" className= "rounded-full" >
                             {item}
                         </Button>
                     </CarouselItem>
+
+                    
                 )
                 }
             </CarouselContent>
