@@ -20,7 +20,7 @@ const CategoryCarosuel = () => {
                         </Button>
                     </CarouselItem>
 
-                    
+        
                 )
                 }
             </CarouselContent>
