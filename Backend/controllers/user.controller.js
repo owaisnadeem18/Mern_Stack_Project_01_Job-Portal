@@ -158,7 +158,7 @@ export const UpdatingProfile = async (req , res) => {
     if (fullName) FindUser.fullName = fullName
     if (email) FindUser.email = email    
     if (password) FindUser.password = password 
-    if (skills) FindUser.skills = skillsArray  
+    if (skills) FindUser.profile.skills = skillsArray  
     if (bio) FindUser.bio = bio
     
     await FindUser.save();
