@@ -160,6 +160,7 @@ export const UpdatingProfile = async (req , res) => {
     if (password) LoginUser.password = password 
     if (skills) LoginUser.profile.skills = skillsArray  
     if (bio) LoginUser.profile.bio = bio
+    if (phoneNumber) LoginUser.phoneNumber = phoneNumber
     
     await LoginUser.save();
 

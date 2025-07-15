@@ -8,7 +8,6 @@ import AppliedJobsTable from "../Jobs/AppliedJobsTable";
 import EditProfileDialog from "./EditProfileDialog";
 import { useSelector } from "react-redux";
 
-const skillsArray = ['html  ' , "Css" , "JavaScript" , "Vue.js" , "MongoDB" , "Node.js" ]
 const resume = true
 
 const ProfileDetails = () => {
@@ -31,8 +30,8 @@ const ProfileDetails = () => {
               <AvatarImage src={"https://github.com/shadcn.png"} />
             </Avatar>
             <div>
-              <h2 className="text-lg sm:text-xl font-semibold">Owais Nadeem</h2>
-              <p className="text-[14px] md:text-sm text-gray-200" > Lorem ipsum, dolor sit amet consectetur adipisicing elit. </p>
+              <h2 className="text-lg sm:text-xl font-semibold"> {user.fullName} </h2>
+              <p className="text-[14px] md:text-sm text-gray-200" > {user.profile.bio} </p>
             </div>
           </div>
           <div>
@@ -48,14 +47,14 @@ const ProfileDetails = () => {
 
             <Mail className="text-white" />
             <p className=" font-medium text-sm text-gray-200" >
-                owaisnadeem@gmail.com
+                {user.email}
             </p>
             </div>
             <div className="flex items-center gap-2" >
 
             <PhoneCall className="text-white" />
             <p className="text-gray-200 font-medium text-sm" >
-                03348889907
+                {user.phoneNumber}
             </p>
             </div>
         </div>
@@ -65,7 +64,7 @@ const ProfileDetails = () => {
                 <Badge variant={"outline"} className={"text-gray-700 bg-white font-bold"} > Skills </Badge>
             </h3>
 
-            { skillsArray.length !== 0 ? skillsArray.map((item , idx) => <Badge variant={"outline"} className={"text-gray-200 rounded-xl border border-gray-400 mr-1"} key={idx}> {item} </Badge> ) : <p className="font-bold text-gray-200 text-sm" > N/A </p> }
+            { user?.profile?.skills?.length !== 0 ? user?.profile?.skills?.map((item , indx) => <Badge variant={"outline"} className={"text-gray-200 rounded-xl border border-gray-400 mr-1"} key={indx}> {item} </Badge> ) : <p className="font-bold text-gray-200 text-sm" > N/A </p> }
 
         </div>
 
