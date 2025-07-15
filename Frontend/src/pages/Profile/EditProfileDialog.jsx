@@ -32,7 +32,7 @@ const [input , setInput] = useState({
   phoneNumber: user?.phoneNumber,
   bio: user?.profile?.bio,
   skills: user?.profile?.skills?.map(item => item) ,
-  file: user?.profile?.resume 
+  file: user?.profile?.resume  
 })
 
 

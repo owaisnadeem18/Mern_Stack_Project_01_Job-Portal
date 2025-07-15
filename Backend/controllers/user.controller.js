@@ -176,7 +176,7 @@ export const UpdatingProfile = async (req , res) => {
   
     return res.status(200).json({
       message: "User Updated Successfully" ,
-      FindUser , 
+      FindUser ,
       success: true
     })
 
