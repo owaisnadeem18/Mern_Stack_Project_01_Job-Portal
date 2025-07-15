@@ -170,8 +170,8 @@ export const UpdatingProfile = async (req , res) => {
       fullName : FindUser.fullName ,
       email : FindUser.email ,
       password : FindUser.password ,
-      skills : FindUser.skills ,
-      bio : FindUser.bio
+      skills : FindUser.profile.skills ,
+      bio : FindUser.profile.bio
     }
   
     return res.status(200).json({
