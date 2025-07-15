@@ -35,7 +35,6 @@ const [input , setInput] = useState({
   file: user?.profile?.resume  
 })
 
-
   const handleChange = (e) => {
     setInput({...input , [e.target.name] : e.target.value})
   } 
@@ -71,7 +70,7 @@ const [input , setInput] = useState({
       })
 
       if (res.data.success) {
-        dispatch(setUser(res.data.FindUser))
+        dispatch(setUser(res.data.LoginUser))
         toast.success(res.data.message)
       }      
 

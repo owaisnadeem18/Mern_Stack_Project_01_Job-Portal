@@ -144,9 +144,9 @@ export const UpdatingProfile = async (req , res) => {
     }
 
     const userId = req.id // middleware authentication (point to be remember -> It's quite difficult)
-    let FindUser = await User.findById(userId) // Then, I used this specific I'd in order to find the user.
+    let LoginUser = await User.findById(userId) // Then, I used this specific I'd in order to find the user.
 
-    if (!FindUser) {
+    if (!LoginUser) {
       return res.status(400).json({
         message: "User is not found" , 
         success: false
@@ -155,28 +155,28 @@ export const UpdatingProfile = async (req , res) => {
 
     // Updating the data:
     
-    if (fullName) FindUser.fullName = fullName
-    if (email) FindUser.email = email    
-    if (password) FindUser.password = password 
-    if (skills) FindUser.profile.skills = skillsArray  
-    if (bio) FindUser.profile.bio = bio
+    if (fullName) LoginUser.fullName = fullName
+    if (email) LoginUser.email = email    
+    if (password) LoginUser.password = password 
+    if (skills) LoginUser.profile.skills = skillsArray  
+    if (bio) LoginUser.profile.bio = bio
     
-    await FindUser.save();
+    await LoginUser.save();
 
     // Now Updating the data in the data base: 
 
-    FindUser = {
-      _id : FindUser._id , 
-      fullName : FindUser.fullName ,
-      email : FindUser.email ,
-      password : FindUser.password ,
-      skills : FindUser.profile.skills ,
-      bio : FindUser.profile.bio
+    LoginUser = {
+      _id : LoginUser._id , 
+      fullName : LoginUser.fullName ,
+      email : LoginUser.email ,
+      password : LoginUser.password ,
+      phoneNumber : LoginUser.phoneNumber ,
+      profile : LoginUser.profile
     }
   
     return res.status(200).json({
       message: "User Updated Successfully" ,
-      FindUser ,
+      LoginUser,
       success: true
     })
 
