@@ -60,12 +60,11 @@ const [input , setInput] = useState({
       formData.append("file" , input.file)
     }
 
+    console.log(input.file)
+
     try {
 
       const res = await axios.post(`${USER_API_END_POINT}/profile/update` , formData , {
-        headers: {
-          "Content-Type" : "application/json"
-        }, 
         withCredentials: true
       })
 
