@@ -102,9 +102,9 @@ const Navbar = () => {
                   <AvatarImage src="https://github.com/shadcn.png" />
                 </Avatar>
                 <div className="flex flex-col px-4">
-                  <h6> owais nadeem </h6>
+                  <h6 className="leading-[1.27]"> {user.fullName} </h6>
                   <p className="text-xs w-[50%] text-muted-foreground">
-                    owaisnadeem15@gmail.com
+                    {user.email}
                   </p>
                 </div>
               </div>
