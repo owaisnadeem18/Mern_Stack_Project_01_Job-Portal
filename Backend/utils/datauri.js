@@ -1,6 +1,4 @@
-import { v2 as cloudinary } from 'cloudinary';
 import DataURIParser from "datauri/parser.js";
-
 import path  from "path";
 
 const datauri = (file) => {

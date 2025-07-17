@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 import datauri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
+import { raw } from "express";
+import path from "path"
 
 export const Register = async (req, res) => {
   try {
@@ -130,14 +132,16 @@ export const UpdatingProfile = async (req , res) => {
   try {
     
     const {fullName , email , password ,  phoneNumber , skills , bio} = req.body 
-    
-    
     // Here, we have to add the data of cloudinary: 
 
     const file = req.file
     console.log("file is => " , file)
-    const fileURI = datauri(file)
-    const cloudResponse = await cloudinary.uploader.upload(fileURI.content) 
+
+
+    const fileUri = datauri(file)
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+
+    console.log("Cloud response is => " , cloudResponse)
 
     let skillsArray; 
 
