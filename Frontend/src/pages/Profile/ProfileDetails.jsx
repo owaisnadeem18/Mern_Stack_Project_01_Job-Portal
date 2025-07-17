@@ -73,7 +73,17 @@ const ProfileDetails = () => {
                 <Badge variant={"outline"} className={"text-gray-700 bg-white font-bold"} > Resume </Badge>
             </h3>
 
-            { resume ? <Button  variant={"link"} className={"p-0"} > <Link target="_blank" to={"https://owaisnadeem18.github.io/owais-nadeem-portfolio-web/"} variant={"outline"} className={" rounded-xl text-sm text-gray-200" }> {user?.profile?.resumeOriginalName} </Link></Button> : <p className="font-bold text-gray-200 mt-1 text-sm" > N/A </p> } 
+            {resume ? (
+                <a
+                href={user?.profile?.resume}
+                target="_blank"
+                className="rounded-xl text-sm text-gray-200 hover:underline"
+              >
+                {user?.profile?.resumeOriginalName}
+              </a>
+            ) : (
+              <p className="font-bold text-gray-200 mt-1 text-sm">N/A</p>
+            )} 
 
         </div>
 

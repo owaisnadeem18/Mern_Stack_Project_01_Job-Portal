@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { navbarItems } from "./utils/navbarItems";
 import { Popover, PopoverTrigger } from "@/components/ui/popover";
@@ -6,10 +6,15 @@ import { PopoverContent } from "@/components/ui/popover";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { LogOut, User2 } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { USER_API_END_POINT } from "@/utils/constant";
+import { setUser } from "@/features/auth/authSlice";
+import { toast } from "sonner";
 
 const Navbar = () => {
-
+  
   const {user} = useSelector(store=> store.auth)
 
   return (
@@ -132,6 +137,7 @@ const Navbar = () => {
                   <Button
                     variant={"link"}
                     className={"mx-2 p-0 cursor-pointer hover:text-red-500"}
+                    
                   >
                     Logout
                   </Button>

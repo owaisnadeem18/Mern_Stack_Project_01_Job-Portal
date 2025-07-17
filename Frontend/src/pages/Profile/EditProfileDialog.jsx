@@ -19,10 +19,9 @@ import axios from "axios";
 
 const EditProfileDialog = ({ open, setOpen }) => {
 
-  const dispatch = useDispatch()
+  const [Loading , setLoading] = useState(false)
 
-  // first we have to use the loaders there: 
-  const loading = useSelector(store => store.loading)
+  const dispatch = useDispatch()
 
   const {user} = useSelector(store => store.auth)
 
@@ -63,7 +62,7 @@ const [input , setInput] = useState({
     console.log(input.file)
 
     try {
-
+      setLoading(true)
       const res = await axios.post(`${USER_API_END_POINT}/profile/update` , formData , {
         withCredentials: true
       })
@@ -81,6 +80,10 @@ const [input , setInput] = useState({
     catch (err) {
       console.log(`Error Fetching API is => ${err}`)
       toast.error(err.response.data.message)
+    }
+
+    finally {
+      setLoading(false)
     }
 
     setOpen(false)
@@ -180,23 +183,24 @@ const [input , setInput] = useState({
           </div>
 
           <DialogFooter className="pt-4">
-
-            {
-              loading ? <Button disable className= "w-full" >
-                  <LoaderCircle className="w-2 h-2 animate-spin" /> loading ...
-                 </Button>
-                 : 
-                 <>
+ 
                   <Button
                     type="button"
                     variant="ghost"
                     onClick={() => setOpen(false)}
+                    disabled = {Loading}
                     >
                     Cancel
                   </Button>
+
+                   {Loading ? (
+                  <Button className="flex items-center gap-2">
+                    <LoaderCircle  className="w-4 h-4 animate-spin" />
+                    <span>Loading...</span>
+                  </Button>
+                  ) : (
                   <Button type="submit">Save changes</Button>
-                </>
-            }
+                  )}
             
           </DialogFooter>
         </form>
