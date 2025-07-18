@@ -8,12 +8,7 @@ import { Button } from "@/components/ui/button";
 import { LogOut, User2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { USER_API_END_POINT } from "@/utils/constant";
-import { setUser } from "@/features/auth/authSlice";
-import { toast } from "sonner";
 import { LogoutHanlder } from "@/components/forms/handlers/LogoutHandler";
-import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 
