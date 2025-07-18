@@ -7,7 +7,6 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { LogOut, User2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { LogoutHanlder } from "@/components/forms/handlers/LogoutHandler";
 import { useNavigate } from "react-router-dom"
 
@@ -95,7 +94,7 @@ const Navbar = () => {
               <Avatar>
                 <AvatarImage
                   className={"cursor-pointer"}
-                  src="https://github.com/shadcn.png"
+                  src= {user?.profile?.ProfilePhoto} 
                 />
               </Avatar>
             </PopoverTrigger>
@@ -106,7 +105,7 @@ const Navbar = () => {
             >
               <div className="flex items-center">
                 <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarImage className={"w-full h-auto"} src= {user?.profile?.ProfilePhoto} />
                 </Avatar>
                 <div className="flex flex-col px-4">
                   <h6 className="leading-[1.27]"> {user.fullName} </h6>

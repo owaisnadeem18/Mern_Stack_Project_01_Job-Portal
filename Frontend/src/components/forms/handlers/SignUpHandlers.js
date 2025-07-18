@@ -13,6 +13,7 @@ export const HandleSubmitSignUp = async (e , SignUpValues , navigate , dispatch)
     formData.append("phoneNumber" , SignUpValues.phoneNumber)
     formData.append("password" , SignUpValues.password)
     formData.append("role" , SignUpValues.role)
+    
     if (SignUpValues.file) {
         formData.append("file" , SignUpValues.file)
     }

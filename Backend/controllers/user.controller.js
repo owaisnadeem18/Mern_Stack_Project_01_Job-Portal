@@ -3,8 +3,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 import datauri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
-import { raw } from "express";
-import path from "path"
 
 export const Register = async (req, res) => {
   try {
@@ -17,6 +15,10 @@ export const Register = async (req, res) => {
         success: false,
       });
     }
+
+    const file = req.file
+    const fileUri = datauri(file)
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
 
     const emailVerify = await User.findOne({ email });
 
@@ -35,6 +37,9 @@ export const Register = async (req, res) => {
       password: hashedPassword,
       phoneNumber,
       role,
+      profile: {
+        ProfilePhoto : cloudResponse.secure_url
+      }
     });
 
     res.status(201).json({

@@ -19,11 +19,11 @@ import axios from "axios";
 
 const EditProfileDialog = ({ open, setOpen }) => {
 
-  const [Loading , setLoading] = useState(false)
+const [Loading , setLoading] = useState(false)
 
-  const dispatch = useDispatch()
+const dispatch = useDispatch()
 
-  const {user} = useSelector(store => store.auth)
+const {user} = useSelector(store => store.auth)
 
 const [input , setInput] = useState({
   fullName: user?.fullName ,
@@ -72,7 +72,6 @@ const [input , setInput] = useState({
         toast.success(res.data.message)
       }      
 
-      
       console.log(input)
 
     }
@@ -165,9 +164,7 @@ const [input , setInput] = useState({
               placeholder="Enter your bio"
             />
           </div>
-
           
-
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="skills" className="col-span-1">
               Skills
