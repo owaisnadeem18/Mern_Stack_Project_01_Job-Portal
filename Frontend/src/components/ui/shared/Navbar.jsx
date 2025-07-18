@@ -12,10 +12,17 @@ import { useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/features/auth/authSlice";
 import { toast } from "sonner";
+import { LogoutHanlder } from "@/components/forms/handlers/LogoutHandler";
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+
 
 const Navbar = () => {
   
   const {user} = useSelector(store=> store.auth)
+  
+  const dispatch = useDispatch()    
+  const navigate = useNavigate()
 
   return (
     <div className="items-center justify-between flex py-1 space-y-4 flex-col md:flex md:flex-row md:max-w-[100%] bg-cyan-950 min-h-[8vh] md:py-2 px-6">
@@ -136,6 +143,7 @@ const Navbar = () => {
                   <LogOut />
                   <Button
                     variant={"link"}
+                    onClick={() => LogoutHanlder({user , dispatch , navigate })}
                     className={"mx-2 p-0 cursor-pointer hover:text-red-500"}
                     
                   >
