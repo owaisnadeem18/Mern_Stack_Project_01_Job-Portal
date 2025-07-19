@@ -58,7 +58,9 @@ export const Login = async (req , res) => {
     try {
 
       const { email , password , role } = req.body
+ 
 
+      
         if(!email || !password || !role) {
             return res.status(400).json({
                 message: "User information is missing",
