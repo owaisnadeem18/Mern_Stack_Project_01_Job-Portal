@@ -49,8 +49,7 @@ export const JobPost = async (req, res) => {
     return res.status(201).json({
       message: "Job Has been created successfully",
       job,
-      success: true, 
-      
+      success: true,
     });
   } catch (error) {
     console.log(error);
@@ -64,8 +63,8 @@ export const GetAllJobs = async (req, res) => {
 
     const query = {
       $or: [
-        { title: { $regex: keyword, $options: "i" } },
-        { description: { $regex: keyword, $options: "i" } },
+        { title: { $regex: keyword, $options: "i" }},
+        { description: { $regex: keyword, $options: "i" }},
       ],
     };
 
