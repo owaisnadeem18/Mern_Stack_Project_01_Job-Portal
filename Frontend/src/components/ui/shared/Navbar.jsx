@@ -93,7 +93,7 @@ const Navbar = () => {
             <PopoverTrigger asChild>
               <Avatar>
                 <AvatarImage
-                  className={"cursor-pointer"}
+                  className={"cursor-pointer w-full object-cover object-top"}
                   src= {user?.profile?.ProfilePhoto} 
                 />
               </Avatar>
@@ -105,7 +105,7 @@ const Navbar = () => {
             >
               <div className="flex items-center">
                 <Avatar>
-                  <AvatarImage className={"w-full h-auto"} src= {user?.profile?.ProfilePhoto} />
+                  <AvatarImage className={"object-cover object-top"} src= {user?.profile?.ProfilePhoto} />
                 </Avatar>
                 <div className="flex flex-col px-4">
                   <h6 className="leading-[1.27]"> {user.fullName} </h6>
