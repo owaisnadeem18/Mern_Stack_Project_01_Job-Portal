@@ -26,8 +26,8 @@ const ProfileDetails = () => {
       <div className="my-4 rounded-xl max-w-5xl mx-auto border bg-gradient-to-br from-gray-500 to-gray-600 px-3 py-2 sm:px-7 sm:py-5">
         <div className=" flex items-center gap-5 justify-between" >
           <div className="flex items-center text-white gap-3 sm:gap-5">
-            <Avatar className={"my-4 h-12 w-12 md:h-24 md:w-24"}>
-              <AvatarImage src={"https://github.com/shadcn.png"} />
+            <Avatar className={"my-4 h-12 w-12 md:h-24 md:w-24 md:object-cover md:object-top"}>
+              <AvatarImage src= {user?.profile?.ProfilePhoto} className={"object-cover object-top"}  />
             </Avatar>
             <div>
               <h2 className="text-lg sm:text-xl font-semibold"> {user.fullName} </h2>

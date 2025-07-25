@@ -193,7 +193,7 @@ const [input , setInput] = useState({
                    {Loading ? (
                   <Button className="flex items-center gap-2">
                     <LoaderCircle  className="w-4 h-4 animate-spin" />
-                    <span>Loading...</span>
+                    <span>Updating...</span>
                   </Button>
                   ) : (
                   <Button type="submit">Save changes</Button>
