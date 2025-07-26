@@ -1,21 +1,61 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { setSingleJob } from '@/features/jobs/jobSlice';
+import { JOB_API_END_POINT } from '@/utils/constant';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 
 const Description = () => {
   const isApplied = false; // Change this to true to show "Already Applied"
 
+  const { id } = useParams()
+
+  console.log("id ye hay " , id)
+
+  const dispatch = useDispatch()
+
+  const {singleJob} = useSelector(store => store?.job)
+
+  console.log(singleJob)
+
+  const {user} = useSelector(store => store.auth)
+
+
+  useEffect(() => {
+    const getSingleJob = async () => {
+      
+      try {
+        const res = await axios.get(`${JOB_API_END_POINT}/getJobs/${id}` , {withCredentials:true})
+
+        console.log("response ye aya hay => " , res)
+
+        if (res.data.success) {
+          dispatch(setSingleJob(res.data.job))
+        }
+      }
+      
+      catch(err) {
+        console.log("error fetching the data is => " , err)
+      }
+      
+    } 
+
+
+    getSingleJob()
+
+  } , [id , dispatch , user._id])
+
   return (
     <div className="max-w-4xl mx-auto px-6 py-30 shadow-md rounded-lg" style={{minHeight: "calc(100vh - 56px)" }} >
-      <div className='border p-8 bg-gray-50 rounded-lg shadow-2xl' >
-        
+      <div className='border p-8 bg-gray-50 rounded-lg shadow-2xl'>        
       <div className=" flex items-center justify-between mb-4">
         <div>
           <p className="text-sm text-gray-500">2 days ago</p>
-          <h2 className="text-xl font-semibold text-gray-800">Company name</h2>
-          <p className="text-gray-600">company location</p>
+          <h2 className="text-xl font-semibold text-gray-800">{singleJob?.title}</h2>
+          <p className="text-gray-600">{singleJob?.location}</p>
         </div>
 
 
@@ -32,22 +72,37 @@ const Description = () => {
             </Button>
       </div>
 
-      <h3 className="text-2xl font-bold text-gray-800 mt-4 mb-2">Title</h3>
+      <h3 className="text-2xl font-bold text-gray-800 mt-4 mb-2"></h3>
       <p className="text-gray-700 mb-6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, sapiente.
+        {singleJob?.description}
       </p>
 
       <div className="flex flex-wrap items-center gap-3 mb-6">
+        <Badge className="font-semibold bg-blue-900 text-white text-sm px-3 py-1 rounded-full">
+          Experience : {singleJob?.experience}
+        </Badge>
         <Badge className="font-semibold bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
-          Positions: 34
+          Positions: {singleJob?.position}
         </Badge>
         <Badge className="font-semibold bg-yellow-200 text-yellow-900 text-sm px-3 py-1 rounded-full">
-          2,00,000 PKR
+           {singleJob?.salary?.toLocaleString("en-IN")}/PKR
         </Badge>
         <Badge className="font-semibold bg-gray-500 text-white text-sm px-3 py-1 rounded-full">
-          Job Type: Full Time
+          Job Type: {singleJob?.jobType}
         </Badge>
       </div>
+
+    <div className='flex justify-between my-4' >
+
+        <div className="font-semibold flex flex-col text-sm px-3 py-1 rounded-lg">
+          Job Requirements : {singleJob?.requirements.map((req) => <Badge variant={"ghost"}> {req} </Badge> )}
+                 
+        </div>
+
+        <div className="font-semibold bg-gray-500 text-white text-sm px-3 py-1 rounded-lg">
+          Applicants: {singleJob?.applications?.length <= 0 ? "No Applicants" : singleJob?.applications?.length }
+        </div>
+    </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
         {!isApplied ? (
@@ -55,7 +110,7 @@ const Description = () => {
             Apply Now
           </Button>
         ) : (
-          <Button disabled={true} className="bg-gray-300 text-gray-600 px-6 py-2 rounded-lg cursor-not-allowed">
+          <Button disabled={true} className="bg-gray-300 text-gray-600 px-6 py-2 rounded-sm cursor-not-allowed">
             Already Applied
           </Button>
         )}

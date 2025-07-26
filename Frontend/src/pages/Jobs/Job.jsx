@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 
 const Job = ({job}) => {
 
-    const jobId = "jfmkdgeofelsfmsdmgsdmgklfd"
-
   return (
     <div className='border p-3 rounded-lg' >
     
@@ -66,7 +64,7 @@ const Job = ({job}) => {
                 Positions: {job?.position}
             </Badge>
             <Badge variant={"ghost"} className= " text-yellow-300" >
-                {job?.salary.toLocaleString("en-IN")} / PKR
+                {job?.salary?.toLocaleString("en-IN")} / PKR
             </Badge>
             <Badge variant={"ghost"} className= "bg-white text-red-600" >
                 Job Type: {job?.jobType}
@@ -76,7 +74,7 @@ const Job = ({job}) => {
         <div className='flex gap-2 flex-wrap' >
 
         <Button variant={"outline"} className="mt-4 text-[12px] cursor-pointer py-1 px-4 rounded-lg">
-            <Link to={`/description/${jobId}`} >
+            <Link to={`/description/${job._id}`}>
                 Details 
             </Link>
         </Button>

@@ -7,8 +7,8 @@ import { jobSlice } from "@/features/jobs/jobSlice";
 
 const rootReducer = combineReducers({
     auth: authSlice,
-    job: jobSlice.reducer
-})
+    job: jobSlice.reducer ,
+  })
 
 const persistConfig = {
     key: "root",

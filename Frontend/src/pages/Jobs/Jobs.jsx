@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const Jobs = () => {
 
-  const {allJobs} = useSelector(store=> store.job)
+  const {allJobs} = useSelector(store=> store?.job)
 
   return (
     <>
