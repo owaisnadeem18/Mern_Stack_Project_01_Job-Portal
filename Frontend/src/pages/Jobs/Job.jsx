@@ -1,11 +1,11 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Bookmark } from 'lucide-react'
+import { Bookmark, MapIcon, MapPinIcon } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Job = () => {
+const Job = ({job}) => {
 
     const jobId = "jfmkdgeofelsfmsdmgsdmgklfd"
 
@@ -20,7 +20,7 @@ const Job = () => {
       
       <div className='flex items-center gap-4 my-2' >
 
-      <Button variant={"outline"} className={"p-1"} size={"icon"} >
+      <Button variant={"outline"} size={"icon"} >
 
         <Avatar>
 
@@ -30,35 +30,46 @@ const Job = () => {
 
       </Button>
 
-        <div className='flex flex-col' >
+        <div className='flex justify-between gap-3 items-center flex-wrap' >
+            <div>
+
+                {
+                    job?.company?.name ?  
             <h6 className='text-white font-semibold' >
-                Company name
-            </h6>
-            <p className='text-[#f0f0f0ba] font-semibold' >
-                company location
+                    <Badge variant={"ghost"}>
+
+                {job?.company?.name }
+                </Badge> 
+            </h6> : ""  }
+            </div>
+            <div>
+
+            <p className='text-[#f0f0f0ba] flex gap-1 font-semibold' >
+                <MapPinIcon /> {job?.location}
             </p>
+            </div>
         </div>
 
       </div>
 
       <div>
-        <h4 className='text-white font-medium' >
-            Title
+        <h4 className='text-white text-lg font-bold' >
+            {job?.title}
         </h4>
         <p className='text-white' >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, sapiente.
+            {job?.description}
         </p>
       </div>
 
       <div className="mt-3 flex flex-wrap gap-3">
             <Badge variant={"ghost"} className= "text-[#8aebffd3]" >
-                Positions 34
+                Positions: {job?.position}
             </Badge>
             <Badge variant={"ghost"} className= " text-yellow-300" >
-                2,00,000/ PKR
+                {job?.salary.toLocaleString("en-IN")} / PKR
             </Badge>
             <Badge variant={"ghost"} className= "bg-white text-red-600" >
-                Job Type Full Time
+                Job Type: {job?.jobType}
             </Badge>
       </div>
         

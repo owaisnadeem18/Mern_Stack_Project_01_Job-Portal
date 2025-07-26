@@ -55,7 +55,7 @@ const Description = () => {
             Apply Now
           </Button>
         ) : (
-          <Button className="bg-gray-300 text-gray-600 px-6 py-2 rounded-lg cursor-not-allowed">
+          <Button disabled={true} className="bg-gray-300 text-gray-600 px-6 py-2 rounded-lg cursor-not-allowed">
             Already Applied
           </Button>
         )}

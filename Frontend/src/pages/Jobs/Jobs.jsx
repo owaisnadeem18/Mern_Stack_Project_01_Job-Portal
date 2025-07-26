@@ -3,9 +3,11 @@ import React from "react";
 import FilterCard from "./FilterCard";
 import Job from "./Job";
 import Footer from "@/components/ui/shared/Footer";
+import { useSelector } from "react-redux";
 
 const Jobs = () => {
-  let randomJobs = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  const {allJobs} = useSelector(store=> store.job)
 
   return (
     <>
@@ -28,12 +30,12 @@ const Jobs = () => {
                 Available Jobs
               </h2>
               <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-                {randomJobs.length == 0 ? (
+                {allJobs.length == 0 ? (
                   <div className="font-semibold text-white">
                     No Relevant Jobs Found
                   </div>
                 ) : (
-                  randomJobs.map((item, indx) => <Job key={indx} />)
+                  allJobs.map((job, indx) => <Job key={job._id} job={job} />)
                 )}
               </div>
             </section>
