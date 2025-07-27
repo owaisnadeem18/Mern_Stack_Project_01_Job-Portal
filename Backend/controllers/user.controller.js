@@ -198,12 +198,10 @@ export const UpdatingProfile = async (req , res) => {
       LoginUser,
       success: true
     })
-
   } 
 
   catch (err) {
     console.log(`Error updating the profile is => ${err}`)
   }
-
 }
 
