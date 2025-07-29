@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { JobPostedTotalTime } from '@/components/ui/shared/utils/jobUtils'
 import { Bookmark, MapIcon, MapPinIcon } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -10,8 +11,8 @@ const Job = ({job}) => {
   return (
     <div className='border p-3 rounded-lg' >
     
-        <div className='flex items-center justify-between' >
-            <p className='text-gray-200 text-sm font-semibold' >2 days ago</p>
+        <div className='flex items-center justify-between'>
+            <p className='text-gray-200 font-semibold' > <span > Job Posted: </span> <Badge variant={"ghost"} className='text-sm font-bold bg-gray-700' > {JobPostedTotalTime(job?.createdAt) === 0 ? "Today" : `${JobPostedTotalTime(job?.createdAt)} days ago` } </Badge> </p>
 
             <Button variant={"outline"} className={"rounded-full"} size={"icon"} > <Bookmark/> </Button>
         </div>
@@ -31,8 +32,7 @@ const Job = ({job}) => {
         <div className='flex justify-between gap-3 items-center flex-wrap' >
             <div>
 
-                {
-                    job?.company?.name ?  
+                { job?.company?.name ?  
             <h6 className='text-white font-semibold' >
                     <Badge variant={"ghost"}>
 

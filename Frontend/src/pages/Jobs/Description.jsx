@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { JobPostedTotalTime } from '@/components/ui/shared/utils/jobUtils';
 import { setSingleJob } from '@/features/jobs/jobSlice';
 import { JOB_API_END_POINT } from '@/utils/constant';
 import axios from 'axios';
@@ -13,13 +14,9 @@ const Description = () => {
 
   const { id } = useParams()
 
-  console.log("id ye hay " , id)
-
   const dispatch = useDispatch()
 
   const {singleJob} = useSelector(store => store?.job)
-
-  console.log(singleJob)
 
   const {user} = useSelector(store => store.auth)
 
@@ -29,9 +26,6 @@ const Description = () => {
       
       try {
         const res = await axios.get(`${JOB_API_END_POINT}/getJobs/${id}` , {withCredentials:true})
-
-        console.log("response ye aya hay => " , res)
-
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job))
         }
@@ -53,7 +47,8 @@ const Description = () => {
       <div className='border p-8 bg-gray-50 rounded-lg shadow-2xl'>        
       <div className=" flex items-center justify-between mb-4">
         <div>
-          <p className="text-sm text-gray-500">2 days ago</p>
+          <p className='text-gray-200 mb-4 font-semibold' > <span className='text-black' > Job Posted: </span> <Badge variant={"ghost"} className='text-sm font-bold bg-gray-700' > {JobPostedTotalTime(singleJob?.createdAt) === 0 ? "Today" : `${JobPostedTotalTime(singleJob?.createdAt)} days ago` } </Badge> </p>
+
           <h2 className="text-xl font-semibold text-gray-800">{singleJob?.title}</h2>
           <p className="text-gray-600">{singleJob?.location}</p>
         </div>
@@ -92,14 +87,14 @@ const Description = () => {
         </Badge>
       </div>
 
-    <div className='flex justify-between my-4' >
+    <div className='flex justify-between flex-wrap gap-5 md:gap-0 items-center my-4' >
 
-        <div className="font-semibold flex flex-col text-sm px-3 py-1 rounded-lg">
-          Job Requirements : {singleJob?.requirements.map((req) => <Badge variant={"ghost"}> {req} </Badge> )}
+        <div className="font-semibold flex gap-2 text-sm py-1 rounded-lg">
+          Job Requirements: {singleJob?.requirements.map((req , index) => <Badge key={index} variant={"ghost"} className={"bg-gray-800 text-white shadow-lg "} > {req} </Badge>)}
                  
         </div>
 
-        <div className="font-semibold bg-gray-500 text-white text-sm px-3 py-1 rounded-lg">
+        <div className="font-semibold bg-gray-200 text-sm px-3 py-1 rounded-lg">
           Applicants: {singleJob?.applications?.length <= 0 ? "No Applicants" : singleJob?.applications?.length }
         </div>
     </div>
@@ -110,7 +105,7 @@ const Description = () => {
             Apply Now
           </Button>
         ) : (
-          <Button disabled={true} className="bg-gray-300 text-gray-600 px-6 py-2 rounded-sm cursor-not-allowed">
+          <Button disabled={isApplied} className="bg-gray-400 text-black font-bold px-6 py-2 rounded-sm cursor-not-allowed">
             Already Applied
           </Button>
         )}

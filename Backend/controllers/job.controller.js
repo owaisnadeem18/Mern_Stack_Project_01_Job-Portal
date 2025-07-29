@@ -7,6 +7,7 @@ export const JobPost = async (req, res) => {
       title,
       description,
       requirements,
+      company,
       location,
       salary,
       jobType,
@@ -36,6 +37,7 @@ export const JobPost = async (req, res) => {
     let job = await JobModel.create({
       title,
       description,
+      company,
       requirements: requirements.split(","),
       location,
       salary: Number(salary),

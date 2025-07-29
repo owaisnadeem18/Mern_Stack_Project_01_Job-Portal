@@ -27,17 +27,20 @@ const Jobs = () => {
             {/* Jobs Grid */}
             <section className="w-full md:w-[78%]">
               <h2 className="text-2xl font-bold mb-3 text-white">
-                Available Jobs
+                Available Jobs:
               </h2>
-              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                 {allJobs.length == 0 ? (
-                  <div className="font-semibold text-white">
-                    No Relevant Jobs Found
+                  <div className="font-semibold min-h-auto flex w-full justify-center items-center text-white md:min-h-[75vh]">
+                    <h1 className="text-xl md:text-2xl underline" > No Relevant Jobs Found!
+                  </h1>
                   </div>
-                ) : (
+              ) : 
+              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                {
                   allJobs.map((job, indx) => <Job key={job._id} job={job} />)
-                )}
+                }
               </div>
+              }
             </section>
           </div>
         </div>

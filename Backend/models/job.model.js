@@ -19,6 +19,6 @@ const jobModel = new mongoose.Schema({
             ref: "Application",
         }
     ]
-})
+} , {timestamps: true} )
 
 export const JobModel = mongoose.model("Job" , jobModel)
