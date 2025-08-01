@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 const Job = ({job}) => {
 
   return (
-    <div className='border p-3 rounded-lg' >
+    <div className='border border-gray-400 p-3 rounded-lg' >
     
         <div className='flex items-center justify-between'>
             <p className='text-gray-200 font-semibold' > <span > Job Posted: </span> <Badge variant={"ghost"} className='text-sm font-bold bg-gray-700' > {JobPostedTotalTime(job?.createdAt) === 0 ? "Today" : `${JobPostedTotalTime(job?.createdAt)} days ago` } </Badge> </p>
