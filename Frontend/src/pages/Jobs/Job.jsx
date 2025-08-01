@@ -36,7 +36,7 @@ const Job = ({job}) => {
             <h6 className='text-white font-semibold' >
                     <Badge variant={"ghost"}>
 
-                {job?.company?.name }
+                {job?.company?.name}
                 </Badge> 
             </h6> : ""  }
             </div>
