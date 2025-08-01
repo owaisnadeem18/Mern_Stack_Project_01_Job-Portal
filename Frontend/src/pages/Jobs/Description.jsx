@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { applyJobHanlder } from '@/components/ui/shared/utils/applyJobHandler';
 import { JobPostedTotalTime } from '@/components/ui/shared/utils/jobUtils';
 import { setSingleJob } from '@/features/jobs/jobSlice';
 import { JOB_API_END_POINT } from '@/utils/constant';
@@ -19,6 +20,8 @@ const Description = () => {
   const {singleJob} = useSelector(store => store?.job)
 
   const {user} = useSelector(store => store.auth)
+
+  console.log(id)
 
 
   useEffect(() => {
@@ -87,10 +90,17 @@ const Description = () => {
         </Badge>
       </div>
 
-    <div className='flex justify-between flex-wrap gap-5 md:gap-0 items-center my-4' >
+    <div className='flex justify-between flex-row flex-wrap gap-5 md:gap-0 items-start my-4' >
 
-        <div className="font-semibold flex gap-2 text-sm py-1 rounded-lg">
-          Job Requirements: {singleJob?.requirements.map((req , index) => <Badge key={index} variant={"ghost"} className={"bg-gray-800 text-white shadow-lg "} > {req} </Badge>)}
+        <div className="font-semibold flex flex-col sm:flex-row gap-2 text-sm py-1 rounded-lg">
+          <h3>
+          Job Requirements: 
+          </h3>
+          
+          <div >
+          {singleJob?.requirements.map((req , index) => <Badge key={index} variant={"ghost"} className={"bg-gray-800 mx-1 my-2 sm:my-0 text-white shadow-lg"} > {req} </Badge>)}
+
+          </div>
                  
         </div>
 
@@ -101,7 +111,7 @@ const Description = () => {
 
       <div className="flex flex-col sm:flex-row gap-4">
         {!isApplied ? (
-          <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow-md transition">
+          <Button onClick = {() => applyJobHanlder(id)} className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow-md transition">
             Apply Now
           </Button>
         ) : (
