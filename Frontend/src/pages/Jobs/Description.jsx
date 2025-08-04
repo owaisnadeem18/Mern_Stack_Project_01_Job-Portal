@@ -23,35 +23,32 @@ const Description = () => {
   
   const {user} = useSelector(store => store.auth)
   
-  const isInitiallyApplied = singleJob?.applications?.some(application => application.applicant === user?._id)
+  const isInitiallyApplied = singleJob?.applications?.some(app => app === user?._id) || false;
 
   // "This is to check if the user has already applied for the job or not"
-
-  console.log(isInitiallyApplied)
-
-  const [isApplied, setIsApplied] = useState(isInitiallyApplied || false);
-
-
-
-  // Create a handler function to check either the job has been applied or not: 
+  
+  const [isApplied, setIsApplied] = useState(isInitiallyApplied);
 
   const applyJobHandler = async () => {
     try {
       const res = await axios.get(`${APPLICATION_API_END_POINT}/applyJob/${id}` , {withCredentials: true})
-
+  
       if (res.data.success) {
+        setIsApplied(true) // updated local state.
+        const updatedSingleJob = {...singleJob , applications: [...singleJob.applications , {applicant: user?._id}]}
+        dispatch(setSingleJob(updatedSingleJob))
         console.log(res.data.success)
         toast.success(res.data.message)
       }
-
+  
     } catch (err) {
       console.log(err)
       toast.error(err.response.data.message)
       
     }
   }
-
-
+  
+  // Create a handler function to check either the job has been applied or not: 
 
   useEffect(() => {
     const getSingleJob = async () => {
