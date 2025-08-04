@@ -58,10 +58,8 @@ export const Login = async (req , res) => {
     try {
 
       const { email , password , role } = req.body
- 
 
-      
-        if(!email || !password || !role) {
+      if(!email || !password || !role) {
             return res.status(400).json({
                 message: "User information is missing",
                 success: false
@@ -105,7 +103,8 @@ export const Login = async (req , res) => {
           email : LoginUser.email ,
           password : LoginUser.password ,
           phoneNumber : LoginUser.phoneNumber ,
-          profile : LoginUser.profile
+          profile : LoginUser.profile,
+          role: LoginUser.role
         }
 
         const token = jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: "1d" })

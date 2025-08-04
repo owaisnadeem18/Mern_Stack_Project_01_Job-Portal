@@ -12,11 +12,13 @@ import { useNavigate } from "react-router-dom"
 
 
 const Navbar = () => {
-  
-  const {user} = useSelector(store=> store.auth)
-  
-  const dispatch = useDispatch()    
+
+  const { user } = useSelector(store => store.auth)
+
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const role = user?.role
 
   return (
     <div className="items-center justify-between flex py-1 space-y-4 flex-col md:flex md:flex-row md:max-w-[100%] bg-cyan-950 min-h-[8vh] md:py-2 px-6">
@@ -34,34 +36,33 @@ const Navbar = () => {
 
       {/* 2nd side of the navbar (menu items) and (avatar) */}
       <div className="menu-items flex md:gap-6 gap-4 my-4 md:m-0">
-        
+
         <ul className="items-center justify-between flex text-white gap-4 md:gap-5">
-  {navbarItems("Home", "Jobs", "Browse").map((item, indx) => (
-    <li key={indx} className="relative group font-semibold font-sans">
-      
-      <NavLink
-        to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-        className={({ isActive }) => 
-          `transition duration-300 ${isActive ? "text-white" : "text-white"}`
-        }
-      >
-        {item}
-      </NavLink>
+          {navbarItems(role).map((item, indx) => (
+            <li key={indx} className="relative group font-semibold font-sans">
 
-      {/* underline span with hover + active support */}
-      <NavLink
-        to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-        className={({ isActive }) =>
-          `absolute left-0 bottom-[-2px] h-[2px] bg-white transition-all duration-300 
+              <NavLink
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className={({ isActive }) =>
+                  `transition duration-300 ${isActive ? "text-white" : "text-white"}`
+                }
+              >
+                {item}
+              </NavLink>
+
+              <NavLink
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className={({ isActive }) =>
+                  `absolute left-0 bottom-[-2px] h-[2px] bg-white transition-all duration-300 
           ${isActive ? "w-3/4" : "w-0"} group-hover:w-3/4`
-        }
-      >
-        <span className="sr-only">{item}</span> {/* for semantics, not visible */}
-      </NavLink>
+                }
+              >
+                <span className="sr-only">{item}</span>
+              </NavLink>
 
-    </li>
-  ))}
-</ul>
+            </li>
+          ))}
+        </ul>
 
 
         {/* Logic For Avatar */}
@@ -94,7 +95,7 @@ const Navbar = () => {
               <Avatar>
                 <AvatarImage
                   className={"cursor-pointer w-full object-cover object-top"}
-                  src= {user?.profile?.ProfilePhoto} 
+                  src={user?.profile?.ProfilePhoto}
                 />
               </Avatar>
             </PopoverTrigger>
@@ -105,7 +106,7 @@ const Navbar = () => {
             >
               <div className="flex items-center">
                 <Avatar>
-                  <AvatarImage className={"object-cover object-top"} src= {user?.profile?.ProfilePhoto} />
+                  <AvatarImage className={"object-cover object-top"} src={user?.profile?.ProfilePhoto} />
                 </Avatar>
                 <div className="flex flex-col px-4">
                   <h6 className="leading-[1.27]"> {user.fullName} </h6>
@@ -117,29 +118,35 @@ const Navbar = () => {
 
               <div className="flex flex-col items-start justify-center">
                 <div className="flex items-center ">
-                  <User2 />
-                  <Link
-                    to={"/profile"}
-                    variant={"link"}
-                    className={"mx-2 p-0 cursor-pointer"}
-                  >
-                   <p className="relative inline-block text-sm font-medium group cursor-pointer">
-  View Profile
 
-  <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-gray-700 transition-all duration-300 group-hover:w-full"></span>
-</p>
+                  {
+                    role == "student" &&
+                    <>
+                      <User2 />
+                      <Link
+                        to={"/profile"}
+                        variant={"link"}
+                        className={"mx-2 p-0 cursor-pointer"}
+                      >
+                        <p className="relative inline-block text-sm font-medium group cursor-pointer">
+                          View Profile
 
-                    
-                  </Link>
+                          <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-gray-700 transition-all duration-300 group-hover:w-full"></span>
+                        </p>
+
+
+                      </Link>
+                    </>
+                  }
                 </div>
 
                 <div className="flex items-center">
                   <LogOut />
                   <Button
                     variant={"link"}
-                    onClick={() => LogoutHanlder({user , dispatch , navigate })}
+                    onClick={() => LogoutHanlder({ user, dispatch, navigate })}
                     className={"mx-2 p-0 cursor-pointer hover:text-red-500"}
-                    
+
                   >
                     Logout
                   </Button>
