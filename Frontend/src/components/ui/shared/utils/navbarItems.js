@@ -4,7 +4,7 @@ export const navbarItems = (role) => {
     { name: "Jobs", roles: ["student"] },
     { name: "Browse", roles: ["student"] },
     { name: "Companies", roles: ["recruiter"] },
-    { name: "Job Posts", roles: ["recruiter"] }
+    { name: "JobPosts", roles: ["recruiter"] }
   ];
 
   return allItems.filter(item => item.roles.includes(role)).map((navItems) => navItems.name)

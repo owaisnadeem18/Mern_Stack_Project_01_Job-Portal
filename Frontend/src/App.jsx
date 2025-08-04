@@ -6,6 +6,8 @@ import Jobs from './pages/Jobs/Jobs'
 import Browse from './pages/Browse/Browse'
 import Profile from './pages/Profile/Profile'
 import JobsDetails from './pages/Jobs/JobsDetails'
+import Companies from './admin-routes/Companies'
+import JobPosts from './admin-routes/JobPosts'
 
 function App() {
 
@@ -19,6 +21,10 @@ function App() {
         <Route path='/browse' element={<Browse />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/description/:id' element={<JobsDetails />} />
+        
+        {/* Routes for admin */}
+        <Route path='/companies' element={<Companies />} />
+        <Route path='/Jobposts' element={<JobPosts />} />
       </Routes>
     </>
   )
