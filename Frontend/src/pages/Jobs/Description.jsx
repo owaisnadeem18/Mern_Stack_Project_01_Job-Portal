@@ -1,14 +1,15 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { applyJobHanlder } from '@/components/ui/shared/utils/applyJobHandler';
+// import { applyJobHanlder } from '@/components/ui/shared/utils/applyJobHandler';
 import { JobPostedTotalTime } from '@/components/ui/shared/utils/jobUtils';
 import { setSingleJob } from '@/features/jobs/jobSlice';
-import { JOB_API_END_POINT } from '@/utils/constant';
+import { APPLICATION_API_END_POINT, JOB_API_END_POINT } from '@/utils/constant';
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const Description = () => {
 
@@ -18,14 +19,38 @@ const Description = () => {
   const dispatch = useDispatch()
   
   const {singleJob} = useSelector(store => store?.job)
+  console.log(singleJob)
   
   const {user} = useSelector(store => store.auth)
   
-  const isApplied = singleJob?.applications?.some(applications => applications?.applicant === user?._id) || false
+  const isInitiallyApplied = singleJob?.applications?.some(application => application.applicant === user?._id)
 
-  console.log(isApplied)
+  // "This is to check if the user has already applied for the job or not"
 
-  console.log(singleJob)
+  console.log(isInitiallyApplied)
+
+  const [isApplied, setIsApplied] = useState(isInitiallyApplied || false);
+
+
+
+  // Create a handler function to check either the job has been applied or not: 
+
+  const applyJobHandler = async () => {
+    try {
+      const res = await axios.get(`${APPLICATION_API_END_POINT}/applyJob/${id}` , {withCredentials: true})
+
+      if (res.data.success) {
+        console.log(res.data.success)
+        toast.success(res.data.message)
+      }
+
+    } catch (err) {
+      console.log(err)
+      toast.error(err.response.data.message)
+      
+    }
+  }
+
 
 
   useEffect(() => {
@@ -35,6 +60,7 @@ const Description = () => {
         const res = await axios.get(`${JOB_API_END_POINT}/getJobs/${id}` , {withCredentials:true})
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job))
+          setIsApplied(res.data.job.applications.some(application => application.applicant === user?._id))
         }
       }
       
@@ -114,15 +140,18 @@ const Description = () => {
     </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
-        {!isApplied ? (
-          <Button onClick = { isApplied ? null : () => applyJobHanlder(id) } className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow-md transition">
-            Apply Now
-          </Button>
-        ) : (
-          <Button disabled={isApplied} className="bg-gray-400 text-black font-bold px-6 py-2 rounded-sm cursor-not-allowed">
-            Already Applied
-          </Button>
-        )}
+        
+      <Button
+          onClick={ isApplied ? null : applyJobHandler }
+          disabled={isApplied}
+          className={`px-6 py-2 rounded-lg shadow-md transition font-bold ${
+            isApplied
+              ? "bg-gray-400 text-white hover:bg-gray-400 cursor-not-allowed"
+              : "bg-purple-600 hover:bg-purple-700 text-white cursor-pointer"
+          }`}
+        >
+          {isApplied ? "Already Applied" : "Apply Now"}
+        </Button>
 
         <Button className="bg-gray-100 text-gray-800 px-6 py-2 rounded-lg border border-gray-300 hover:bg-gray-200 transition">
           <Link to={"/jobs"} >

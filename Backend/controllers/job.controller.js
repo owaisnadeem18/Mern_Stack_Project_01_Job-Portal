@@ -51,8 +51,6 @@ export const JobPost = async (req, res) => {
     return res.status(201).json({
       message: "Job Has been created successfully",
       job,
-
-      
       success: true,
     });
   } catch (error) {
