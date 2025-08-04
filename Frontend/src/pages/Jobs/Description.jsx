@@ -11,17 +11,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 const Description = () => {
-  const isApplied = false; // Change this to true to show "Already Applied"
 
+  
   const { id } = useParams()
-
+  
   const dispatch = useDispatch()
-
+  
   const {singleJob} = useSelector(store => store?.job)
-
+  
   const {user} = useSelector(store => store.auth)
+  
+  const isApplied = singleJob?.applications?.some(applications => applications?.applicant === user?._id) || false
 
-  console.log(id)
+  console.log(isApplied)
+
+  console.log(singleJob)
 
 
   useEffect(() => {
@@ -90,15 +94,15 @@ const Description = () => {
         </Badge>
       </div>
 
-    <div className='flex justify-between flex-row flex-wrap gap-5 md:gap-0 items-start my-4' >
+    <div className='flex justify-between flex-row flex-wrap gap-5 md:gap-2 items-start my-4' >
 
-        <div className="font-semibold flex flex-col sm:flex-row gap-2 text-sm py-1 rounded-lg">
+        <div className="font-semibold flex sm:items-center flex-col sm:flex-row gap-2 text-sm py-1 rounded-lg">
           <h3>
           Job Requirements: 
           </h3>
           
           <div >
-          {singleJob?.requirements.map((req , index) => <Badge key={index} variant={"ghost"} className={"bg-gray-800 mx-1 my-2 sm:my-0 text-white shadow-lg"} > {req} </Badge>)}
+          {singleJob?.requirements.map((req , index) => <Badge key={index} variant={"ghost"} className={"bg-gray-800 mx-1 my-2 sm:my-2 text-white shadow-lg"} > {req} </Badge>)}
 
           </div>
                  
@@ -111,7 +115,7 @@ const Description = () => {
 
       <div className="flex flex-col sm:flex-row gap-4">
         {!isApplied ? (
-          <Button onClick = {() => applyJobHanlder(id)} className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow-md transition">
+          <Button onClick = { isApplied ? null : () => applyJobHanlder(id) } className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow-md transition">
             Apply Now
           </Button>
         ) : (
