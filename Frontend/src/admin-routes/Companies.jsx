@@ -1,3 +1,5 @@
+import Footer from '@/components/ui/shared/Footer'
+import Navbar from '@/components/ui/shared/Navbar'
 import React from 'react'
 
 const Companies = () => {
