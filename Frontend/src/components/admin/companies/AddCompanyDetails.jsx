@@ -3,9 +3,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Footer from '@/components/ui/shared/Footer'
 import Navbar from '@/components/ui/shared/Navbar'
+import { COMPANY_API_END_POINT } from '@/utils/constant'
+import axios from 'axios'
 import { ArrowLeft } from 'lucide-react'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'sonner'
 
 const AddCompanyDetails = () => {
 
@@ -19,6 +22,11 @@ const AddCompanyDetails = () => {
 
     const navigate = useNavigate()
 
+    const [loading , setLoading] = useState(false)
+
+    const params = useParams()
+
+    console.log(params.id)
 
     const handleValueChange = async (e) => {
         setInput({...input , [e.target.name]: e.target.value})
@@ -28,9 +36,53 @@ const AddCompanyDetails = () => {
         setInput({...input, file: e.target.files[0]});
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(input)
+
+        // let work on form data 
+
+        const formData = new FormData()
+
+        formData.append("name" , input.name)
+        formData.append("description" , input.description)
+        formData.append("website" , input.website)
+        formData.append("location" , input.location)
+
+        if (input.file) {
+            formData.append("file" , input.file)
+        }
+
+        // call the update PUT API of companies: 
+        
+        try {
+            const res = await axios.put(`${COMPANY_API_END_POINT}/updateCompany/${params.id}` , formData , {
+                headers: {
+                    "Content-Type" : "multipart/form-data"
+                },
+                withCredentials: true
+            })
+
+            setLoading(true)
+
+            if (res?.data?.success) {
+                toast.success(res.data.message)
+                navigate("/admin/companies")
+                
+            }
+
+        } 
+
+
+        catch (err) {
+            console.log(err)
+            toast.error(err?.response?.data?.message)
+        }
+
+        finally {
+            setLoading(false)
+        }
+
     }
  
     return (
@@ -129,7 +181,7 @@ const AddCompanyDetails = () => {
       type="submit" 
       className="w-full font-medium text-white bg-black rounded-md hover:bg-gray-800 transition"
     >
-      Submit
+     {loading ? "Updating..." : "Update" }
     </Button>
   </div>
 </form>
