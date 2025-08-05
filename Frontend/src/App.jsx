@@ -6,9 +6,10 @@ import Jobs from './pages/Jobs/Jobs'
 import Browse from './pages/Browse/Browse'
 import Profile from './pages/Profile/Profile'
 import JobsDetails from './pages/Jobs/JobsDetails'
-import Companies from './components/admin/Companies'
+import Companies from './components/admin/companies/Companies'
 import JobPosts from './components/admin/JobPosts'
-import CreateCompany from './components/admin/CreateCompany'
+import CreateCompany from './components/admin/companies/CreateCompany'
+import AddCompanyDetails from './components/admin/companies/AddCompanyDetails'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/admin/companies/' element={<Companies />} />
         <Route path='/jobposts' element={<JobPosts />} />
         <Route path='/admin/companies/create-company' element={<CreateCompany />} />
+        <Route path='/admin/companies/:id' element={<AddCompanyDetails />} />
       </Routes>
     </>
   )

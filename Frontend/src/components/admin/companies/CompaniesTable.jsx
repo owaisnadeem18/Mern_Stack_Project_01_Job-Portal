@@ -1,7 +1,7 @@
 import React from 'react'
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
-import { Avatar, AvatarImage } from '../ui/avatar'
-import { Popover, PopoverContent } from '../ui/popover'
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../ui/table'
+import { Avatar, AvatarImage } from '../../ui/avatar'
+import { Popover, PopoverContent } from '../../ui/popover'
 import { PopoverTrigger } from '@radix-ui/react-popover'
 import { Edit2, MoreHorizontalIcon } from 'lucide-react'
 
