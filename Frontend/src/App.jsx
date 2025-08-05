@@ -6,8 +6,8 @@ import Jobs from './pages/Jobs/Jobs'
 import Browse from './pages/Browse/Browse'
 import Profile from './pages/Profile/Profile'
 import JobsDetails from './pages/Jobs/JobsDetails'
-import Companies from './admin-routes/Companies'
-import JobPosts from './admin-routes/JobPosts'
+import Companies from './components/admin/Companies'
+import JobPosts from './components/admin/JobPosts'
 
 function App() {
 
