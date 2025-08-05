@@ -6,7 +6,9 @@ import { PopoverTrigger } from '@radix-ui/react-popover'
 import { Edit2, MoreHorizontalIcon } from 'lucide-react'
 
 const CompaniesTable = () => {
-  return (
+    
+  
+    return (
     <div>
       <Table className={"my-4"} >
         <TableCaption>A List Of Your Registered Companies</TableCaption>
@@ -33,9 +35,9 @@ const CompaniesTable = () => {
             <TableCell className={"text-center"} >
                 <Popover>
                     <PopoverTrigger><MoreHorizontalIcon/></PopoverTrigger>
-                    <PopoverContent>
-                        <div>
-                            <Edit2/>
+                    <PopoverContent className={"w-32 p-2"} >
+                        <div className='flex items-center justify-center gap-4 p-0' >
+                            <Edit2 width={20} />
                             <span>Edit</span>
                         </div>   
                     </PopoverContent>

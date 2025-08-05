@@ -8,6 +8,7 @@ import Profile from './pages/Profile/Profile'
 import JobsDetails from './pages/Jobs/JobsDetails'
 import Companies from './components/admin/Companies'
 import JobPosts from './components/admin/JobPosts'
+import CreateCompany from './components/admin/CreateCompany'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         {/* Routes for admin */}
         <Route path='/admin/companies/' element={<Companies />} />
         <Route path='/jobposts' element={<JobPosts />} />
+        <Route path='/admin/companies/create-company' element={<CreateCompany />} />
       </Routes>
     </>
   )

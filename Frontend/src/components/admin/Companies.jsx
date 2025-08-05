@@ -4,8 +4,12 @@ import Footer from '../ui/shared/Footer'
 import Navbar from '../ui/shared/Navbar'
 import React from 'react'
 import CompaniesTable from './CompaniesTable'
+import { useNavigate } from 'react-router-dom'
 
 const Companies = () => {
+
+  const navigate = useNavigate()
+
   return (
 <>
     <Navbar />
@@ -20,7 +24,7 @@ const Companies = () => {
           placeholder="Filter by Company Name"
           />
 
-        <Button>
+        <Button  onClick={() => navigate("/admin/companies/create-company") } >
           New Company
         </Button>
       
