@@ -21,10 +21,10 @@ function App() {
         <Route path='/browse' element={<Browse />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/description/:id' element={<JobsDetails />} />
-        
+
         {/* Routes for admin */}
-        <Route path='/companies' element={<Companies />} />
-        <Route path='/Jobposts' element={<JobPosts />} />
+        <Route path='/admin/companies/' element={<Companies />} />
+        <Route path='/jobposts' element={<JobPosts />} />
       </Routes>
     </>
   )

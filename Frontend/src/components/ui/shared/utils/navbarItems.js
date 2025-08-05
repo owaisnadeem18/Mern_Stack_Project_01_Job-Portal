@@ -10,3 +10,9 @@ export const navbarItems = (role) => {
   return allItems.filter(item => item.roles.includes(role)).map((navItem) => navItem.name )
  
 }
+
+export const routesMap = {
+  Home: "/",
+  Companies: "/admin/companies",
+  JobPosts: "/jobposts"
+};
