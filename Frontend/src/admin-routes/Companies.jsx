@@ -6,7 +6,7 @@ const Companies = () => {
   return (
 <>
     <Navbar />
-      <h2 className='min-h-screen' >
+      <h2 className='min-h-screen'>
         Companies management page
       </h2>
     <Footer/>
