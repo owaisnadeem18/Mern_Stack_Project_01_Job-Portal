@@ -1,5 +1,5 @@
 export const navbarItems = (role) => {
-  const allItems = [
+   const allItems = [
     { name: "Home", roles: ["student"] },
     { name: "Jobs", roles: ["student"] },
     { name: "Browse", roles: ["student"] },
@@ -7,6 +7,6 @@ export const navbarItems = (role) => {
     { name: "JobPosts", roles: ["recruiter"] }
   ];
 
-  return allItems.filter(item => item.roles.includes(role)).map((navItems) => navItems.name)
-
-};
+  return allItems.filter(item => item.roles.includes(role)).map((navItem) => navItem.name )
+ 
+}
