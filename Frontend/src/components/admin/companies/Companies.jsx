@@ -24,7 +24,7 @@ const Companies = () => {
           placeholder="Filter by Company Name"
           />
 
-        <Button  onClick={() => navigate("/admin/companies/create-company")} >
+        <Button className={"cursor-pointer"} onClick={() => navigate("/admin/companies/create-company")} >
           New Company
         </Button>
       
