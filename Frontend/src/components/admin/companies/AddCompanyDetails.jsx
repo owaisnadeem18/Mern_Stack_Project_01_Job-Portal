@@ -6,7 +6,8 @@ import Navbar from '@/components/ui/shared/Navbar'
 import { COMPANY_API_END_POINT } from '@/utils/constant'
 import axios from 'axios'
 import { ArrowLeft } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
@@ -19,6 +20,8 @@ const AddCompanyDetails = () => {
     description: "",
     file: null
   })
+
+  const {singleCompany} = useSelector(store => store.company)
 
   const navigate = useNavigate()
 
@@ -33,6 +36,17 @@ const AddCompanyDetails = () => {
   const handleFileChange = (e) => {
     setInput({ ...input, file: e.target.files[0] });
   }
+
+
+  useEffect(() => {
+    setInput({
+      name: singleCompany?.name || "" ,
+      website: singleCompany?.website || "" ,
+      location: singleCompany?.location || "" ,
+      description: singleCompany?.description || "" , 
+      file: singleCompany?.file || null
+    })
+  } , [singleCompany])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -176,7 +190,7 @@ const AddCompanyDetails = () => {
               type="submit"
               className="w-full cursor-pointer font-medium text-white bg-black rounded-md hover:bg-gray-800 transition"
             >
-              {loading ? "Updating..." : "Update"}
+              {loading ? `<LoaderCircle className="w-2 h-2 animate-spin" /> Updating...` : "Update"}
             </Button>
           </div>
         </form>
