@@ -1,4 +1,7 @@
 import { CompanyModel } from "../models/company.model.js";
+import datauri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
+
 
 // Register Company:
 
@@ -93,7 +96,17 @@ export const updateCompany = async (req, res) => {
  
     const file = req.file;
 
-    const updateData = { name, description, website, location };
+    // We have to implement cloudinary here for image upload
+    const fileUri = datauri(file)
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+
+    const logo = cloudResponse.secure_url
+
+    console.log(logo , "logo is => ");
+
+    const updateData = { name, description, website, location , logo};
+
+    console.log("Updated data is => ", updateData);
 
     const company = await CompanyModel.findByIdAndUpdate(
       req.params.id,

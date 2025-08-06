@@ -5,7 +5,7 @@ import Footer from '@/components/ui/shared/Footer'
 import Navbar from '@/components/ui/shared/Navbar'
 import { COMPANY_API_END_POINT } from '@/utils/constant'
 import axios from 'axios'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Loader2 } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -18,7 +18,7 @@ const AddCompanyDetails = () => {
     website: "",
     location: "",
     description: "",
-    file: null
+    logo: null
   })
 
   const {singleCompany} = useSelector(store => store.company)
@@ -34,7 +34,7 @@ const AddCompanyDetails = () => {
   }
 
   const handleFileChange = (e) => {
-    setInput({ ...input, file: e.target.files[0] });
+    setInput({ ...input, logo: e.target.files[0] });
   }
 
 
@@ -44,13 +44,15 @@ const AddCompanyDetails = () => {
       website: singleCompany?.website || "" ,
       location: singleCompany?.location || "" ,
       description: singleCompany?.description || "" , 
-      file: singleCompany?.file || null
+      logo: singleCompany?.logo || null
     })
   } , [singleCompany])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input)
+    
+    setLoading(true)
+
 
     // let work on form data 
 
@@ -61,8 +63,8 @@ const AddCompanyDetails = () => {
     formData.append("website", input.website)
     formData.append("location", input.location)
 
-    if (input.file) {
-      formData.append("file", input.file)
+    if (input.logo) {
+      formData.append("file", input.logo)
     }
 
     // call the update PUT API of companies: 
@@ -71,8 +73,6 @@ const AddCompanyDetails = () => {
       const res = await axios.put(`${COMPANY_API_END_POINT}/updateCompany/${params.id}`, formData, {
         withCredentials: true
       })
-
-      setLoading(true)
 
       if (res?.data?.success) {
         toast.success(res.data.message)
@@ -190,7 +190,10 @@ const AddCompanyDetails = () => {
               type="submit"
               className="w-full cursor-pointer font-medium text-white bg-black rounded-md hover:bg-gray-800 transition"
             >
-              {loading ? `<LoaderCircle className="w-2 h-2 animate-spin" /> Updating...` : "Update"}
+              {loading ?   <span className="flex items-center justify-center gap-2">
+      <Loader2 className="w-4 h-4 animate-spin" />
+      Updating...
+    </span> : "Update"}
             </Button>
           </div>
         </form>
