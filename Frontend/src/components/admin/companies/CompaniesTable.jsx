@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../ui/table'
 import { Avatar, AvatarImage } from '../../ui/avatar'
 import { Popover, PopoverContent } from '../../ui/popover'
 import { PopoverTrigger } from '@radix-ui/react-popover'
 import { Edit2, MoreHorizontalIcon } from 'lucide-react'
 
-const CompaniesTable = () => {
-    
-  
+const CompaniesTable = ({companies}) => {
+
     return (
     <div>
 <Table className={"my-4"} >
@@ -21,20 +20,29 @@ const CompaniesTable = () => {
     </TableRow>
   </TableHeader>
 
+        {
+            companies.length <= 0 ? <TableCaption>No Companies Registered So far.</TableCaption>
+        :
+        (
+            
   <TableBody>
     <TableRow>
+
+            {
+                companies.map((company) => (
+<>
       <TableCell className={"flex justify-center items-center"}>
         <Avatar className={"text-center"}>
-          <AvatarImage src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEUApzo4eHxKJuQNV_Gi_BVYGYjR_hcMrhqQ&s"} />
+          <AvatarImage src={company?.logo} />
         </Avatar>
       </TableCell>
 
       <TableCell className={"text-center"}>
-        Company Name
+        {company?.name}
       </TableCell>
 
       <TableCell className={"text-center"}>
-        Company Created Date
+        {company?.createdAt}
       </TableCell>
 
       <TableCell className={"text-center"}>
@@ -48,8 +56,15 @@ const CompaniesTable = () => {
           </PopoverContent>
         </Popover>
       </TableCell>
+      </>
+    ))}
     </TableRow>
   </TableBody>
+  
+        )
+ }
+                    
+        
 </Table>
 
     </div>

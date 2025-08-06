@@ -5,10 +5,19 @@ import Navbar from '../../ui/shared/Navbar'
 import React from 'react'
 import CompaniesTable from './CompaniesTable'
 import { useNavigate } from 'react-router-dom'
+import useGetAllCompanies from '@/hooks/useGetAllCompanies'
+import { useSelector } from 'react-redux'
 
 const Companies = () => {
 
+  useGetAllCompanies()    
+
+  const {companies} = useSelector(state => state?.company);
+
+  console.log("Companies: ", companies)
+
   const navigate = useNavigate()
+
 
   return (
 <>
@@ -30,7 +39,7 @@ const Companies = () => {
       
       </div>
 
-      <CompaniesTable/>
+      <CompaniesTable companies={companies} />
 
       </div>
     <Footer/>
