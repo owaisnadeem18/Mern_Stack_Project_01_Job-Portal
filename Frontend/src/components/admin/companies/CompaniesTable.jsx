@@ -58,7 +58,7 @@ const CompaniesTable = ({ companies }) => {
 
               filterCompany.length == 0 ? 
 
-              <TableCell colSpan={4} className="text-center text-red-500 py-4 text-xl">
+              <TableCell colSpan={4} className="text-center text-red-500 py-4 text-xl font-medium">
   No company found with that name of{" "}
   <span className="text-2xl font-bold">"{companyFilterText}"</span>
 </TableCell> :
