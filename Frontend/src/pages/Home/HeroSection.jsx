@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <section
       className="bg-gradient-to-br from-gray-500 to-gray-800 py-5 md:px-8 md:py-0 flex items-center"
-      style={{ minHeight: "calc(100vh - 56px)" }}
+      style={{ minHeight: "calc(100vh - 69px)" }}
     >
       <div className="max-w-[90%] w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Content */}

@@ -18,7 +18,7 @@ const ProfileDetails = () => {
 
   return (
     <div
-      style={{ minHeight: "calc(100vh - 56px)" }}
+      style={{ minHeight: "calc(100vh - 69px)" }}
       className="max-w-9xl bg-gradient-to-br from-gray-500 to-gray-800 py-4 px-7"
     >
 

@@ -73,7 +73,7 @@ const Description = () => {
   } , [id , dispatch , user._id])
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-30 shadow-md rounded-lg" style={{minHeight: "calc(100vh - 56px)" }} >
+    <div className="max-w-4xl mx-auto px-6 py-30 shadow-md rounded-lg" style={{minHeight: "calc(100vh - 69px)" }} >
       <div className='border p-8 bg-gray-50 rounded-lg shadow-2xl'>        
       <div className=" flex items-center justify-between mb-4">
         <div>

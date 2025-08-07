@@ -22,7 +22,7 @@ const Companies = () => {
   return (
 <>
     <Navbar />
-      <div className='max-w-[60%] pt-15 mx-auto' style={{ minHeight: "calc(100vh - 82px)" }} >
+      <div className='max-w-[60%] pt-15 mx-auto' style={{ minHeight: "calc(100vh - 69px)" }} >
 
       <div className='flex items-center justify-between'>
 

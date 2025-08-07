@@ -17,7 +17,7 @@ const CreateCompany = () => {
   return (
     <div>
       <Navbar/>
-      <div className='max-w-[60%] pt-15 mx-auto' style={{minHeight: "calc(100vh - 82px)"}}  >
+      <div className='max-w-[60%] pt-15 mx-auto' style={{minHeight: "calc(100vh - 69px)"}}  >
         <div className='mb-4 flex gap-1 flex-col ' >
           <h1 className='font-bold text-2xl' >
             Your Company Name

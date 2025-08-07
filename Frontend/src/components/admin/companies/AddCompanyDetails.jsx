@@ -97,7 +97,7 @@ const AddCompanyDetails = () => {
   return (
     <div>
       <Navbar />
-      <div className='max-w-[85%] md:max-w-[70%] lg:max-w-[50%] xl:max-w-[40%] pt-15 mx-auto' style={{ minHeight: "calc(100vh - 82px" }} >
+      <div className='max-w-[85%] md:max-w-[70%] lg:max-w-[50%] xl:max-w-[40%] pt-15 mx-auto' style={{ minHeight: "calc(100vh - 69px" }} >
 
         <div className='flex items-center gap-3' >
 
