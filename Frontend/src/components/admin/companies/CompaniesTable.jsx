@@ -13,12 +13,15 @@ import { Popover, PopoverContent } from "../../ui/popover";
 import { PopoverTrigger } from "@radix-ui/react-popover";
 import { Edit2, MoreHorizontalIcon } from "lucide-react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = ({ companies }) => {
 
   const [filterCompany , setFilterCompany] = useState(companies)
   
   const {companyFilterText} = useSelector(store => store?.company)
+
+  const navigate = useNavigate()
   
   useEffect(() => {
 
@@ -32,7 +35,7 @@ const CompaniesTable = ({ companies }) => {
 
     setFilterCompany(filteredCompany)
 
-  } , [filterCompany , companyFilterText] )
+  } , [companyFilterText] )
 
   return (
     <div>
@@ -58,13 +61,13 @@ const CompaniesTable = ({ companies }) => {
 
               filterCompany.length == 0 ? 
 
-              <TableCell colSpan={4} className="text-center text-red-500 py-4 text-xl font-medium">
-  No company found with that name of{" "}
-  <span className="text-2xl font-bold">"{companyFilterText}"</span>
-</TableCell> :
-            
+                <TableRow>
+      <TableCell colSpan={4} className="text-center py-4 text-xl">
+  No company found with that name of <span className="text-4xl">{companyFilterText}</span>
+</TableCell>
+    </TableRow> :
             filterCompany.map((company) => (
-              <TableRow>
+              <TableRow key={company._id} >
                 <TableCell className={"flex justify-center items-center"}>
                   <Avatar className={"text-center"}>
                     <AvatarImage
@@ -90,7 +93,7 @@ const CompaniesTable = ({ companies }) => {
                     </PopoverTrigger>
                     <PopoverContent className={"w-24 p-2"}>
                       <div className="flex items-center justify-center gap-2 p-0">
-                        <Edit2 className="cursor-pointer" width={18} />
+                        <Edit2 onClick={() => navigate(`/admin/companies/${company._id}`)} className="cursor-pointer" width={18} />
                         <span>Edit</span>
                       </div>
                     </PopoverContent>

@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Footer from '@/components/ui/shared/Footer'
 import Navbar from '@/components/ui/shared/Navbar'
+import useGetCompanybyId from '@/hooks/useGetCompanybyId'
 import { COMPANY_API_END_POINT } from '@/utils/constant'
 import axios from 'axios'
 import { ArrowLeft, Loader2 } from 'lucide-react'
@@ -12,6 +13,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
 const AddCompanyDetails = () => {
+
+  const params = useParams()
+
+  useGetCompanybyId(params.id)
 
   const [input, setInput] = useState({
     name: "",
@@ -27,7 +32,6 @@ const AddCompanyDetails = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const params = useParams()
 
   const handleValueChange = async (e) => {
     setInput({ ...input, [e.target.name]: e.target.value })
@@ -79,9 +83,7 @@ const AddCompanyDetails = () => {
         navigate("/admin/companies")
 
       }
-
     }
-
 
     catch (err) {
       console.log(err)
@@ -101,8 +103,8 @@ const AddCompanyDetails = () => {
 
         <div className='flex items-center gap-3' >
 
-          <Button variant={"outline"} >
-            <div onClick={() => navigate("/admin/companies")} className='flex cursor-pointer items-center gap-1' >
+          <Button className={"cursor-pointer"} onClick={() => navigate("/admin/companies")} variant={"outline"} >
+            <div className='flex items-center gap-1' >
               <ArrowLeft className="w-5 h-5" />
               <span>Back</span>
             </div>
