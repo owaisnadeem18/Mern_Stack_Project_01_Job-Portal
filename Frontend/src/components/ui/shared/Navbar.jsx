@@ -51,7 +51,7 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                to={item === "Home" ? "/" : item == "Companies" ? "/admin/companies" : `/${item.toLowerCase()}`}
+                to={routesMap[item] || `${item.toLowerCase()}`}
                 className={({ isActive }) =>
                   `absolute left-0 bottom-[-2px] h-[2px] bg-white transition-all duration-300 
           ${isActive ? "w-3/4" : "w-0"} group-hover:w-3/4`
