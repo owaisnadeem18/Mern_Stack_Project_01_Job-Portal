@@ -1,19 +1,29 @@
 import Footer from '@/components/ui/shared/Footer' 
 import Navbar from '@/components/ui/shared/Navbar'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AdminJobsTable from './AdminJobsTable'
+import { setFilterJobByText } from '@/features/jobs/jobSlice'
+import useGetAllAdminJobs from '@/hooks/useGetAllAdminJobs'
 
 const AdminJobs = () => {
 
+  useGetAllAdminJobs()
+
   const navigate = useNavigate()
 
-  const {companies} = useSelector(store => store?.company)
+  const dispatch = useDispatch()
+
+  const {allAdminJobs} = useSelector(store => store?.job)
 
   const [input , setInput] = useState("")
+
+  useEffect(() => {
+    dispatch(setFilterJobByText(input))
+  } , [input] )
 
   return (
     <>
@@ -30,13 +40,13 @@ const AdminJobs = () => {
           onChange={(e) => setInput(e.target.value)}
           />
 
-        <Button className={"cursor-pointer"} onClick={() => navigate("/admin/companies/create-company")} >
+        <Button className={"cursor-pointer"} onClick={() => navigate("/admin/jobs/post-job")} >
           New Job
         </Button>
       
       </div>
 
-      <AdminJobsTable />
+      <AdminJobsTable adminjobs={allAdminJobs} />
 
       </div>
     <Footer/>
