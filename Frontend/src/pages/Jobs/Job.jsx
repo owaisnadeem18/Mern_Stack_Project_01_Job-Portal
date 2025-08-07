@@ -23,7 +23,7 @@ const Job = ({job}) => {
 
         <Avatar>
 
-            <AvatarImage src = {"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEUApzo4eHxKJuQNV_Gi_BVYGYjR_hcMrhqQ&s"}  />
+            <AvatarImage src = {""} />
 
         </Avatar>
 

@@ -88,7 +88,7 @@ const Description = () => {
               <Avatar className={"w-16 h-16"} >
 
                 <AvatarImage
-                  src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEUApzo4eHxKJuQNV_Gi_BVYGYjR_hcMrhqQ&s"} // Add logo image path here if needed
+                  src={singleJob?.logo} // Add logo image path here if needed
                   alt="Company Logo"
                   className="rounded-full object-cover"
                   />

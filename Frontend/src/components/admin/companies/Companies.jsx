@@ -11,7 +11,7 @@ import { setCompanyFilterText } from '@/features/companies/companySlice'
 
 const Companies = () => {
 
-  useGetAllCompanies()    
+  useGetAllCompanies()
 
   const [input , setInput] = useState("")
 

@@ -27,7 +27,7 @@ const Jobs = () => {
             {/* Jobs Grid */}
             <section className="w-full md:w-[78%]">
               <h2 className="text-2xl font-bold mb-3 text-white">
-                Available Jobs:
+                Available Jobs: ({allJobs.length})
               </h2>
                 {allJobs.length == 0 ? (
                   <div className="font-semibold min-h-auto flex w-full justify-center items-center text-white md:min-h-[75vh]">

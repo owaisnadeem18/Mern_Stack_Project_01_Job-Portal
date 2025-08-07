@@ -7,12 +7,14 @@ export const navbarItems = (role) => {
     { name: "Job-Posts", roles: ["recruiter"] }
   ];
 
-  return allItems.filter(item => item.roles.includes(role)).map((navItem) => navItem.name )
+  return allItems.filter(item => item.roles.includes(role)).map((navItem) => navItem.name)
  
 }
 
 export const routesMap = {
   Home: "/",
   Companies: "/admin/companies",
-  "Job-Posts": "/admin/jobs"
+  "Job-Posts": "/admin/jobs",
+  Jobs: "/jobs",
+  Browse: "/browse",
 };
