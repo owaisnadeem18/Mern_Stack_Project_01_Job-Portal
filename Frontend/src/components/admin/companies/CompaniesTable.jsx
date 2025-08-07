@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -12,8 +12,28 @@ import { Avatar, AvatarImage } from "../../ui/avatar";
 import { Popover, PopoverContent } from "../../ui/popover";
 import { PopoverTrigger } from "@radix-ui/react-popover";
 import { Edit2, MoreHorizontalIcon } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const CompaniesTable = ({ companies }) => {
+
+  const [filterCompany , setFilterCompany] = useState(companies)
+  
+  const {companyFilterText} = useSelector(store => store?.company)
+  
+  useEffect(() => {
+
+    const filteredCompany = companies.length >= 0 && companies.filter(company => { 
+        if (!companyFilterText) {
+          return true
+        }
+
+        return company?.name.toLowerCase().includes(companyFilterText.toLowerCase())
+    })
+
+    setFilterCompany(filteredCompany)
+
+  } , [filterCompany , companyFilterText] )
+
   return (
     <div>
       <Table className={"my-4"}>
@@ -28,10 +48,22 @@ const CompaniesTable = ({ companies }) => {
         </TableHeader>
 
         {companies.length <= 0 ? (
-          <TableCaption>No Companies Registered So far.</TableCaption>
+          <TableCell colSpan={4} className="text-center py-4">No Companies Registered So far.</TableCell>
         ) : (
           <TableBody>
-            {companies.map((company) => (
+
+
+
+            {
+
+              filterCompany.length == 0 ? 
+
+              <TableCell colSpan={4} className="text-center text-red-500 py-4 text-xl">
+  No company found with that name of{" "}
+  <span className="text-2xl font-bold">"{companyFilterText}"</span>
+</TableCell> :
+            
+            filterCompany.map((company) => (
               <TableRow>
                 <TableCell className={"flex justify-center items-center"}>
                   <Avatar className={"text-center"}>
