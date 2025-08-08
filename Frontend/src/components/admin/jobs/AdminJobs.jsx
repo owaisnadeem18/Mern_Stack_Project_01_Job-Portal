@@ -13,6 +13,9 @@ const AdminJobs = () => {
 
   const [input , setInput] = useState("")
 
+  const { allAdminJobs } = useSelector(store => store.job);
+console.log("Redux allAdminJobs =>", allAdminJobs);
+
   return (
     <>
     <Navbar />
