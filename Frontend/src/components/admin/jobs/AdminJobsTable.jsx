@@ -4,29 +4,17 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Edit2, MoreHorizontalIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const AdminJobsTable = ({adminjobs}) => {
-
-  console.log(adminjobs)
-
-  const { filterJobByText } = useSelector(store => store?.job);
-
-  const [filterAdminJobs, setFilterAdminJobs] = useState(adminjobs)
-
-  useEffect(() => {
-
-    const filteredJobs = filterAdminJobs.length > 0 && filterAdminJobs.filter((job) => {
-      if (!filterJobByText) {
-        return true
-      }
-      return job?.company?.name.toLowerCase().includes(filterJobByText.toLowerCase()) || job?.title.toLowerCase().includes(filterJobByText.toLowerCase())
-    } ) 
-
-    setFilterAdminJobs(filteredJobs)
- 
-  } , [filterJobByText])
+const AdminJobsTable = () => {
+  
+  const filterAdminJobs = [45 , 6 , 3, 4,5 , 23 ,3]
+  
+  const navigate = useNavigate()
 
   return (
+
+    
     <div>
       <Table className={"my-4"}>
         <TableCaption>A List Of Your Recent Posted Jobs</TableCaption>
@@ -66,9 +54,9 @@ const AdminJobsTable = ({adminjobs}) => {
                       {company?.name}
                     </TableCell>
 
-                    <TableCell className={"text-center text-md"}>
+                    {/* <TableCell className={"text-center text-md"}>
                       {company?.createdAt.split("T")[0]}
-                    </TableCell>
+                    </TableCell> */}
 
                     <TableCell className={"text-center"}>
                       <Popover>

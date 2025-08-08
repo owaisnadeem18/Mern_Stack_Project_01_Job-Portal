@@ -5,8 +5,8 @@ export const jobSlice = createSlice({
     name: "job",
     initialState: {
         allJobs: [],
-        allAdminJobs:[],
         singleJob: null,
+        allAdminJobs:[],
         filterJobByText: ""
     },
 

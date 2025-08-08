@@ -11,19 +11,7 @@ import useGetAllAdminJobs from '@/hooks/useGetAllAdminJobs'
 
 const AdminJobs = () => {
 
-  useGetAllAdminJobs()
-
-  const navigate = useNavigate()
-
-  const dispatch = useDispatch()
-
-  const {allAdminJobs} = useSelector(store => store?.job)
-
   const [input , setInput] = useState("")
-
-  useEffect(() => {
-    dispatch(setFilterJobByText(input))
-  } , [input] )
 
   return (
     <>
@@ -46,7 +34,7 @@ const AdminJobs = () => {
       
       </div>
 
-      <AdminJobsTable adminjobs={allAdminJobs} />
+      <AdminJobsTable />
 
       </div>
     <Footer/>
