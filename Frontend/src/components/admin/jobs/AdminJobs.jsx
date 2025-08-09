@@ -20,11 +20,9 @@ const AdminJobs = () => {
 
   useEffect(() => {
     dispatch(setFilterJobsByText(input))
-  } , [])
+  } , [input])
 
   const { allAdminJobs } = useSelector(store => store?.job)
-
-  console.log(allAdminJobs)
 
   return (
     <>

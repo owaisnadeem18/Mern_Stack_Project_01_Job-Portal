@@ -35,7 +35,7 @@ const CompaniesTable = ({ companies }) => {
 
     setFilterCompany(filteredCompany)
 
-  } , [companyFilterText] )
+  } , [companyFilterText])
 
   return (
     <div>

@@ -7,27 +7,23 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const AdminJobsTable = ({adminJobs}) => {
-  
-  console.log("Admin jobs" , adminJobs)
 
   const [filterAdminJobs , setFilterAdminJobs] = useState(adminJobs)
   
   const { filterJobByText } = useSelector(store => store.job)
 
   const navigate = useNavigate()
-
-  
-  
+ 
   const FilterAllAdminJobs = () => {
     
   const filteredJob = adminJobs.length > 0 && filterAdminJobs.filter((job) => {
+ 
     if (!filterJobByText) {
       return true
     }
     
     return job?.title.toLowerCase().includes(filterJobByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(filterJobByText.toLowerCase())
  
-    
   })
   setFilterAdminJobs(filteredJob)
 }
@@ -35,8 +31,6 @@ const AdminJobsTable = ({adminJobs}) => {
     useEffect(() => {
       FilterAllAdminJobs()
     } , [])
-
-    console.log("FIltered jobs " , filterAdminJobs)
 
   return (
   
