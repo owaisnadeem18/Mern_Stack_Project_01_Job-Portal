@@ -12,7 +12,7 @@ const Job = ({job}) => {
     <div className='border border-gray-400 p-3 rounded-lg' >
     
         <div className='flex items-center justify-between'>
-            <p className='text-gray-200 font-semibold' > <span > Job Posted: </span> <Badge variant={"ghost"} className='text-sm font-bold bg-gray-700' > {JobPostedTotalTime(job?.createdAt) === 0 ? "Today" : `${JobPostedTotalTime(job?.createdAt)} days ago` } </Badge> </p>
+            <p className='text-gray-200 font-semibold' > <span > Job Posted : </span> <Badge variant={"ghost"} className='text-sm font-bold bg-gray-700' > {JobPostedTotalTime(job?.createdAt) === 0 ? "Today" : `${JobPostedTotalTime(job?.createdAt)} days ago` } </Badge> </p>
 
             <Button variant={"outline"} className={"rounded-full"} size={"icon"} > <Bookmark/> </Button>
         </div>
@@ -23,7 +23,7 @@ const Job = ({job}) => {
 
         <Avatar>
 
-            <AvatarImage src = {""} />
+            <AvatarImage src = {job?.company?.logo} />
 
         </Avatar>
 

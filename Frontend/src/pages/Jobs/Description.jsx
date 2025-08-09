@@ -19,7 +19,6 @@ const Description = () => {
   const dispatch = useDispatch()
   
   const {singleJob} = useSelector(store => store?.job)
-  console.log(singleJob)
   
   const {user} = useSelector(store => store.auth)
   
@@ -67,7 +66,6 @@ const Description = () => {
       
     } 
 
-
     getSingleJob()
 
   } , [id , dispatch , user._id])
@@ -88,7 +86,7 @@ const Description = () => {
               <Avatar className={"w-16 h-16"} >
 
                 <AvatarImage
-                  src={singleJob?.logo} // Add logo image path here if needed
+                  src={singleJob?.company?.logo}
                   alt="Company Logo"
                   className="rounded-full object-cover"
                   />
