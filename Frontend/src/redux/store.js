@@ -25,7 +25,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-  }) // thunk ko add kar rahe ho
+  }) 
 })
 
 export const persistor = persistStore(store)

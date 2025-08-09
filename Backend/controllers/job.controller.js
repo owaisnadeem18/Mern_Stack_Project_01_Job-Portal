@@ -139,7 +139,8 @@ export const adminJobs = async ( req , res ) => {
 
     return res.status(200).json({
       adminJobId,
-      success:true
+      success:true,
+      message: "Admin jobs get"
     })
 
   } catch (error) {

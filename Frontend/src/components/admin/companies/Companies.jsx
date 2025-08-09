@@ -18,6 +18,8 @@ const Companies = () => {
   const dispatch = useDispatch()
 
   let {companies} = useSelector(state => state?.company);
+
+  console.log(companies)
   
   const navigate = useNavigate()
   

@@ -16,9 +16,12 @@ export const jobSlice = createSlice({
         },
         setSingleJob: (state , action) => {
             state.singleJob = action.payload
+            
         },
         setAllAdminJobs: (state , action) => {
             state.allAdminJobs = action.payload
+            
+            console.log(state.allAdminJobs , action.payload)
         },
         setFilterJobsByText: (state , action) => {
             state.filterJobsByText = action.payload 

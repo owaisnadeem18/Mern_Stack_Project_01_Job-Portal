@@ -8,25 +8,35 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminJobsTable = ({adminJobs}) => {
   
+  console.log("Admin jobs" , adminJobs)
+
   const [filterAdminJobs , setFilterAdminJobs] = useState(adminJobs)
   
   const { filterJobByText } = useSelector(store => store.job)
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const filteredJob = adminJobs.length > 0 && filterAdminJob.filter((job) => {
-      if (!filterJobByText) {
-        return true
-      }
-      
-      return job?.title.toLowerCase().includes(filterJobByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(filterJobByText.toLowerCase())
+  
+  
+  const FilterAllAdminJobs = () => {
     
-    })
-
-    setFilterAdminJobs(filteredJob)
-
+  const filteredJob = adminJobs.length > 0 && filterAdminJobs.filter((job) => {
+    if (!filterJobByText) {
+      return true
+    }
+    
+    return job?.title.toLowerCase().includes(filterJobByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(filterJobByText.toLowerCase())
+ 
+    
   })
+  setFilterAdminJobs(filteredJob)
+}
+
+    useEffect(() => {
+      FilterAllAdminJobs()
+    } , [])
+
+    console.log("FIltered jobs " , filterAdminJobs)
 
   return (
   
@@ -53,7 +63,7 @@ const AdminJobsTable = ({adminJobs}) => {
                     No company found with that name of <span className="text-4xl">{companyFilterText}</span>
                   </TableCell>
                 </TableRow> :
-                filterAdminJobs.map((company) => (
+                filterAdminJobs?.map((company) => (
                   <TableRow key={company._id} >
                     <TableCell className={"flex justify-center items-center"}>
                       <Avatar className={"text-center"}>
