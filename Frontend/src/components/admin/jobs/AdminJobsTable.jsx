@@ -6,15 +6,30 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const AdminJobsTable = () => {
+const AdminJobsTable = ({adminJobs}) => {
   
-  const filterAdminJobs = [45 , 6 , 3, 4,5 , 23 ,3]
+  const [filterAdminJobs , setFilterAdminJobs] = useState(adminJobs)
   
+  const { filterJobByText } = useSelector(store => store.job)
+
   const navigate = useNavigate()
 
-  return (
-
+  useEffect(() => {
+    const filteredJob = adminJobs.length > 0 && filterAdminJob.filter((job) => {
+      if (!filterJobByText) {
+        return true
+      }
+      
+      return job?.title.toLowerCase().includes(filterJobByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(filterJobByText.toLowerCase())
     
+    })
+
+    setFilterAdminJobs(filteredJob)
+
+  })
+
+  return (
+  
     <div>
       <Table className={"my-4"}>
         <TableCaption>A List Of Your Recent Posted Jobs</TableCaption>

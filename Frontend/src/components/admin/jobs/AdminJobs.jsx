@@ -6,15 +6,25 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useDispatch, useSelector } from 'react-redux'
 import AdminJobsTable from './AdminJobsTable'
-import { setFilterJobByText } from '@/features/jobs/jobSlice'
+import { setFilterJobsByText } from '@/features/jobs/jobSlice'
 import useGetAllAdminJobs from '@/hooks/useGetAllAdminJobs'
+
 
 const AdminJobs = () => {
 
+  useGetAllAdminJobs()
+
   const [input , setInput] = useState("")
 
-  const { allAdminJobs } = useSelector(store => store.job);
-console.log("Redux allAdminJobs =>", allAdminJobs);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setFilterJobsByText(input))
+  } , [input])
+
+  const { allAdminJobs } = useSelector(store => store?.job)
+
+  console.log(allAdminJobs)
 
   return (
     <>
@@ -37,7 +47,7 @@ console.log("Redux allAdminJobs =>", allAdminJobs);
       
       </div>
 
-      <AdminJobsTable />
+      <AdminJobsTable adminJobs={allAdminJobs} />
 
       </div>
     <Footer/>
