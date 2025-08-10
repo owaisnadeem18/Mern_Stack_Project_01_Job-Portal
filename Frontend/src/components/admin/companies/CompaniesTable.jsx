@@ -35,7 +35,7 @@ const CompaniesTable = ({ companies }) => {
 
     setFilterCompany(filteredCompany)
 
-  } , [companyFilterText])
+  } , [companyFilterText , companies])
 
   return (
     <div>
@@ -54,12 +54,9 @@ const CompaniesTable = ({ companies }) => {
           <TableCell colSpan={4} className="text-center py-4">No Companies Registered So far.</TableCell>
         ) : (
           <TableBody>
-
-
-
             {
 
-              filterCompany.length == 0 ? 
+              filterCompany.length <= 0 ? 
 
                 <TableRow>
       <TableCell colSpan={4} className="text-center py-4 text-xl">
