@@ -39,10 +39,12 @@ const AdminJobsTable = ({adminJobs}) => {
         <TableCaption>A List Of Your Recent Posted Jobs</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className={"text-center"}>Job Name</TableHead>
-            <TableHead className={"text-center"}>Role</TableHead>
-            <TableHead className={"text-center"}>Date</TableHead>
-            <TableHead className={"text-center"}>Actions</TableHead>
+            <TableHead className={"text-center font-bold "}>Company</TableHead>
+            <TableHead className={"text-center font-bold "}>Job Position</TableHead>
+            <TableHead className={"text-center font-bold "}>Employment Type</TableHead>
+            <TableHead className={"text-center font-bold "}>Date</TableHead>
+            <TableHead className={"text-center font-bold "}>Salary</TableHead>
+            <TableHead className={"text-center font-bold "}>Actions</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -57,25 +59,39 @@ const AdminJobsTable = ({adminJobs}) => {
                     No company found with that name of <span className="text-4xl">{companyFilterText}</span>
                   </TableCell>
                 </TableRow> :
-                filterAdminJobs?.map((company) => (
-                  <TableRow key={company._id} >
-                    <TableCell className={"flex justify-center items-center"}>
+                filterAdminJobs?.map((job) => (
+                  <TableRow key={job._id} >
+
+                    <TableCell className={"text-center font-semibold text-md"}>
+                      <div className='flex justify-center items-center gap-3' >
+
                       <Avatar className={"text-center"}>
                         <AvatarImage
                           size={"icon"}
                           className={"w-32"}
-                          src={company?.logo}
-                        />
+                          src={job?.company?.logo}
+                          />
                       </Avatar>
+                      {job?.company?.name}
+                        </div>
                     </TableCell>
 
                     <TableCell className={"text-center font-semibold text-md"}>
-                      {company?.name}
+                      {job?.title}
                     </TableCell>
 
-                    {/* <TableCell className={"text-center text-md"}>
-                      {company?.createdAt.split("T")[0]}
-                    </TableCell> */}
+                    <TableCell className={"flex justify-center font-semibold items-center"}>
+                      {job?.jobType}
+                    </TableCell>
+
+                    <TableCell className={"text-center font-semibold text-md"}>
+                      {job?.createdAt.split("T")[0]}
+                    </TableCell>
+
+                    
+                    <TableCell className={"text-center font-semibold text-md"}>
+                      {job?.salary}
+                    </TableCell>
 
                     <TableCell className={"text-center"}>
                       <Popover>
@@ -84,7 +100,7 @@ const AdminJobsTable = ({adminJobs}) => {
                         </PopoverTrigger>
                         <PopoverContent className={"w-24 p-2"}>
                           <div className="flex items-center justify-center gap-2 p-0">
-                            <Edit2 onClick={() => navigate(`/admin/companies/${company._id}`)} className="cursor-pointer" width={18} />
+                            <Edit2 onClick={() => navigate(`/admin/jobs/${job._id}`)} className="cursor-pointer" width={18} />
                             <span>Edit</span>
                           </div>
                         </PopoverContent>
