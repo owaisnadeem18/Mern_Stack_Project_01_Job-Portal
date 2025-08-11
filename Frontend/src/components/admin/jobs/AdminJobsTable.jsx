@@ -9,32 +9,33 @@ import { useNavigate } from 'react-router-dom';
 const AdminJobsTable = ({adminJobs}) => {
 
   console.log(adminJobs)
-
+  
   const [filterAdminJobs , setFilterAdminJobs] = useState(adminJobs)
   
-  const { filterJobByText } = useSelector(store => store.job)
-
-  console.log(filterJobByText)
-
+  const { filterJobsByText } = useSelector(store => store.job)
+  
+  console.log(filterJobsByText)
+  
   const navigate = useNavigate()
- 
+  
+  useEffect(() => {
+
   const FilterAllAdminJobs = () => {
     
-  const filteredJob = adminJobs.length > 0 && filterAdminJobs.filter((job) => {
+  const filteredJob = adminJobs.length > 0 && adminJobs.filter((job) => {
  
-    if (!filterJobByText) {
+    if (!filterJobsByText) {
       return true
     }
     
-    return job?.title.toLowerCase().includes(filterJobByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(filterJobByText.toLowerCase())
+    return job?.title.toLowerCase().includes(filterJobsByText.toLowerCase()) || job?.company?.name.toLowerCase().includes(filterJobsByText.toLowerCase())
  
   })
   setFilterAdminJobs(filteredJob)
 }
 
-    useEffect(() => {
       FilterAllAdminJobs()
-    } , [filterJobByText])
+    } , [filterJobsByText , adminJobs ])
 
   return (
   
@@ -52,15 +53,15 @@ const AdminJobsTable = ({adminJobs}) => {
           </TableRow>
         </TableHeader>
 
-        {filterAdminJobs.length <= 0 ? (
+        {adminJobs.length <= 0 ? (
           <TableCell colSpan={4} className="text-center py-4">No Jobs Posted So far.</TableCell>
         ) : (
           <TableBody>
             {
-              filterAdminJobs.length == 0 ?
+              filterAdminJobs.length <= 0 ?
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-4 text-xl">
-                    No company found with that name of <span className="text-4xl">{companyFilterText}</span>
+                  <TableCell colSpan={6} className="text-center w-full py-4 text-xl">
+                    No company found with that name of <span className="text-4xl">{filterJobsByText}</span>
                   </TableCell>
                 </TableRow> :
                 filterAdminJobs?.map((job) => (
