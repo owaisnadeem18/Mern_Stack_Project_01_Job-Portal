@@ -8,9 +8,13 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminJobsTable = ({adminJobs}) => {
 
+  console.log(adminJobs)
+
   const [filterAdminJobs , setFilterAdminJobs] = useState(adminJobs)
   
   const { filterJobByText } = useSelector(store => store.job)
+
+  console.log(filterJobByText)
 
   const navigate = useNavigate()
  
@@ -30,7 +34,7 @@ const AdminJobsTable = ({adminJobs}) => {
 
     useEffect(() => {
       FilterAllAdminJobs()
-    } , [])
+    } , [filterJobByText])
 
   return (
   
@@ -90,7 +94,7 @@ const AdminJobsTable = ({adminJobs}) => {
 
                     
                     <TableCell className={"text-center font-semibold text-md"}>
-                      {job?.salary}
+                      {job?.salary} / mo
                     </TableCell>
 
                     <TableCell className={"text-center"}>
