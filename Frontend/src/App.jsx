@@ -10,6 +10,7 @@ import Companies from './components/admin/companies/Companies'
 import AdminJobs from './components/admin/jobs/AdminJobs'
 import CreateCompany from './components/admin/companies/CreateCompany'
 import AddCompanyDetails from './components/admin/companies/AddCompanyDetails'
+import AddJobDetails from './components/admin/jobs/AddJobDetails'
 
 function App() {
 
@@ -25,10 +26,16 @@ function App() {
         <Route path='/description/:id' element={<JobsDetails />} />
 
         {/* Routes for admin */}
+
+        {/* 1. Company Routes */}
         <Route path='/admin/companies' element={<Companies />} />
         <Route path='/admin/jobs' element={<AdminJobs />} />
         <Route path='/admin/companies/create-company' element={<CreateCompany />} />
         <Route path='/admin/companies/:id' element={<AddCompanyDetails />} />
+        
+        {/* 2. Admin Job Routes */}
+        <Route path='/admin/job/post-job' element={ <AddJobDetails/> } />
+
       </Routes>
     </>
   )

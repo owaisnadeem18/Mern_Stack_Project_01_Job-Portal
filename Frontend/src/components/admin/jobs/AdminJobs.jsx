@@ -39,7 +39,7 @@ const AdminJobs = () => {
           onChange={(e) => setInput(e.target.value)}
           />
 
-        <Button className={"cursor-pointer"} onClick={() => navigate("/admin/jobs/post-job")} >
+        <Button className={"cursor-pointer"} onClick={() => navigate("/admin/jobs/post-job")}>
           New Job
         </Button>
       
