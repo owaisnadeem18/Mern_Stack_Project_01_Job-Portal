@@ -18,6 +18,8 @@ const AdminJobs = () => {
 
   const dispatch = useDispatch()
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     dispatch(setFilterJobsByText(input))
   } , [input])
@@ -32,7 +34,7 @@ const AdminJobs = () => {
       <div className='flex items-center justify-between'>
 
         <Input
-          className="w-fit px-3 py-2 border border-gray-300 rounded-sm shadow-sm 
+          className="w-1/4 px-3 py-2 border border-gray-300 rounded-sm shadow-sm 
           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
           placeholder-gray-400 transition-all duration-200"
           placeholder="Filter by Job Name & Company Name"
