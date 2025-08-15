@@ -47,7 +47,7 @@ const AdminJobs = () => {
       
       </div>
 
-      <AdminJobsTable adminJobs={allAdminJobs} />
+        <AdminJobsTable adminJobs={allAdminJobs} />
 
       </div>
     <Footer/>

@@ -34,7 +34,7 @@ function App() {
         <Route path='/admin/companies/:id' element={<AddCompanyDetails />} />
         
         {/* 2. Admin Job Routes */}
-        <Route path='/admin/job/post-job' element={ <AddJobDetails/> } />
+        <Route path='/admin/jobs/post-job' element={ <AddJobDetails /> } />
 
       </Routes>
     </>
