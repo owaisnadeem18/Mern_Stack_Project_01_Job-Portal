@@ -10,7 +10,10 @@ const AddJobDetails = () => {
 
   const [input , setInput] = useState({
     companyName: "" ,
-
+    jobPosition: "" , 
+    employmentType: "" ,
+    date: "" , 
+    salary: ""
   })
 
   const handleSubmit = () => {
@@ -57,8 +60,8 @@ const AddJobDetails = () => {
             <Input
               onChange={handleValueChange}
               type="text"
-              value={input.name}
-              name="company"
+              value={input.companyName}
+              name="companyName"
               placeholder="Enter Company Name"
               className="w-full border border-gray-300 rounded-md p-2 text-sm bg-gray-50 focus:outline-none"
             />
@@ -70,8 +73,8 @@ const AddJobDetails = () => {
             <Input
               onChange={handleValueChange}
               type="text"
-              value={input.website}
-              name="position"
+              value={input.jobPosition}
+              name="jobPosition"
               placeholder="Enter Job Position"
               className="w-full border border-gray-300 rounded-md p-2 text-sm bg-gray-50 focus:outline-none"
             />
@@ -83,8 +86,8 @@ const AddJobDetails = () => {
             <Input
               onChange={handleValueChange}
               type="text"
-              value={input.description}
-              name="empolymentType"
+              value={input.employmentType}
+              name="employmentType"
               placeholder="Enter Employment Type"
               className="w-full border border-gray-300 rounded-md p-2 text-sm bg-gray-50 focus:outline-none"
             />
@@ -96,7 +99,7 @@ const AddJobDetails = () => {
             <Input
               onChange={handleValueChange}
               type="text"
-              value={input.location}
+              value={input.date}
               name="date"
               placeholder="Enter Date when job created"
               className="w-full border border-gray-300 rounded-md p-2 text-sm bg-gray-50 focus:outline-none"
@@ -109,6 +112,7 @@ const AddJobDetails = () => {
             <Input
               type="text"
               name="salary"
+              value={input.salary}
               onChange={handleValueChange}
               className="w-full border border-gray-300 rounded-md text-sm bg-gray-50 cursor-pointer focus:outline-none"
             />
