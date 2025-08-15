@@ -16,8 +16,14 @@ const AddJobDetails = () => {
     salary: ""
   })
 
-  const handleSubmit = () => {
+  const [loading , setLoading] = useState(false)
 
+  const handleValueChange = () => {
+    setInput({...input , [e.target.name] : e.target.value})
+  }
+
+  const handleSubmit = (data) => {
+    console.log(data)
   }
 
   return (
@@ -44,7 +50,7 @@ const AddJobDetails = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5 py-6 bg-white shadow-sm rounded-lg"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 py-6 m-2 shadow-sm rounded-lg"
         >
           {/* Company Name */}
           <div>
@@ -112,6 +118,7 @@ const AddJobDetails = () => {
             <Input
               type="text"
               name="salary"
+              placeholder= "Enter Salary"
               value={input.salary}
               onChange={handleValueChange}
               className="w-full border border-gray-300 rounded-md text-sm bg-gray-50 cursor-pointer focus:outline-none"
@@ -119,10 +126,10 @@ const AddJobDetails = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-1 m-auto border w-full">
             <Button
               type="submit"
-              className="w-full cursor-pointer font-medium text-white bg-black rounded-md hover:bg-gray-800 transition"
+              className="w-full cursor-pointer m-auto font-medium text-white bg-black rounded-md hover:bg-gray-800 transition"
             >
               {loading ? <span className="flex items-center justify-center gap-2">
                 <Loader2 className="w-4 h-4 animate-spin" />
