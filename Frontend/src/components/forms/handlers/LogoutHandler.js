@@ -16,7 +16,7 @@ export const LogoutHanlder = async ({user , dispatch , navigate }) => {
     
     catch(err) {
         console.log(err)
-        toast.error(err.res.data.message)
+        toast.error(err.response.data.message)
     }
 
 }

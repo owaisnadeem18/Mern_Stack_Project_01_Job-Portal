@@ -1,101 +1,144 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import Footer from '@/components/ui/shared/Footer'
-import Navbar from '@/components/ui/shared/Navbar'
-import { ArrowLeft } from 'lucide-react'
-import React, { useState } from 'react'
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import Footer from "@/components/ui/shared/Footer";
+import Navbar from "@/components/ui/shared/Navbar";
+import { JOB_API_END_POINT } from "@/utils/constant";
+import axios from "axios";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const AddJobDetails = () => {
+  const [input, setInput] = useState({
+    title: "",
+    position: "",
+    jobType: "",
+    date: "",
+    salary: "",
+    location: "",
+    experience: "",
+    requirements: "",
+    companyId: "",
+    description: "",
+  });
 
-  const [input , setInput] = useState({
-    companyName: "" ,
-    jobPosition: "" , 
-    employmentType: "" ,
-    date: "" , 
-    salary: ""
-  })
+  const { companies } = useSelector((store) => store.company);
 
-  const [loading , setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleValueChange = () => {
-    setInput({...input , [e.target.name] : e.target.value})
-  }
+  const handleValueChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = (data) => {
-    console.log(data)
-  }
+  const selectCompanyChangeHandler = (value) => {
+    const selectedCompany = companies.find(
+      (company) => company?.name.toLowerCase() === value
+    );
+    setInput({ ...input, companyId: selectedCompany?._id || "" });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(input);
+
+    try {
+      setLoading(true);
+      const res = await axios.post(`${JOB_API_END_POINT}/jobPost`, input, {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        toast.success(res.data.message)
+      }
+
+      console.log(res)
+
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message)
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
       <Navbar />
-      <div className='max-w-[85%] md:max-w-[70%] lg:max-w-[50%] xl:max-w-[40%] pt-15 mx-auto' style={{ minHeight: "calc(100vh - 69px" }} >
-
-        <div className='flex items-center gap-3' >
-
-          <Button className={"cursor-pointer"} onClick={() => navigate("/admin/companies")} variant={"outline"} >
-            <div className='flex items-center gap-1' >
+      <div
+        className="max-w-[85%] md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%] pt-10 mx-auto"
+        style={{ minHeight: "calc(100vh - 69px)" }}
+      >
+        {/* Header */}
+        <div className="flex items-center gap-3">
+          <Button
+            className="cursor-pointer"
+            onClick={() => navigate("/admin/companies")}
+            variant="outline"
+          >
+            <div className="flex items-center gap-1">
               <ArrowLeft className="w-5 h-5" />
               <span>Back</span>
             </div>
           </Button>
-
-          <h2 className='text-xl font-medium' >
-            Job Details
-          </h2>
-
+          <h2 className="text-xl font-semibold">Job Details</h2>
         </div>
 
-        {/* Company details items */}
-
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5 py-6 m-2 shadow-sm rounded-lg"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 py-6 my-6 border px-6 shadow-xl shadow-blue-950/30 rounded-2xl bg-white"
         >
-          {/* Company Name */}
+          {/* Job Title */}
           <div>
-
-            {/* <TableHead className={"text-center font-bold "}>Company</TableHead>
-            <TableHead className={"text-center font-bold "}>Job Position</TableHead>
-            <TableHead className={"text-center font-bold "}>Employment Type</TableHead>
-            <TableHead className={"text-center font-bold "}>Date</TableHead>
-            <TableHead className={"text-center font-bold "}>Salary</TableHead>
-            <TableHead className={"text-center font-bold "}>Actions</TableHead> */}
-
-            <Label className="block mb-2 font-medium text-gray-800">Company</Label>
+            <Label className="block mb-2 font-medium text-gray-800">
+              Job Title
+            </Label>
             <Input
               onChange={handleValueChange}
               type="text"
-              value={input.companyName}
-              name="companyName"
-              placeholder="Enter Company Name"
-              className="w-full border border-gray-300 rounded-md p-2 text-sm bg-gray-50 focus:outline-none"
+              value={input.title}
+              name="title"
+              placeholder="Enter Job Title"
             />
           </div>
 
-          {/* Job Position */}
+          {/* Position */}
           <div>
-            <Label className="block mb-2 font-medium text-gray-800">Position</Label>
+            <Label className="block mb-2 font-medium text-gray-800">
+              Position
+            </Label>
             <Input
               onChange={handleValueChange}
               type="text"
-              value={input.jobPosition}
-              name="jobPosition"
+              value={input.position}
+              name="position"
               placeholder="Enter Job Position"
-              className="w-full border border-gray-300 rounded-md p-2 text-sm bg-gray-50 focus:outline-none"
             />
           </div>
 
           {/* Employment Type */}
           <div>
-            <Label className="block mb-2 font-medium text-gray-800">Employment Type</Label>
+            <Label className="block mb-2 font-medium text-gray-800">
+              Employment Type
+            </Label>
             <Input
               onChange={handleValueChange}
               type="text"
-              value={input.employmentType}
-              name="employmentType"
-              placeholder="Enter Employment Type"
-              className="w-full border border-gray-300 rounded-md p-2 text-sm bg-gray-50 focus:outline-none"
+              value={input.jobType}
+              name="jobType"
+              placeholder="Full-time / Part-time / Remote"
             />
           </div>
 
@@ -104,44 +147,135 @@ const AddJobDetails = () => {
             <Label className="block mb-2 font-medium text-gray-800">Date</Label>
             <Input
               onChange={handleValueChange}
-              type="text"
+              type="date"
               value={input.date}
               name="date"
-              placeholder="Enter Date when job created"
-              className="w-full border border-gray-300 rounded-md p-2 text-sm bg-gray-50 focus:outline-none"
             />
           </div>
 
           {/* Salary */}
-          <div className="md:w-fit md:col-span-2">
-            <Label className="block mb-2 font-medium text-gray-800">Salary</Label>
+          <div>
+            <Label className="block mb-2 font-medium text-gray-800">
+              Salary
+            </Label>
             <Input
               type="text"
               name="salary"
-              placeholder= "Enter Salary"
+              placeholder="Enter Salary"
               value={input.salary}
               onChange={handleValueChange}
-              className="w-full border border-gray-300 rounded-md text-sm bg-gray-50 cursor-pointer focus:outline-none"
+            />
+          </div>
+
+          {/* Location */}
+          <div>
+            <Label className="block mb-2 font-medium text-gray-800">
+              Location
+            </Label>
+            <Input
+              type="text"
+              name="location"
+              placeholder="Enter Job Location"
+              value={input.location}
+              onChange={handleValueChange}
+            />
+          </div>
+
+          {/* Experience */}
+          <div>
+            <Label className="block mb-2 font-medium text-gray-800">
+              Experience
+            </Label>
+            <Input
+              type="text"
+              name="experience"
+              placeholder="e.g. 2+ years"
+              value={input.experience}
+              onChange={handleValueChange}
+            />
+          </div>
+
+          {/* Requirements */}
+          <div>
+            <Label className="block mb-2 font-medium text-gray-800">
+              Requirements
+            </Label>
+            <Input
+              type="text"
+              name="requirements"
+              placeholder="Enter Key Requirements"
+              value={input.requirements}
+              onChange={handleValueChange}
+            />
+          </div>
+
+          {/* Select Company */}
+          <div className="md:col-span-2">
+            <Label className="block mb-2 font-medium text-gray-800">
+              Select Company
+            </Label>
+            {companies.length > 0 && (
+              <Select onValueChange={selectCompanyChangeHandler}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a Company" />
+                </SelectTrigger>
+                <SelectContent>
+                  {companies.map((company) => (
+                    <SelectItem
+                      key={company._id}
+                      value={company.name.toLowerCase()}
+                    >
+                      {company.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          </div>
+
+          {/* Description (Textarea - last field) */}
+          <div className="md:col-span-2">
+            <Label className="block mb-2 font-medium text-gray-800">
+              Description
+            </Label>
+            <Textarea
+              name="description"
+              value={input.description}
+              onChange={handleValueChange}
+              placeholder="Write full job description here..."
+              className="min-h-[120px] scroll-auto"
             />
           </div>
 
           {/* Submit Button */}
-          <div className="md:col-span-1 m-auto border w-full">
+          <div className="md:col-span-2">
             <Button
               type="submit"
-              className="w-full cursor-pointer m-auto font-medium text-white bg-black rounded-md hover:bg-gray-800 transition"
+              className="w-full font-medium text-white bg-black rounded-md hover:bg-gray-800 transition"
             >
-              {loading ? <span className="flex items-center justify-center gap-2">
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Updating...
-              </span> : "Update"}
+              {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Updating...
+                </span>
+              ) : (
+                "Update"
+              )}
             </Button>
           </div>
+
+          {companies.length > 0 && (
+            <div className="md:col-span-2">
+              <p className="text-red-500 text-xs text-center font-bold">
+                *You must register at least one company before posting a job
+              </p>
+            </div>
+          )}
         </form>
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default AddJobDetails
+export default AddJobDetails;
