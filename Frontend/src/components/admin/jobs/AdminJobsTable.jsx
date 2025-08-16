@@ -45,8 +45,11 @@ const AdminJobsTable = ({adminJobs}) => {
         <TableHeader>
           <TableRow>
             <TableHead className={"text-center font-bold "}>Company</TableHead>
-            <TableHead className={"text-center font-bold "}>Job Position</TableHead>
+            <TableHead className={"text-center font-bold "}>Job Title</TableHead>
+            <TableHead className={"text-center font-bold "}>Required Experience</TableHead>
+            <TableHead className={"text-center font-bold "}>Total Positions</TableHead>
             <TableHead className={"text-center font-bold "}>Employment Type</TableHead>
+            <TableHead className={"text-center font-bold "}>Location</TableHead>
             <TableHead className={"text-center font-bold "}>Date</TableHead>
             <TableHead className={"text-center font-bold "}>Salary</TableHead>
             <TableHead className={"text-center font-bold "}>Actions</TableHead>
@@ -85,8 +88,22 @@ const AdminJobsTable = ({adminJobs}) => {
                       {job?.title}
                     </TableCell>
 
-                    <TableCell className={"flex justify-center font-semibold items-center"}>
+                    <TableCell className="text-center font-semibold text-md">
+                      {
+                        job?.experience ? job.experience.toString().includes("year" || "years") ? job.experience : `${job.experience} ${Number(job.experience) > 1 ? "years" : "year"}` : "Not Specified"
+                      }
+                    </TableCell>
+
+                    <TableCell className={"text-center font-semibold text-md"}>
+                      {job?.position}
+                    </TableCell>
+
+                    <TableCell className={"font-semibold text-md text-center"}>
                       {job?.jobType}
+                    </TableCell>
+
+                    <TableCell className={"font-semibold text-md text-center"}>
+                      {job?.location}
                     </TableCell>
 
                     <TableCell className={"text-center font-semibold text-md"}>
@@ -95,7 +112,7 @@ const AdminJobsTable = ({adminJobs}) => {
 
                     
                     <TableCell className={"text-center font-semibold text-md"}>
-                      {job?.salary} / mo
+                      {job?.salary.toLocaleString("en-IN")} / mo
                     </TableCell>
 
                     <TableCell className={"text-center"}>

@@ -84,7 +84,7 @@ const AddJobDetails = () => {
         <div className="flex items-center gap-3">
           <Button
             className="cursor-pointer"
-            onClick={() => navigate("/admin/companies")}
+            onClick={() => navigate("/admin/jobs")}
             variant="outline"
           >
             <div className="flex items-center gap-1">
@@ -211,10 +211,12 @@ const AddJobDetails = () => {
 
           {/* Select Company */}
           <div className="md:col-span-2">
+            {companies.length > 0 && (
+            <>
             <Label className="block mb-2 font-medium text-gray-800">
               Select Company
             </Label>
-            {companies.length > 0 && (
+            
               <Select onValueChange={selectCompanyChangeHandler}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a Company" />
@@ -222,14 +224,15 @@ const AddJobDetails = () => {
                 <SelectContent>
                   {companies.map((company) => (
                     <SelectItem
-                      key={company._id}
-                      value={company.name.toLowerCase()}
+                    key={company._id}
+                    value={company.name.toLowerCase()}
                     >
                       {company.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+              </>
             )}
           </div>
 
@@ -264,7 +267,7 @@ const AddJobDetails = () => {
             </Button>
           </div>
 
-          {companies.length > 0 && (
+          {companies.length <= 0 && (
             <div className="md:col-span-2">
               <p className="text-red-500 text-xs text-center font-bold">
                 *You must register at least one company before posting a job
