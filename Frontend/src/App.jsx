@@ -11,6 +11,7 @@ import AdminJobs from './components/admin/jobs/AdminJobs'
 import CreateCompany from './components/admin/companies/CreateCompany'
 import AddCompanyDetails from './components/admin/companies/AddCompanyDetails'
 import AddJobDetails from './components/admin/jobs/AddJobDetails'
+import SingleJobApplicants from './components/admin/jobs/SingleJobApplicants'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         
         {/* 2. Admin Job Routes */}
         <Route path='/admin/jobs/post-job' element={ <AddJobDetails /> } />
+        <Route path='/admin/jobs/applicants/:id' element={<SingleJobApplicants />} />
 
       </Routes>
     </>

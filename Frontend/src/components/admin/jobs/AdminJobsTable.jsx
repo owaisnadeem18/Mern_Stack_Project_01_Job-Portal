@@ -1,7 +1,7 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Edit2, MoreHorizontalIcon } from 'lucide-react';
+import { Edit, Edit2, MoreHorizontalIcon, User, UserCircle, Users } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -120,10 +120,18 @@ const AdminJobsTable = ({adminJobs}) => {
                         <PopoverTrigger>
                           <MoreHorizontalIcon className="cursor-pointer" />
                         </PopoverTrigger>
-                        <PopoverContent className={"w-24 p-2"}>
-                          <div className="flex items-center justify-center gap-2 p-0">
-                            <Edit2 onClick={() => navigate(`/admin/jobs/${job._id}`)} className="cursor-pointer" width={18} />
-                            <span>Edit</span>
+                        <PopoverContent className={"w-32 p-2"}>
+                          <div className="flex items-start flex-col justify-center gap-2 p-0">
+                            <div onClick={() => navigate(`/admin/jobs/${job._id}`)} className='flex gap-2 items-center cursor-pointer' >
+                              <Edit2 width={18} />
+                              <span>Edit</span>
+                            </div>
+                          <div className='flex gap-2 cursor-pointer items-center' onClick={() => navigate(`/admin/jobs/applicants/${job._id}`)} >
+
+                            <User className="cursor-pointer" width={18} />
+                            <span>Applicants</span>
+                          
+                          </div>
                           </div>
                         </PopoverContent>
                       </Popover>
