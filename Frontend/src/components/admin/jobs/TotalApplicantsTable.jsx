@@ -38,11 +38,11 @@ const TotalApplicantsTable = ({applicantsData}) => {
     {
       applicantsData.map(item =>
       <TableRow key={item._id} >
-       <TableCell key={item._id}> {item.fullName} </TableCell>
-        <TableCell>{item.email}</TableCell>
-        <TableCell>{item.phoneNumber}</TableCell>
-    <TableCell>{item.profile.resume}</TableCell>
-    <TableCell>{item.createdAt}</TableCell>
+       <TableCell> {item.applicant.fullName} </TableCell>
+        <TableCell>{item.applicant.email}</TableCell>
+        <TableCell>{item.applicant.phoneNumber}</TableCell>
+    <TableCell>{item.applicant.profile.resumeOriginalName}</TableCell>
+    <TableCell>{item.applicant.createdAt}</TableCell>
     <TableCell>
       <Popover>
         <PopoverTrigger>
