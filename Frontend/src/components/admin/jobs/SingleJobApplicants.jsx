@@ -4,9 +4,11 @@ import React, { useEffect } from 'react'
 import TotalApplicantsTable from './TotalApplicantsTable'
 import axios from 'axios'
 import { APPLICATION_API_END_POINT } from '@/utils/constant'
-import { data, useParams } from 'react-router-dom'
+import { data, Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAllApplicants } from '@/features/application/applicationSlice'
+import { Button } from '@/components/ui/button'
+import { ArrowLeft } from 'lucide-react'
 
 const SingleJobApplicants = () => {
 
@@ -47,9 +49,23 @@ const SingleJobApplicants = () => {
         <Navbar/>
         <div className='xl:max-w-7xl md:max-w-5xl max-w-full px-3 md:px-6 m-auto py-6 md:py-24 '   style={{ minHeight: "calc(100vh - 69px)" }}
        >
+        <div className='flex items-center gap-4 '>
+
+        <Link to={"/admin/jobs"} >
+            <Button variant={"outline"} className={"text-xl py-8 cursor-pointer"} >
+                
+                    <ArrowLeft width={"34"} className='' />
+                    <span className='font-semibold' > Back to Admin Jobs </span>
+            </Button>
+        </Link>
+
         <h1 className='font-semibold text-xl md:text-2xl' >
             Total Applicants ({applicants.length})
         </h1>
+
+        
+
+        </div>
 
         <TotalApplicantsTable applicantsData = {applicants} />
 
