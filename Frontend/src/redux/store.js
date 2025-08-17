@@ -5,13 +5,13 @@ import { persistReducer , persistStore } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
 import jobReducer from "@/features/jobs/jobSlice";
 import companyReducer from "@/features/companies/companySlice";
-import { setAllApplicants } from "@/features/application/applicationSlice";
+import applicationReducer from "@/features/application/applicationSlice"
 
 const rootReducer = combineReducers({
     auth: authSlice,
     job: jobReducer,
     company: companyReducer,
-    application: setAllApplicants
+    application: applicationReducer
   })
 
 const persistConfig = {

@@ -10,13 +10,12 @@ import { setAllApplicants } from '@/features/application/applicationSlice'
 
 const SingleJobApplicants = () => {
 
-    const {applicants} = useSelector(store => store?.application)
-
-    console.log(applicants)
-
+    
     const params = useParams()
-
+    
     const dispatch = useDispatch()
+    
+    const {applicants} = useSelector(store=>store.application) 
 
     console.log(params.id)
 
@@ -27,8 +26,11 @@ const SingleJobApplicants = () => {
                 
                 console.log(res)
 
-                if (data.res.success) {
+                console.log("find applications: " , res.data.FindJobId.applications)
+
+                if (res.data.success) {
                     dispatch(setAllApplicants(res.data.FindJobId.applications))
+                    console.log(setAllApplicants , "set all applicants")
                 }
             
             } catch (err) {
@@ -46,10 +48,10 @@ const SingleJobApplicants = () => {
         <div className='xl:max-w-7xl md:max-w-5xl max-w-full px-3 md:px-6 m-auto py-6 md:py-24 '   style={{ minHeight: "calc(100vh - 69px)" }}
        >
         <h1 className='font-semibold text-xl md:text-2xl' >
-            Total Applicants (3)
+            Total Applicants ({applicants.length})
         </h1>
 
-        <TotalApplicantsTable/>
+        <TotalApplicantsTable applicantsData = {applicants} />
 
         </div>
         <Footer/>

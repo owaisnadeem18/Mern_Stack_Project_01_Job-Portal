@@ -11,8 +11,9 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { CheckCircle, MoreHorizontal, XCircle, XCircleIcon } from 'lucide-react';
 
-const TotalApplicantsTable = () => {
+const TotalApplicantsTable = ({applicantsData}) => {
   
+    console.log(applicantsData)
     
     const shortListingStatus = [
         { status: "Accepted" , icon: <CheckCircle className="h-5 w-5 text-green-600" aria-label="Accepted" /> } ,
@@ -34,12 +35,14 @@ const TotalApplicantsTable = () => {
         </TableHeader>
 
         <TableBody className={"text-center"} >
-  <TableRow>
-    <TableCell>Full Name</TableCell>
-    <TableCell>Email</TableCell>
-    <TableCell>Contact</TableCell>
-    <TableCell>Resume</TableCell>
-    <TableCell>Date</TableCell>
+    {
+      applicantsData.map(item =>
+      <TableRow key={item._id} >
+       <TableCell key={item._id}> {item.fullName} </TableCell>
+        <TableCell>{item.email}</TableCell>
+        <TableCell>{item.phoneNumber}</TableCell>
+    <TableCell>{item.profile.resume}</TableCell>
+    <TableCell>{item.createdAt}</TableCell>
     <TableCell>
       <Popover>
         <PopoverTrigger>
@@ -48,8 +51,8 @@ const TotalApplicantsTable = () => {
         <PopoverContent className="w-fit p-0">
           {shortListingStatus.map((item, index) => (
             <div
-              key={index}
-              className="flex cursor-pointer gap-2 p-2 items-center hover:bg-gray-900 hover:text-white hover:rounded-sm transition-all duration-300"
+            key={index}
+            className="flex cursor-pointer gap-2 p-2 items-center hover:bg-gray-900 hover:text-white hover:rounded-sm transition-all duration-300"
             >
               <p>{item.status}</p>
               <span>{item.icon}</span>
@@ -59,7 +62,9 @@ const TotalApplicantsTable = () => {
       </Popover>
     </TableCell>
   </TableRow>
-</TableBody>
+        )}
+        </TableBody>
+        
 
 
     </Table>

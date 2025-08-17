@@ -5,9 +5,10 @@ const applicationSlice = createSlice({
     initialState: {
         applicants: []
     },
-    reducers: 
-    {setAllApplicants: (state , action) => {
+    reducers: {
+        setAllApplicants: (state , action) => {
         state.applicants = action.payload
+        console.log(state.applicants)
     }}
 })
 
