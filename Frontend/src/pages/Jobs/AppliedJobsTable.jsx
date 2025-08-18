@@ -12,9 +12,22 @@ const AppliedJobsTable = () => {
 
     console.log(allAppliedJobs)
 
+    const formatExperience = (exp) => {
+        if (!exp) return "Not Specified"
+
+        if (exp.toString().toLowerCase().includes("year")) {
+            return exp
+        }
+
+        if (parseInt(exp) === 1) {
+            return `${exp} year`
+        }
+
+        return `${exp} years`
+
+    }
+
     return (
-
-
 
         <div>
             <h3 className="text-lg font-semibold text-white" >
@@ -24,14 +37,14 @@ const AppliedJobsTable = () => {
                 <TableCaption> A list of your Applied Jobs</TableCaption>
                 <TableHeader className={"bg-gray-800 font-bold"} >
                     <TableRow >
+                        <TableHead className={"text-white font-extrabold text-center underline"} >Date</TableHead>
                         <TableHead className={"text-white font-extrabold text-center underline"} >Company Name</TableHead>
                         <TableHead className={"text-white font-extrabold text-center underline"} >Job Title</TableHead>
                         <TableHead className={"text-white font-extrabold text-center underline"} >Location</TableHead>
                         <TableHead className={"text-white font-extrabold text-center underline"} >Job Type</TableHead>
                         <TableHead className={"text-white font-extrabold text-center underline"} >Experience</TableHead>
-                        <TableHead className={"text-white font-extrabold text-center underline"} >Date</TableHead>
                         <TableHead className={"text-white font-extrabold underline"} >Status</TableHead>
-                    </TableRow>
+                    </TableRow>   
                 </TableHeader>
                 <TableBody className={"text-center"} >
 
@@ -52,9 +65,9 @@ const AppliedJobsTable = () => {
 
 
                                 const statusClasses = {
-                                    pending: "text-yellow-500",
-                                    accepted: "text-green-700",
-                                    rejected: "text-red-600",
+                                    pending: "bg-yellow-500 text-black",
+                                    accepted: "bg-green-700",
+                                    rejected: "bg-red-600",
                                 };
 
                                 const defaultClass = "bg-none"
@@ -67,6 +80,9 @@ const AppliedJobsTable = () => {
 
                                     <TableRow key={item._id} >
 
+                                        <TableCell>
+                                            {item?.job?.createdAt?.split("T")[0]}
+                                        </TableCell>
                                         <TableCell>
                                             {item?.job?.company?.name}
                                         </TableCell>
@@ -82,15 +98,12 @@ const AppliedJobsTable = () => {
                                             {item?.job?.jobType}
                                         </TableCell>
                                         <TableCell>
-                                            {item?.job?.experience}
+                                            {formatExperience(item?.job?.experience)}
                                         </TableCell>
-                                        
-                                        <TableCell>
-                                            {item?.job?.createdAt?.split("T")[0]}
-                                        </TableCell>
-                                        
+
+
                                         <TableCell className={"text-left"} >
-                                            <Badge variant={"outline"} className={`font-semibold bg-black ${statusClass}`} > {item.status} </Badge>
+                                            <Badge variant={"outline"} className={`font-semibold text-white ${statusClass}`} > {item.status.split("")[0].toUpperCase() + item.status.slice(1)} </Badge>
                                         </TableCell>
                                     </TableRow>
                                 )
