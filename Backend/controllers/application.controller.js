@@ -138,7 +138,7 @@ export const updateStatus = async (req , res) => {
     
     if (!status) {
       return res.status(400).json({
-        message: "Status is not available",
+        message: "Status is required",
         success: false
       })
     }
@@ -148,13 +148,17 @@ export const updateStatus = async (req , res) => {
     const FindApplicant = await applicationModel.findOne({_id: applicationId})
 
     if (!FindApplicant) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: "No Applicant found",
-        success: true
+        success: false
       })
     }
 
+    // Now , update the status of applicant:
     FindApplicant.status = status.toLowerCase()
+
+    console.log( "application status" , FindApplicant)
+
     await FindApplicant.save()
 
     return res.status(200).json({

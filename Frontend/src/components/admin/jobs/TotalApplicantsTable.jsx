@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 
 const TotalApplicantsTable = ({ applicantsData }) => {
+
   // Track both applicant id AND status type
   const [loading, setLoading] = useState({ id: null, status: null });
 
@@ -26,8 +27,8 @@ const TotalApplicantsTable = ({ applicantsData }) => {
 
   const statusHandler = async (status, id) => {
     try {
-      setLoading({ id, status }); // ✅ track applicant + status
-      const res = await axios.post(
+      setLoading({ id, status });
+      const res = await axios.put(
         `${APPLICATION_API_END_POINT}/status/${id}/update`,
         { status },
         { withCredentials: true }
@@ -48,12 +49,12 @@ const TotalApplicantsTable = ({ applicantsData }) => {
       <TableCaption>List of Job Applicants</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="text-center font-semibold text-lg">Full Name</TableHead>
-          <TableHead className="text-center font-semibold text-lg">Email</TableHead>
-          <TableHead className="text-center font-semibold text-lg">Contact</TableHead>
-          <TableHead className="text-center font-semibold text-lg">Resume</TableHead>
-          <TableHead className="text-center font-semibold text-lg">Date</TableHead>
-          <TableHead className="text-center font-semibold text-lg">Actions</TableHead>
+          <TableHead className="text-center font-semibold md:text-lg">Full Name</TableHead>
+          <TableHead className="text-center font-semibold md:text-lg">Email</TableHead>
+          <TableHead className="text-center font-semibold md:text-lg">Contact</TableHead>
+          <TableHead className="text-center font-semibold md:text-lg">Resume</TableHead>
+          <TableHead className="text-center font-semibold md:text-lg">Date</TableHead>
+          <TableHead className="text-center font-semibold md:text-lg">Actions</TableHead>
         </TableRow>
       </TableHeader>
 

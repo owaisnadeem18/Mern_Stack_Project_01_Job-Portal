@@ -52,14 +52,14 @@ const SingleJobApplicants = () => {
         <div className='flex items-center gap-4 '>
 
         <Link to={"/admin/jobs"} >
-            <Button variant={"outline"} className={"text-xl py-8 cursor-pointer"} >
+            <Button variant={"outline"} className={"md:text-xl p-6 md:py-8 cursor-pointer"} >
                 
                     <ArrowLeft width={"34"} className='' />
                     <span className='font-semibold' > Back to Admin Jobs </span>
             </Button>
         </Link>
 
-        <h1 className='font-semibold text-xl md:text-2xl' >
+        <h1 className='font-semibold md:text-xl xl:text-2xl' >
             Total Applicants ({applicants.length})
         </h1>
 
