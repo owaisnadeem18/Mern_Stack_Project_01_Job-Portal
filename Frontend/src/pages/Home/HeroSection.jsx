@@ -2,13 +2,23 @@ import { Button } from "@/components/ui/button";
 import heroImg from "../../assets/Images/bg-hero-image.png"
 import { Search } from "lucide-react";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSearchQuery } from "@/features/jobs/jobSlice";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
 
-  const [query , setQuery] = useState()
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
+  const [query , setQuery] = useState("")
 
   const searchJobHandler = () => {
-    alert("nfjdgnjfd")
+    dispatch(setSearchQuery(query))
+    console.log(query)
+    navigate("/browse")
   }
 
   return (
@@ -31,7 +41,7 @@ const HeroSection = () => {
             <div className="flex w-full ">
               <input
                 type="text"
-                onChange={() => setQuery(e.target.value)}
+                onChange={(e) => setQuery(e.target.value)}
                 placeholder="Find your dream jobs ..."
                 className="flex-grow px-4 py-0 bg-transparent text-white border-[0.0125px] border-gray-500 border-r-0 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-300 placeholder:text-sm"
               />

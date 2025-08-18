@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { MapPinCheckIcon, MapPinIcon } from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const LatestJobsCards = ({ job }) => {
 
@@ -14,6 +15,8 @@ const LatestJobsCards = ({ job }) => {
     return `${exp} years`
 
   } 
+
+  // const navigate = useNavigate()
 
   return (
     <>
