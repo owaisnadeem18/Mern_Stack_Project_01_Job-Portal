@@ -63,8 +63,6 @@ const SingleJobApplicants = () => {
             Total Applicants ({applicants.length})
         </h1>
 
-        
-
         </div>
 
         <TotalApplicantsTable applicantsData = {applicants} />

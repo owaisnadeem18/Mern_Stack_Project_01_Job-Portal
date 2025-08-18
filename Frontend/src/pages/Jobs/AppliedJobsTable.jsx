@@ -43,7 +43,7 @@ const AppliedJobsTable = () => {
                         <TableHead className={"text-white font-extrabold text-center underline"} >Location</TableHead>
                         <TableHead className={"text-white font-extrabold text-center underline"} >Job Type</TableHead>
                         <TableHead className={"text-white font-extrabold text-center underline"} >Experience</TableHead>
-                        <TableHead className={"text-white font-extrabold underline"} >Status</TableHead>
+                        <TableHead className={"text-white font-extrabold text-center underline"} >Status</TableHead>
                     </TableRow>   
                 </TableHeader>
                 <TableBody className={"text-center"} >
@@ -55,7 +55,7 @@ const AppliedJobsTable = () => {
                             <TableRow>
 
 
-                                <TableCell colSpan={4} className="text-center py-6 font-bold text-lg">
+                                <TableCell colSpan={7} className="text-center font-bold text-lg">
                                     No Applied Jobs Found
                                 </TableCell>
 
@@ -102,7 +102,7 @@ const AppliedJobsTable = () => {
                                         </TableCell>
 
 
-                                        <TableCell className={"text-left"} >
+                                        <TableCell className={"text-center"} >
                                             <Badge variant={"outline"} className={`font-semibold text-white ${statusClass}`} > {item.status.split("")[0].toUpperCase() + item.status.slice(1)} </Badge>
                                         </TableCell>
                                     </TableRow>

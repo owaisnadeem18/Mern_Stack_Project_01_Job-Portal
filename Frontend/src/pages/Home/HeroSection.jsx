@@ -1,9 +1,16 @@
 import { Button } from "@/components/ui/button";
 import heroImg from "../../assets/Images/bg-hero-image.png"
 import { Search } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 const HeroSection = () => {
+
+  const [query , setQuery] = useState()
+
+  const searchJobHandler = () => {
+    alert("nfjdgnjfd")
+  }
+
   return (
     <section
       className="bg-gradient-to-br from-gray-500 to-gray-800 py-5 md:px-8 md:py-0 flex items-center"
@@ -24,10 +31,11 @@ const HeroSection = () => {
             <div className="flex w-full ">
               <input
                 type="text"
+                onChange={() => setQuery(e.target.value)}
                 placeholder="Find your dream jobs ..."
                 className="flex-grow px-4 py-0 bg-transparent text-white border-[0.0125px] border-gray-500 border-r-0 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-300 placeholder:text-sm"
               />
-              <Button className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-3 py-4 flex items-center justify-center rounded-r-full">
+              <Button onClick = {searchJobHandler} className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-3 py-4 flex items-center justify-center rounded-r-full">
                 <Search className="" />
               </Button>
             </div>

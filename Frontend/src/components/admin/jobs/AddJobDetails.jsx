@@ -61,6 +61,8 @@ const AddJobDetails = () => {
 
       if (res.data.success) {
         toast.success(res.data.message)
+        navigate("/admin/jobs");
+      
       }
 
       console.log(res)
@@ -239,7 +241,7 @@ const AddJobDetails = () => {
           {/* Description (Textarea - last field) */}
           <div className="md:col-span-2">
             <Label className="block mb-2 font-medium text-gray-800">
-              Description
+              Job Description
             </Label>
             <Textarea
               name="description"
@@ -259,10 +261,10 @@ const AddJobDetails = () => {
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Updating...
+                  Posting...
                 </span>
               ) : (
-                "Update"
+                "Post New Job"
               )}
             </Button>
           </div>

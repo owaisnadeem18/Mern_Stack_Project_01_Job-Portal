@@ -4,6 +4,17 @@ import React from "react";
 
 const LatestJobsCards = ({ job }) => {
 
+  const formattedExperience = (exp) => {
+    if (!exp) return "Beginner"
+
+    if (exp.toString().toLowerCase().includes("year")) return exp 
+
+    if (parseInt(exp) == 1) return `${exp} year`
+
+    return `${exp} years`
+
+  } 
+
   return (
     <>
       <div className=" bg-blue-950 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.06)] rounded-xl px-5 py-6 m-4 transition hover:scale-[1.04] duration-300">
@@ -11,7 +22,7 @@ const LatestJobsCards = ({ job }) => {
         <p className="text-gray-300 font-semibold mt-1">{job?.company?.name}</p>
         <p className="text-sm text-gray-400 mt-1 flex gap-1 items-center"> <MapPinIcon /> {job?.location}</p>
 
-        <p className="text-sm leading-6 text-gray-300 mt-1">{job?.description} with experience of <Badge className={"ml-1"} variant={"ghost"} > {job?.experience} </Badge> </p>
+        <p className="text-sm leading-6 text-gray-300 mt-1">{job?.description} with experience of <Badge className={"ml-1"} variant={"ghost"} > {formattedExperience(job?.experience)} </Badge> </p>
 
         <div className="mt-3 flex flex-wrap gap-3">
           <Badge variant={"ghost"} className="text-white">

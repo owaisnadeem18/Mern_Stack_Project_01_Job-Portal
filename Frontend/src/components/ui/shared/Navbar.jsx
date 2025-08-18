@@ -15,10 +15,14 @@ const Navbar = () => {
 
   const { user } = useSelector(store => store.auth)
 
-  const dispatch = useDispatch()
+  console.log("User:", user);
+
+  const dispatch = useDispatch()  
   const navigate = useNavigate()
 
   const role = user?.role
+
+  console.log("User Role:", role);
 
   return (
     <div className="items-center justify-between flex py-1 space-y-4 flex-col md:flex md:flex-row md:max-w-[100%] bg-cyan-950 min-h-[8vh] md:py-2 px-6">
@@ -110,8 +114,8 @@ const Navbar = () => {
                 </Avatar>
                 <div className="flex flex-col px-4">
                   <h6 className="leading-[1.27]"> {user.fullName} </h6>
-                  <p className="text-xs w-[50%] text-muted-foreground">
-                    {user.email}
+                  <p className="text-xs w-full text-muted-foreground">
+                    {user.profile?.bio || "No Bio Available"}
                   </p>
                 </div>
               </div>
@@ -133,8 +137,6 @@ const Navbar = () => {
 
                           <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-gray-700 transition-all duration-300 group-hover:w-full"></span>
                         </p>
-
-
                       </Link>
                     </>
                   }

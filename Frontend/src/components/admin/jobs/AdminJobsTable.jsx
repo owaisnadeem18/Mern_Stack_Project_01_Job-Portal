@@ -57,7 +57,7 @@ const AdminJobsTable = ({adminJobs}) => {
         </TableHeader>
 
         {adminJobs.length <= 0 ? (
-          <TableCell colSpan={4} className="text-center py-4">No Jobs Posted So far.</TableCell>
+          <TableCell colSpan={9} className="text-center py-4 text-lg font-semibold">No Jobs Posted So far.</TableCell>
         ) : (
           <TableBody>
             {

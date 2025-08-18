@@ -34,7 +34,7 @@ const AdminJobs = () => {
       <div className='flex items-center gap-5 md:gap-0 md:flex-row flex-col justify-between'>
 
         <Input
-          className="w-full md:w-1/2 px-3 py-2 border border-gray-300 rounded-sm shadow-sm 
+          className="w-full md:w-fit px-3 py-2 border border-gray-300 rounded-sm shadow-sm 
           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
           placeholder-gray-400 transition-all duration-200"
           placeholder="Filter by Job & Company"
