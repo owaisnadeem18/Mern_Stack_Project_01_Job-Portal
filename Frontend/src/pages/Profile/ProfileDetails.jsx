@@ -10,12 +10,13 @@ import { useSelector } from "react-redux";
 
 const resume = true
 
+
 const ProfileDetails = () => {
   
   const {user} = useSelector(store=> store.auth)
-
+  
   const [open , setOpen] = useState(false)
-
+  
   return (
     <div
       style={{ minHeight: "calc(100vh - 69px)" }}
@@ -92,10 +93,6 @@ const ProfileDetails = () => {
         {/* Div For Applied Jobs */}
 
         <div className=" max-w-5xl mx-auto"  >
-
-            <h3 className="text-lg font-semibold text-white underline" >
-                Applied Jobs are 
-            </h3>
 
             {/* Apploied Jobs Table will be there  */}
             <AppliedJobsTable/>            

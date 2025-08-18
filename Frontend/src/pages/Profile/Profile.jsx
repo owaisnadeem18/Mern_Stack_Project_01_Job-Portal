@@ -4,11 +4,12 @@ import React from "react";
 import ProfileDetails from "./ProfileDetails";
 
 const Profile = () => {
+
   return (
     <>
       <Navbar />
-      <ProfileDetails/>
-      <Footer />
+      <ProfileDetails />
+      <Footer  />
     </>
   );
 };

@@ -75,6 +75,7 @@ const Description = () => {
       <div className='border p-8 bg-gray-50 rounded-lg shadow-2xl'>        
       <div className=" flex items-center justify-between mb-4">
         <div>
+          
           <p className='text-gray-200 mb-4 font-semibold' > <span className='text-black' > Job Posted: </span> <Badge variant={"ghost"} className='text-sm font-bold bg-gray-700' > {JobPostedTotalTime(singleJob?.createdAt) === 0 ? "Today" : `${JobPostedTotalTime(singleJob?.createdAt)} days ago` } </Badge> </p>
 
           <h2 className="text-xl font-semibold text-gray-800">{singleJob?.title}</h2>
