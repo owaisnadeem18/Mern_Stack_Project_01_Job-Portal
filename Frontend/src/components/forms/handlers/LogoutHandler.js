@@ -8,7 +8,7 @@ export const LogoutHanlder = async ({user , dispatch , navigate }) => {
     try {
         const res = await axios.get(`${USER_API_END_POINT}/logout` , {withCredentials: true})
         if (res.data.success) {
-            navigate("/")
+            navigate("/login")
             dispatch(setUser(null))
             toast.success(res.data.message)
         }
