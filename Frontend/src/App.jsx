@@ -12,6 +12,7 @@ import CreateCompany from './components/admin/companies/CreateCompany'
 import AddCompanyDetails from './components/admin/companies/AddCompanyDetails'
 import AddJobDetails from './components/admin/jobs/AddJobDetails'
 import SingleJobApplicants from './components/admin/jobs/SingleJobApplicants'
+import ProtectedRoutes from './components/admin/ProtectedRoutes'
 
 function App() {
 
@@ -26,18 +27,18 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/description/:id' element={<JobsDetails />} />
 
-        {/* Routes for admin */}
+        {/* Protected Routes for admin */}
 
         {/* 1. Company Routes */}
-        <Route path='/admin/companies' element={<Companies />} />
-        <Route path='/admin/jobs' element={<AdminJobs />} />
-        <Route path='/admin/companies/create-company' element={<CreateCompany />} />
-        <Route path='/admin/companies/:id' element={<AddCompanyDetails />} />
+        <Route path='/admin/companies' element={ <ProtectedRoutes><Companies /></ProtectedRoutes>} />
+        <Route path='/admin/jobs' element={<ProtectedRoutes><AdminJobs /></ProtectedRoutes>} />
+        <Route path='/admin/companies/create-company' element={<ProtectedRoutes><CreateCompany /></ProtectedRoutes>} />
+        <Route path='/admin/companies/:id' element={<ProtectedRoutes><AddCompanyDetails /></ProtectedRoutes>} />
         
         {/* 2. Admin Job Routes */}
-        <Route path='/admin/jobs/post-job' element={ <AddJobDetails /> } />
-        <Route path='/admin/jobs/applicants/:id' element={<SingleJobApplicants />} />
-        <Route path='/admin/jobs/:id' element={<SingleJobApplicants />} />
+        <Route path='/admin/jobs/post-job' element={<ProtectedRoutes> <AddJobDetails /></ProtectedRoutes> } />
+        <Route path='/admin/jobs/applicants/:id' element={<ProtectedRoutes><SingleJobApplicants /></ProtectedRoutes>} />
+        <Route path='/admin/jobs/:id' element={<ProtectedRoutes><SingleJobApplicants /></ProtectedRoutes>} />
 
       </Routes>
     </>

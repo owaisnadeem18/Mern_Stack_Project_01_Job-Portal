@@ -4,6 +4,7 @@ import FilterCard from "./FilterCard";
 import Job from "./Job";
 import Footer from "@/components/ui/shared/Footer";
 import { useSelector } from "react-redux";
+import {motion} from "framer-motion"
 
 const Jobs = () => {
 
@@ -64,11 +65,24 @@ useEffect(() => {
                   </h1>
                   </div>
               ) : 
-              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-                {
-                  filteredJobs.map((job) => <Job key={job._id} job={job} />)
-                }
-              </div>
+<motion.div
+  className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+  initial={{ opacity: 0, y: 50 }}   // suruwat me hidden
+  animate={{ opacity: 1, y: 0 }}    // animate hote waqt
+  transition={{ duration: 0.6, ease: "easeOut" }} // timing
+>
+  {filteredJobs.map((job) => (
+    <motion.div
+      key={job._id}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4 }}
+    >
+      <Job job={job} />
+    </motion.div>
+  ))}
+</motion.div>
+
               }
             </section>
           </div>
