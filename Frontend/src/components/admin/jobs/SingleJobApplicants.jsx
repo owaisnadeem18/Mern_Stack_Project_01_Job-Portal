@@ -21,24 +21,24 @@ const SingleJobApplicants = () => {
 
     console.log(params.id)
 
-    useEffect(() => {
-        const fetchAllApplicants = async () => {
-            try {
-                const res = await axios.get(`${APPLICATION_API_END_POINT}/${params.id}/applicants` , {withCredentials: true})
-                
-                console.log(res)
-
-                console.log("find applications: " , res.data.FindJobId.applications)
-
-                if (res.data.success) {
-                    dispatch(setAllApplicants(res.data.FindJobId.applications))
-                    console.log(setAllApplicants , "set all applicants")
-                }
+    const fetchAllApplicants = async () => {
+        try {
+            const res = await axios.get(`${APPLICATION_API_END_POINT}/${params.id}/applicants` , {withCredentials: true})
             
-            } catch (err) {
-                console.log(err)
+            console.log(res)
+
+            console.log("find applications: " , res.data.FindJobId.applications)
+
+            if (res.data.success) {
+                dispatch(setAllApplicants(res.data.FindJobId.applications))
+                console.log(setAllApplicants , "set all applicants")
             }
+        
+        } catch (err) {
+            console.log(err)
         }
+    }
+    useEffect(() => {
 
         fetchAllApplicants()
 

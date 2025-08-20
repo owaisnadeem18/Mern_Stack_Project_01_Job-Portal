@@ -86,7 +86,7 @@ export const Login = async (req , res) => {
             }) 
         }
 
-        if ( LoginUser.role !== role ) {
+        if (LoginUser.role !== role ) {
             return res.status(400).json({
                 message: "You are logging in with incorrect role...",
                 success: false
@@ -137,7 +137,7 @@ export const UpdatingProfile = async (req , res) => {
 
   try {
     
-    const {fullName , email , password ,  phoneNumber , skills , bio} = req.body 
+    const {fullName , email , password , role ,  phoneNumber , skills , bio} = req.body 
     // Here, we have to add the data of cloudinary: 
 
     const file = req.file
@@ -170,6 +170,7 @@ export const UpdatingProfile = async (req , res) => {
     if (fullName) LoginUser.fullName = fullName
     if (email) LoginUser.email = email    
     if (password) LoginUser.password = password 
+    if (role) LoginUser.role = role 
     if (skills) LoginUser.profile.skills = skillsArray  
     if (bio) LoginUser.profile.bio = bio
     if (phoneNumber) LoginUser.phoneNumber = phoneNumber
@@ -188,9 +189,12 @@ export const UpdatingProfile = async (req , res) => {
       fullName : LoginUser.fullName ,
       email : LoginUser.email ,
       password : LoginUser.password ,
+      role : LoginUser.role ,
       phoneNumber : LoginUser.phoneNumber ,
       profile : LoginUser.profile
     }
+
+    console.log("update user API called => " , LoginUser)
   
     return res.status(200).json({
       message: "User Updated Successfully" ,

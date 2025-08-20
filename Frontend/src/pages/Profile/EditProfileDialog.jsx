@@ -71,7 +71,6 @@ const [input , setInput] = useState({
         dispatch(setUser(res.data.LoginUser))
         toast.success(res.data.message)
       }      
-
       console.log(input)
 
     }
