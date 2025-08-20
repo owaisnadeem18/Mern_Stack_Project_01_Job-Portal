@@ -15,7 +15,7 @@ const BrowseJobs = () => {
     return () => {
       dispatch(setSearchQuery(""))
     } 
-  } , [] )
+  } , [])
 
 
   console.log("allJobs in BrowseJobs => " , allJobs)

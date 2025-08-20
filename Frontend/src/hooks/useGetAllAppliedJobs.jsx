@@ -13,6 +13,8 @@ const useGetAllAppliedJobs = () => {
 
             const res = await axios.get(`${APPLICATION_API_END_POINT}/getAppliedJobs` , {withCredentials: true} )
             
+            alert("I am triggered !")
+
             console.log(res)
             if (res.data.success) {
                 dispatch(setAllAppliedJobs(res.data.findApplicants))

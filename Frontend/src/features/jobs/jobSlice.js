@@ -23,13 +23,15 @@ export const jobSlice = createSlice({
         setAllAdminJobs: (state , action) => {
             state.allAdminJobs = action.payload
             
-            console.log(state.allAdminJobs , action.payload)
         },
         setFilterJobsByText: (state , action) => {
             state.filterJobsByText = action.payload 
         } , 
         setAllAppliedJobs : (state , action) => {
             state.allAppliedJobs = action.payload
+            
+            console.log(state.allAppliedJobs , " - all applied jobs")
+        
         },
         setSearchQuery: (state , action) => {
             state.searchQuery = action.payload

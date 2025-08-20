@@ -34,7 +34,7 @@ const LatestJobsCards = ({ job }) => {
           <Badge variant={"ghost"} className=" text-yellow-300">
             {job?.salary?.toLocaleString('en-IN')} PKR / month
           </Badge>
-          <Badge variant={"ghost"} className=" text-red-600">
+          <Badge variant={"ghost"} className=" text-white">
             {job?.jobType}
           </Badge>
         </div>

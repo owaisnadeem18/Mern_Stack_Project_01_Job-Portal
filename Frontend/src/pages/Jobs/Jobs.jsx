@@ -58,7 +58,7 @@ useEffect(() => {
               <h2 className="text-2xl font-bold mb-3 text-white">
                 Available Jobs: ({filteredJobs.length})
               </h2>
-                {allJobs.length == 0 ? (
+                {filteredJobs.length == 0 ? (
                   <div className="font-semibold min-h-auto flex w-full justify-center items-center text-white md:min-h-[75vh]">
                     <h1 className="text-xl md:text-2xl underline" > No Relevant Jobs Found!
                   </h1>

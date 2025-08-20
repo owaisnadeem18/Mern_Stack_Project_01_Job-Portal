@@ -6,17 +6,29 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import AppliedJobsTable from "../Jobs/AppliedJobsTable";
 import EditProfileDialog from "./EditProfileDialog";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useGetAllAppliedJobs from "@/hooks/useGetAllAppliedJobs";
 
 const resume = true
 
 
+
+
 const ProfileDetails = () => {
+
+
+  useGetAllAppliedJobs()
   
+  const { allAppliedJobs } = useSelector(store => store?.job)
+  
+  console.log("allAppliedJobs " , allAppliedJobs)
+
   const {user} = useSelector(store=> store.auth)
   
   const [open , setOpen] = useState(false)
   
+  const dispatch = useDispatch()  
+
   return (
     <div
       style={{ minHeight: "calc(100vh - 69px)" }}
@@ -95,7 +107,7 @@ const ProfileDetails = () => {
         <div className=" max-w-5xl mx-auto"  >
 
             {/* Apploied Jobs Table will be there  */}
-            <AppliedJobsTable/>            
+            <AppliedJobsTable  dispatch={dispatch} />            
 
 
         </div>
