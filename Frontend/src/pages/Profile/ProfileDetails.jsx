@@ -16,7 +16,6 @@ const resume = true
 
 const ProfileDetails = () => {
 
-
   useGetAllAppliedJobs()
   
   const { allAppliedJobs } = useSelector(store => store?.job)
