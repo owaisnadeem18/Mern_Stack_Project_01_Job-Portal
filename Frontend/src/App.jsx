@@ -37,6 +37,7 @@ function App() {
         {/* 2. Admin Job Routes */}
         <Route path='/admin/jobs/post-job' element={ <AddJobDetails /> } />
         <Route path='/admin/jobs/applicants/:id' element={<SingleJobApplicants />} />
+        <Route path='/admin/jobs/:id' element={<SingleJobApplicants />} />
 
       </Routes>
     </>

@@ -16,11 +16,11 @@ const LatestJobsCards = ({ job }) => {
 
   } 
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   return (
     <>
-      <div className=" bg-blue-950 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.06)] rounded-xl px-5 py-6 m-4 transition hover:scale-[1.04] duration-300">
+      <div onClick={() => navigate(`/description/${job._id}`)} className="bg-blue-950 cursor-pointer shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.06)] rounded-xl px-5 py-6 m-4 transition hover:scale-[1.04] duration-300">
         <h3 className="text-xl font-bold text-white">{job?.title} </h3>
         <p className="text-gray-300 font-semibold mt-1">{job?.company?.name}</p>
         <p className="text-sm text-gray-400 mt-1 flex gap-1 items-center"> <MapPinIcon /> {job?.location}</p>
@@ -40,7 +40,7 @@ const LatestJobsCards = ({ job }) => {
         </div>
 
         <div className="flex gap-3 mt-4 flex-wrap" >
-            {job?.requirements.map((requirement , index) => <Badge variant={"ghost"} className=" text-black bg-white"> {requirement} </Badge>
+            {job?.requirements.map((requirement , index) => <Badge key={index} variant={"ghost"} className=" text-black bg-white"> {requirement} </Badge>
             )}
           
         </div>
