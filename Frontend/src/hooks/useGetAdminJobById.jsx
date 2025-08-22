@@ -40,7 +40,7 @@ const useGetAdminJobById = (jobId) => {
     } , [])
 
 
-    return { getAdminJobById, loading }
+    return { getAdminJobById }
 
 }
 

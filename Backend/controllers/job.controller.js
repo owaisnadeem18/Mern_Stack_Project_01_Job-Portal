@@ -149,3 +149,70 @@ export const adminJobs = async ( req , res ) => {
   
   }
 }
+
+// Update admin job by Id: 
+
+export const updateAdminJob = async (req , res) => {
+
+  console.log("req => " , req.body)
+
+  try {
+
+    const jobId = req.params.id 
+
+    console.log(jobId)
+
+    const adminId = req.id
+
+    console.log(adminId)
+
+    console.log(req.body)
+
+    const {
+      title, 
+      location,
+      salary,
+      jobType,
+      experience,
+      position,
+      company, 
+      date
+    } = req.body
+
+    console.log("title", title)
+
+    let adminJob = await JobModel.findOne({_id: jobId , created_by: adminId})
+
+    if (!adminJob) {
+      return res.status(404).json({
+        message: "Job Not Found",
+        success: false
+      })
+    }
+
+    if (title) adminJob.title = title
+    if (location) adminJob.location = location;
+    if (salary) adminJob.salary = Number(salary);
+    if (jobType) adminJob.jobType = jobType;
+    if (experience) adminJob.experience = experience;
+    if (position) adminJob.position = position;
+    if (company) adminJob.company = company;
+    if (date) adminJob.createdAt = date;
+
+    await adminJob.save();
+
+    return res.status(200).json({
+      message: "Job Updated Successfully" ,
+      adminJob , 
+      success: true
+    })
+
+  }
+  catch (err){
+    console.log(err)
+    return res.status(500).json({
+      message: "Server error while updating job",
+      success: false,
+    }); 
+  }
+} 

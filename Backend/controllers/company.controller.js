@@ -106,8 +106,6 @@ export const updateCompany = async (req, res) => {
 
     const updateData = { name, description, website, location , logo};
 
-    console.log("Updated data is => ", updateData);
-
     const company = await CompanyModel.findByIdAndUpdate(
       req.params.id,
       updateData,

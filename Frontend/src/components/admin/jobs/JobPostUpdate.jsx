@@ -6,22 +6,25 @@ import Navbar from '@/components/ui/shared/Navbar'
 import useGetAdminJobById from '@/hooks/useGetAdminJobById'
 import useUpdateAdminJobById from '@/hooks/useGetAdminJobById'
 import { JOB_API_END_POINT } from '@/utils/constant'
+import axios from 'axios'
 import { ArrowLeft, Loader2 } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'sonner'
 
 const JobPostUpdate = () => {
 
   const params = useParams()
   const jobId = params.id
+  const [loading, setLoading] = useState(false)
 
-  const {loading} = useGetAdminJobById(jobId)
+  useGetAdminJobById(jobId)
 
   const [input, setInput] = useState({
     title: "",
-    company: "" ,
+    company: "",
     position: "",
     jobType: "",
     date: "",
@@ -30,11 +33,11 @@ const JobPostUpdate = () => {
     experience: "",
   });
 
-  const { allAdminJobs , singleAdminJob} = useSelector(store => store?.job) 
+  const { allAdminJobs, singleAdminJob } = useSelector(store => store?.job)
 
   console.log(allAdminJobs)
 
-  console.log("single admin job => " , singleAdminJob)
+  console.log("single admin job => ", singleAdminJob)
 
   const navigate = useNavigate();
 
@@ -44,39 +47,59 @@ const JobPostUpdate = () => {
 
   useEffect(() => {
     setInput({
-      title: singleAdminJob?.title || "" ,
-    company: singleAdminJob?.company?.name || "" ,
-    position: singleAdminJob?.position || "" ,
-    jobType: singleAdminJob?.jobType || "",
-    date: singleAdminJob?.createdAt?.split("T")[0] || "" ,
-    salary: singleAdminJob?.salary || "",
-    location: singleAdminJob?.location || "",
-    experience: singleAdminJob?.experience || "",
-  
+      title: singleAdminJob?.title || "",
+      company: singleAdminJob?.company?._id || "",
+      position: singleAdminJob?.position || "",
+      jobType: singleAdminJob?.jobType || "",
+      date: singleAdminJob?.createdAt?.split("T")[0] || "",
+      salary: singleAdminJob?.salary || "",
+      location: singleAdminJob?.location || "",
+      experience: singleAdminJob?.experience || "",
+
     })
-  } , [singleAdminJob] )
+  }, [singleAdminJob])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData()
 
-    formData.append("title" , input.title)
-    formData.append("company" , input.company)
-    formData.append("position" , input.position)
-    formData.append("jobType" , input.jobType)
-    formData.append("salary" , input.salary)
-    formData.append("location" , input.location)
-    formData.append("experience" , input.experience)
-    formData.append("date" , input.date)
+    formData.append("title", input.title)
+    formData.append("company", input.company)
+    formData.append("position", input.position)
+    formData.append("jobType", input.jobType)
+    formData.append("salary", input.salary)
+    formData.append("location", input.location)
+    formData.append("experience", input.experience)
+    formData.append("date", input.date)
 
-    // await updateAdminJobById(jobId , formData)
+    try {
+      setLoading(true)
+
+      const res = await axios.put(`${JOB_API_END_POINT}/updateJob/${jobId}`, formData, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" }
+      });
+
+
+      if (res.data.success) {
+        toast.success(res.data.message)
+      }
+
+    }
+    catch (err) {
+      toast.error(err.response.data.message)
+
+    }
+    finally {
+      setLoading(false)
+    }
 
   };
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div
         className="max-w-[85%] md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%] pt-10 mx-auto"
         style={{ minHeight: "calc(100vh - 69px)" }}
@@ -229,7 +252,7 @@ const JobPostUpdate = () => {
 
         </form>
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }
