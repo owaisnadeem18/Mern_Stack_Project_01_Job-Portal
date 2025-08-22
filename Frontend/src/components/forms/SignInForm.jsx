@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputGroup from './InputGroup'
 import { HandleValueChange } from './handlers/FormHandlers'
 import { RadioGroup } from '../ui/radio-group'
@@ -15,6 +15,8 @@ const SignInForm = () => {
     // Let's use the laoding state of redux 
     const loading = useSelector(store => store.auth.loading)
 
+    const {user} = useSelector(store => store.auth)
+
     // Form Login Values
     const [LoginValues, SetLoginValues] = useState({
         email: "",
@@ -27,6 +29,13 @@ const SignInForm = () => {
 
     // Let's send the dispatch as an argument to submit Login function
     const dispatch = useDispatch()
+
+    useEffect(() => {
+      if (user) {
+        navigate("/")
+      }
+    } , [])
+
 
   return (
           <div className="rounded-xl w-full max-w-lg mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">

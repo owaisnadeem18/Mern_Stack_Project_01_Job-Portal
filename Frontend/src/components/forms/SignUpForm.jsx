@@ -4,7 +4,7 @@ import { RadioGroup } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FileHandler, HandleValueChange } from "./handlers/FormHandlers";
 import { HandleSubmitSignUp } from "./handlers/SignUpHandlers";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,8 @@ const SignUpForm = () => {
 
   // Now let's get the state of loading from the redux store
   const loading = useSelector((store) => store.auth.loading);
+
+  const { user } = useSelector((store) => store.auth);
 
   // Now, let's dispatch the values from redux store and send to SignUp function 
   const dispatch = useDispatch()
@@ -29,6 +31,12 @@ const SignUpForm = () => {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  } , [])
 
   return (
     <div className="rounded-xl w-full max-w-lg mx-auto mt-10 p-6 border shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
