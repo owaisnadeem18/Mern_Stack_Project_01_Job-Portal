@@ -13,6 +13,7 @@ import AddCompanyDetails from './components/admin/companies/AddCompanyDetails'
 import AddJobDetails from './components/admin/jobs/AddJobDetails'
 import SingleJobApplicants from './components/admin/jobs/SingleJobApplicants'
 import ProtectedRoutes from './components/admin/ProtectedRoutes'
+import JobPostUpdate from './components/admin/jobs/JobPostUpdate'
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
         {/* 2. Admin Job Routes */}
         <Route path='/admin/jobs/post-job' element={<ProtectedRoutes> <AddJobDetails /></ProtectedRoutes> } />
         <Route path='/admin/jobs/applicants/:id' element={<ProtectedRoutes><SingleJobApplicants /></ProtectedRoutes>} />
-        <Route path='/admin/jobs/:id' element={<ProtectedRoutes><SingleJobApplicants /></ProtectedRoutes>} />
+        <Route path='/admin/jobs/:id' element={<ProtectedRoutes><JobPostUpdate /></ProtectedRoutes>} />
 
       </Routes>
     </>
