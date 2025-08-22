@@ -3,7 +3,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Footer from '@/components/ui/shared/Footer'
 import Navbar from '@/components/ui/shared/Navbar'
-import useUpdateAdminJobById from '@/hooks/useUpdateAdminJobById'
+import useGetAdminJobById from '@/hooks/useGetAdminJobById'
+import useUpdateAdminJobById from '@/hooks/useGetAdminJobById'
 import { JOB_API_END_POINT } from '@/utils/constant'
 import { ArrowLeft, Loader2 } from 'lucide-react'
 import React, { useEffect } from 'react'
@@ -13,12 +14,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const JobPostUpdate = () => {
 
-  const {updateAdminJobById , loading} = useUpdateAdminJobById() 
-
   const params = useParams()
   const jobId = params.id
 
-    const [input, setInput] = useState({
+  const {loading} = useGetAdminJobById(jobId)
+
+  const [input, setInput] = useState({
     title: "",
     company: "" ,
     position: "",
@@ -29,9 +30,11 @@ const JobPostUpdate = () => {
     experience: "",
   });
 
-  const { allAdminJobs } = useSelector(store => store?.job)
+  const { allAdminJobs , singleAdminJob} = useSelector(store => store?.job) 
 
   console.log(allAdminJobs)
+
+  console.log("single admin job => " , singleAdminJob)
 
   const navigate = useNavigate();
 
@@ -41,17 +44,17 @@ const JobPostUpdate = () => {
 
   useEffect(() => {
     setInput({
-      title: allAdminJobs?.title || "" ,
-    company: allAdminJobs?.company?.name || "" ,
-    position: allAdminJobs?.position || "" ,
-    jobType: allAdminJobs?.jobType || "",
-    date: allAdminJobs?.createdAt?.split("T")[0] || "" ,
-    salary: allAdminJobs?.salary || "",
-    location: allAdminJobs?.location || "",
-    experience: allAdminJobs?.experience || "",
+      title: singleAdminJob?.title || "" ,
+    company: singleAdminJob?.company?.name || "" ,
+    position: singleAdminJob?.position || "" ,
+    jobType: singleAdminJob?.jobType || "",
+    date: singleAdminJob?.createdAt?.split("T")[0] || "" ,
+    salary: singleAdminJob?.salary || "",
+    location: singleAdminJob?.location || "",
+    experience: singleAdminJob?.experience || "",
   
     })
-  } , [allAdminJobs] )
+  } , [singleAdminJob] )
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +70,7 @@ const JobPostUpdate = () => {
     formData.append("experience" , input.experience)
     formData.append("date" , input.date)
 
-    await updateAdminJobById(jobId , formData)
+    // await updateAdminJobById(jobId , formData)
 
   };
 
