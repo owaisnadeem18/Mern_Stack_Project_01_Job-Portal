@@ -166,8 +166,6 @@ export const updateAdminJob = async (req , res) => {
 
     console.log(adminId)
 
-    console.log(req.body)
-
     const {
       title, 
       location,
@@ -178,8 +176,6 @@ export const updateAdminJob = async (req , res) => {
       company, 
       date
     } = req.body
-
-    console.log("title", title)
 
     let adminJob = await JobModel.findOne({_id: jobId , created_by: adminId})
 
