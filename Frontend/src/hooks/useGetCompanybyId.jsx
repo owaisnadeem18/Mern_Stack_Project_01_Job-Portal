@@ -1,5 +1,5 @@
 import { setSingleCompany } from '@/features/companies/companySlice'
-import { APPLICATION_API_END_POINT, COMPANY_API_END_POINT } from '@/utils/constant'
+import { COMPANY_API_END_POINT } from '@/utils/constant'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'

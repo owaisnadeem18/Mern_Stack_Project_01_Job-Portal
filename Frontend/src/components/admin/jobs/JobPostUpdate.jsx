@@ -1,74 +1,75 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import Footer from '@/components/ui/shared/Footer'
 import Navbar from '@/components/ui/shared/Navbar'
-import { Textarea } from '@/components/ui/textarea'
-import { ArrowLeft } from 'lucide-react'
-import React from 'react'
+import useUpdateAdminJobById from '@/hooks/useUpdateAdminJobById'
+import { JOB_API_END_POINT } from '@/utils/constant'
+import { ArrowLeft, Loader2 } from 'lucide-react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const JobPostUpdate = () => {
 
+  const {updateAdminJobById , loading} = useUpdateAdminJobById() 
+
+  const params = useParams()
+  const jobId = params.id
+
     const [input, setInput] = useState({
     title: "",
+    company: "" ,
     position: "",
     jobType: "",
     date: "",
     salary: "",
     location: "",
     experience: "",
-    requirements: "",
-    companyId: "",
-    description: "",
   });
 
   const { allAdminJobs } = useSelector(store => store?.job)
 
-  const [loading, setLoading] = useState(false);
+  console.log(allAdminJobs)
+
   const navigate = useNavigate();
 
   const handleValueChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const selectJobChangeHandler = (value) => {
-    const selectedJob = companies.find(
-      (job) => job?.name.toLowerCase() === value
-    );
-    setInput({ ...input, jobId: selectedJob?._id || "" });
-  };
+  useEffect(() => {
+    setInput({
+      title: allAdminJobs?.title || "" ,
+    company: allAdminJobs?.company?.name || "" ,
+    position: allAdminJobs?.position || "" ,
+    jobType: allAdminJobs?.jobType || "",
+    date: allAdminJobs?.createdAt?.split("T")[0] || "" ,
+    salary: allAdminJobs?.salary || "",
+    location: allAdminJobs?.location || "",
+    experience: allAdminJobs?.experience || "",
+  
+    })
+  } , [allAdminJobs] )
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input);
 
-    try {
-      setLoading(true);
-      const res = await axios.post(`${JOB_API_END_POINT}/jobPost`, input, {
-        withCredentials: true,
-      });
+    const formData = new FormData()
 
-      if (res.data.success) {
-        toast.success(res.data.message)
-        navigate("/admin/jobs");
-      
-      }
+    formData.append("title" , input.title)
+    formData.append("company" , input.company)
+    formData.append("position" , input.position)
+    formData.append("jobType" , input.jobType)
+    formData.append("salary" , input.salary)
+    formData.append("location" , input.location)
+    formData.append("experience" , input.experience)
+    formData.append("date" , input.date)
 
-      console.log(res)
+    await updateAdminJobById(jobId , formData)
 
-    } catch (err) {
-      console.log(err);
-      toast.error(err.response.data.message)
-    } finally {
-      setLoading(false);
-    }
   };
-
-
 
   return (
     <>
@@ -108,6 +109,20 @@ const JobPostUpdate = () => {
               value={input.title}
               name="title"
               placeholder="Enter Job Title"
+            />
+          </div>
+
+          {/* Company Name */}
+          <div>
+            <Label className="block mb-2 font-medium text-gray-800">
+              Company
+            </Label>
+            <Input
+              onChange={handleValueChange}
+              type="text"
+              value={input.company}
+              name="company"
+              placeholder="Enter Company Name"
             />
           </div>
 
@@ -192,61 +207,6 @@ const JobPostUpdate = () => {
             />
           </div>
 
-          {/* Requirements */}
-          <div>
-            <Label className="block mb-2 font-medium text-gray-800">
-              Requirements
-            </Label>
-            <Input
-              type="text"
-              name="requirements"
-              placeholder="Enter Key Requirements"
-              value={input.requirements}
-              onChange={handleValueChange}
-            />
-          </div>
-
-          {/* Select Company */}
-          <div className="md:col-span-2">
-            {companies.length > 0 && (
-            <>
-            <Label className="block mb-2 font-medium text-gray-800">
-              Select Company
-            </Label>
-            
-              <Select onValueChange={selectJobChangeHandler}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a Company" />
-                </SelectTrigger>
-                <SelectContent>
-                  {companies.map((company) => (
-                    <SelectItem
-                    key={company._id}
-                    value={company.name.toLowerCase()}
-                    >
-                      {company.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              </>
-            )}
-          </div>
-
-          {/* Description (Textarea - last field) */}
-          <div className="md:col-span-2">
-            <Label className="block mb-2 font-medium text-gray-800">
-              Job Description
-            </Label>
-            <Textarea
-              name="description"
-              value={input.description}
-              onChange={handleValueChange}
-              placeholder="Write full job description here..."
-              className="min-h-[120px] scroll-auto"
-            />
-          </div>
-
           {/* Submit Button */}
           <div className="md:col-span-2">
             <Button
@@ -256,21 +216,14 @@ const JobPostUpdate = () => {
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Posting...
+                  Updating...
                 </span>
               ) : (
-                "Post New Job"
+                "Update Job"
               )}
             </Button>
           </div>
 
-          {companies.length <= 0 && (
-            <div className="md:col-span-2">
-              <p className="text-red-500 text-xs text-center font-bold">
-                *You must register at least one company before posting a job
-              </p>
-            </div>
-          )}
         </form>
       </div>
       <Footer/>
