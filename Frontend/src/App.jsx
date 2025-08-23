@@ -1,7 +1,7 @@
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
 import Home from './pages/Home/Home'
-import { Route , Routes } from 'react-router-dom'
+import { Navigate, Route , Routes } from 'react-router-dom'
 import Jobs from './pages/Jobs/Jobs'
 import Browse from './pages/Browse/Browse'
 import Profile from './pages/Profile/Profile'
@@ -14,13 +14,16 @@ import AddJobDetails from './components/admin/jobs/AddJobDetails'
 import SingleJobApplicants from './components/admin/jobs/SingleJobApplicants'
 import ProtectedRoutes from './components/admin/ProtectedRoutes'
 import JobPostUpdate from './components/admin/jobs/JobPostUpdate'
+import { useSelector } from 'react-redux'
 
 function App() {
+
+  const {user} = useSelector(store=> store?.auth)
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={ user ? <Home /> : <Navigate to="/login" /> } />
         <Route path='/login' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/jobs' element={<Jobs />} />
