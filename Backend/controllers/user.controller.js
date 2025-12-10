@@ -14,7 +14,7 @@ export const Register = async (req, res) => {
         message: "Something is missing...",
         success: false,
       });
-    }
+    } 
 
     const file = req.file
     const fileUri = datauri(file)
@@ -63,8 +63,8 @@ export const Login = async (req , res) => {
             return res.status(400).json({
                 message: "User information is missing",
                 success: false
-            })
-        } 
+            }) 
+        }               
 
         let LoginUser = await User.findOne({email})
 

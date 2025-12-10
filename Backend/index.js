@@ -8,7 +8,7 @@ import CompanyRouter from "./routes/company.routes.js";
 import jobRouter from "./routes/job.routes.js"
 import ApplicationRouter from "./routes/application.routes.js";
 
-dotenv.config({});
+dotenv.config({}); 
 
 const app = express();
 const PORT = process.env.PORT || 3000
